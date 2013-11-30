@@ -1,0 +1,15 @@
+%div
+	%form{:method => "post",:action => "/do_login"}
+		%div
+			%label
+				スペースID
+			%input{:type => "text", :name =>"space_id"}
+		%div
+			%label
+				ユーザーID
+			%input{:type => "text", :name => "username"}
+		%div
+			%label
+				パスワード
+			%input{:type=>"password", :name => "password"}
+		%input{:type => "submit", :value => "ログイン"}
