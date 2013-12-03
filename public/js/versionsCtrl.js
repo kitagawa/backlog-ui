@@ -1,5 +1,5 @@
-function versionsCtrl($scope,$http){
-	$http({method: 'GET', url: '/get_versions/1073815130'}).
+function versionsCtrl($scope,$http,$routeParams){
+	$http({method: 'GET', url: '/get_versions/'+$routeParams.project_id}).
 			success(function(data, status, headers, config) {
 				$scope.versions = data;
 			}).

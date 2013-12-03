@@ -7,7 +7,7 @@ enable :sessions
 
 # ログイン画面
 get '/login' do
-	haml :login, :layout => :layout
+	haml :login
 end
 
 # ログイン処理
@@ -15,18 +15,12 @@ post '/do_login' do
 	session[:username] = params[:username]
 	session[:password] = params[:password]
 	session[:space_id] = params[:space_id]
-	redirect '/projects'
+	redirect '/'
 end
 
-# プロジェクト選択
-get '/projects' do
-	haml :projects, :layout => :layout
-end
-
-#プロジェクト内バージョン一覧
-get '/projects/:id' do
-
-  haml :versions, :layout => :layout
+#アプリケーション画面
+get '/' do
+	haml :app
 end
 
 # プロジェクト一覧取得API

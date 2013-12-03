@@ -1,0 +1,6 @@
+%ul
+	%li{"ng-repeat" => "project in projects"}
+		%a{:href => "#/{{project.id}}"}
+			{{project.id}}/
+			{{project.key}}/
+			{{project.name}}
