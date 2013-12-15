@@ -11,9 +11,9 @@ describe("Issue",function(){
 		expect(issue.id).toEqual(2);
 	})
 
-	describe("set_issues",function(){
+	describe("convert_issues",function(){
 		it("creates issue",function(){
-			var issues = Issue.set_issues([data]);
+			var issues = Issue.convert_issues([data]);
 			expect(issues[0].id).toEqual(1070000001);
 		});
 	})

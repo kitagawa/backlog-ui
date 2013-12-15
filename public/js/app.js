@@ -1,14 +1,16 @@
-var app = angular.module('App', ['ngRoute']);
+
+
+var app = angular.module('App', ['ngRoute','ui.sortable']);
 app.config(function ($routeProvider) {
   $routeProvider
     .when('/',
 	    {
-	      templateUrl: "/partials/projects.html",
+	      templateUrl: "/html/projects.html",
 	      controller: "projectsCtrl"
 	    })
 	  .when('/:project_id',
 	    {
-	      templateUrl: "/partials/versions.html",
+	      templateUrl: "/html/versions.html",
 	      controller: "versionsCtrl"
 	    }
 	  )

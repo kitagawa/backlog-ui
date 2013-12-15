@@ -1,20 +1,28 @@
-versions
-<ul>
-  <li>
+<div class='ticket-list'>
+  <div class='list-header'>
     未設定
-    <ul>
+  </div>
+  <div class='list-body'>
+    <ul class='connectedSortable' id='sortable1'>
       <li ng-repeat='issue in issues | milestoneFilter:null'>
-        {{issue}}
+        <div class='ticket'>
+          {{issue.summary}}
+        </div>
       </li>
     </ul>
-  </li>
-  <li ng-repeat='version in versions'>
-    {{version}}
-    issues
-    <ul>
+  </div>
+</div>
+<div class='ticket-list' ng-repeat='version in versions'>
+  <div class='list-header'>
+    {{version.name}}
+  </div>
+  <div class='list-body'>
+    <ul class='connectedSortable'>
       <li ng-repeat='issue in issues | milestoneFilter:version.id'>
-        {{issue}}
+        <div class='ticket'>
+          {{issue.summary}}
+        </div>
       </li>
     </ul>
-  </li>
-</ul>
+  </div>
+</div>

@@ -2,18 +2,42 @@ function versionsCtrl($scope,$http,$routeParams){
 	//バージョンの一覧を取得
 	$http({method: 'GET', url: '/get_versions/'+$routeParams.project_id}).
 			success(function(data, status, headers, config) {
-				$scope.versions = data;
+				var versions = Version.convert_versions(data);
+				//未設定用のバージョンを一覧に追加
+				versions.unshift(new Version({name: "未設定"}));
+				$scope.versions = versions;
+				//チケットの一覧を取得
 				$http({method: 'GET', url: '/find_issue/'+$routeParams.project_id}).
 					success(function(data, status, headers, config) {
-						$scope.issues = Issue.set_issues(data);
+						//チケットにあったバージョンに配置
+						var issues = Issue.convert_issues(data);
+						for(i in $scope.versions){
+							$scope.versions[i].set_issues(issues);
+						}
+						//ui-sortable.jsにあわせて配列に入れ直す
+						$scope.version_rows = [];
+						for(i in $scope.versions){
+							$scope.version_rows.push($scope.versions[i].issues);
+						}
 					}).
 					error(function(data, status, headers, config) {
 						alert(status);
 					});
+
 			}).
 			error(function(data, status, headers, config) {
 				alert(status);
 			});
+
+	$scope.sortable_options = {
+    connectWith: '.row',
+    update: function(event,ui){
+    	console.log(ui.item.sortable);
+    },
+    receive: function(evemt,ui){
+    	// console.log(ui.ngModel);
+    }
+	}
 }
 
 app.filter('milestoneFilter',function(){

@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'haml'
+require 'sass'
 require 'json'
 require './public/backlog_lib'
 
@@ -42,4 +43,13 @@ end
 def client
 	BacklogLib::Client.new(
 		session[:space_id],session[:username],session[:password])
+end
+
+# scss
+get '/css/base.css' do
+  scss :base
+end
+
+get '/css/content.css' do
+  scss :content
 end

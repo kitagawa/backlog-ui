@@ -1,15 +1,17 @@
 - # encoding: UTF-8
-versions
-%ul
-	%li
+%div{:class=>"ticket-list"}
+	%div{:class=>"list-header"}
 		未設定
-		%ul
+	%div{:class=>"list-body"}
+		%ul{:id=>"sortable1",:class=>"connectedSortable"}
 			%li{"ng-repeat" => "issue in issues | milestoneFilter:null"}
-				{{issue}}
-	%li{"ng-repeat" => "version in versions"}
-		{{version}}
-		issues
-		%ul
+				%div{:class=>"ticket"}
+					{{issue.summary}}
+%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
+	%div{:class=>"list-header"}
+		{{version.name}}
+	%div{:class=>"list-body"}
+		%ul{:class=>"connectedSortable"}
 			%li{"ng-repeat" => "issue in issues | milestoneFilter:version.id"}
-				{{issue}}
-
+				%div{:class=>"ticket"}
+					{{issue.summary}}

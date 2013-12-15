@@ -2,7 +2,7 @@ function Issue(attriubtes){
 	$.extend(this,attriubtes)
 }
 
-Issue.set_issues = function(data){
+Issue.convert_issues = function(data){
 	issues = [];
 	for(i in data){
 		issues.push(new Issue(data[i]));

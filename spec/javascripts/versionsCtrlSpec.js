@@ -16,7 +16,7 @@ describe("versionsCtrl",function(){
 		{"id":1070000004},
 		]
 
-		issues = Issue.set_issues(issues_dates);
+		issues = Issue.convert_issues(issues_dates);
 	})
 
 	describe("filter_milestone",function(){
