@@ -1,8 +1,20 @@
-<div ng-controller='versionsCtrl'>
-  versions
-  <ul>
-    <li ng-repeat='version in versions'>
-      {{version}}
-    </li>
-  </ul>
-</div>
+versions
+<ul>
+  <li>
+    未設定
+    <ul>
+      <li ng-repeat='issue in issues | milestoneFilter:null'>
+        {{issue}}
+      </li>
+    </ul>
+  </li>
+  <li ng-repeat='version in versions'>
+    {{version}}
+    issues
+    <ul>
+      <li ng-repeat='issue in issues | milestoneFilter:version.id'>
+        {{issue}}
+      </li>
+    </ul>
+  </li>
+</ul>

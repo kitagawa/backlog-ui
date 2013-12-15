@@ -33,6 +33,11 @@ get '/get_versions/:projectId' do
 	client.execute("backlog.getVersions",params[:projectId].to_i).to_json
 end
 
+# チケット一覧取得API
+get '/find_issue/:projectId' do
+	client.execute("backlog.findIssue",{:projectId => params[:projectId].to_i}).to_json	
+end
+
 # Backlog接続クライアント取得
 def client
 	BacklogLib::Client.new(
