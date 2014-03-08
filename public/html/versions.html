@@ -1,0 +1,24 @@
+<div class='ticket-list' ng-repeat='version in version_rows'>
+<div class='list-header'>
+{{versions[$index].name}}
+</div>
+<div class='list-body'>
+<ul class='row' ng-model='version' ui-sortable='sortable_options'>
+<li ng-repeat='issue in version'>
+<div class='ticket'>
+{{issue.summary}}
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div style='clear:both'></div>
+<div ng-repeat='version in versions'>
+{{version.name}}
+<ul>
+<li ng-repeat='issue in version.issues'>
+{{issue.summary}}
+</li>
+</ul>
+<br>
+</div>

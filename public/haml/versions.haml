@@ -1,0 +1,17 @@
+- # encoding: UTF-8
+%div{"ng-repeat" => "version in version_rows", :class=>"ticket-list"}
+	%div{:class=>"list-header"}
+		{{versions[$index].name}}
+	%div{:class=>"list-body"}
+		%ul{"ui-sortable"=>"sortable_options", "ng-model"=>"version", :class=>"row"}
+			%li{"ng-repeat" => "issue in version"}
+				%div{:class=>"ticket"}
+					{{issue.summary}}
+
+%div{:style=>"clear:both"}
+%div{"ng-repeat" => "version in versions"}
+	{{version.name}}
+	%ul
+		%li{"ng-repeat" => "issue in version.issues"}
+			{{issue.summary}}
+	%br
