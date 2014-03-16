@@ -1,7 +1,8 @@
 module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-haml'
-  grunt.loadNpmTasks 'grunt-contrib-connect';
+  grunt.loadNpmTasks 'grunt-contrib-connect'
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
   
   grunt.initConfig
     #hamlコンパイル
@@ -17,12 +18,28 @@ module.exports = (grunt) ->
     connect:
       site: {}
 
+    #cofeescriptコンパイル
+    coffee:
+      compile:
+        files: [
+          expand: true
+          src: ['public/coffee/*.coffee']
+          dest: './'
+          ext: '.js'
+        ]
+        options: 
+          bare: true
+
     #監視設定
     watch:
-      files:['public/haml/*.haml']
-      tasks:['haml']
-      options:
-        livereload: true #変更があればリロードする
+      coffee:
+        files: ['public/coffee/*.coffee']
+        tasks: ['coffee']
+      haml:
+        files:['public/haml/*.haml']
+        tasks:['haml']
+        options:
+          livereload: true #変更があればリロードする
 
   #タスク登録
   grunt.registerTask 'default', ['connect',"watch"]
