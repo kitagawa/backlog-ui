@@ -3,6 +3,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-haml'
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-compass'
   
   grunt.initConfig
     #hamlコンパイル
@@ -30,11 +31,20 @@ module.exports = (grunt) ->
         options: 
           bare: true
 
+    # Compass
+    compass:
+      dist:
+        options:
+          config: 'config.rb'
+
     #監視設定
     watch:
       coffee:
         files: ['public/coffee/*.coffee']
         tasks: ['coffee']
+      sass:
+        files: ['public/sass/*.scss'],
+        tasks: ['compass']
       haml:
         files:['public/haml/*.haml']
         tasks:['haml']

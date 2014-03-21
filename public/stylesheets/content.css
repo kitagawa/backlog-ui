@@ -1,0 +1,23 @@
+/* line 4, ../sass/content.scss */
+.ticket-list {
+  float: left;
+  width: 300px;
+  border: 1px solid #cccccc;
+}
+/* line 12, ../sass/content.scss */
+.ticket-list .list-body ul {
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 0px;
+  padding-bottom: 10px;
+}
+/* line 17, ../sass/content.scss */
+.ticket-list .list-body ul li {
+  border-bottom: 1px solid #cccccc;
+}
+
+/* line 23, ../sass/content.scss */
+.ticket {
+  background-color: #ddff44;
+  padding: 3px;
+}

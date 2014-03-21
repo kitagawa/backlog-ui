@@ -6,6 +6,7 @@ gem "haml"
 
 group :development do
   gem 'shotgun'
+  gem 'compass'
 end
 
 group :test do
