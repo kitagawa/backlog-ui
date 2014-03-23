@@ -1,10 +1,10 @@
-<div class='ticket-list' ng-repeat='version in version_rows'>
+<div class='ticket-list' ng-repeat='version in versions'>
 <div class='list-header'>
 {{versions[$index].name}}
 </div>
 <div class='list-body'>
-<ul class='row' ng-model='version' ui-sortable='sortable_options'>
-<li ng-repeat='issue in version'>
+<ul class='row' ng-model='version.issues' ui-sortable='sortable_options'>
+<li ng-repeat='issue in version.issues'>
 <div class='ticket'>
 {{issue.summary}}
 </div>

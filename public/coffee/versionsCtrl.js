@@ -8,19 +8,13 @@ versionsCtrl = function($scope, $http, $routeParams) {
         name: "未設定"
       }));
       return $scope.find_issues(function(data) {
-        var issues, version, _i, _j, _len, _len1, _ref, _ref1, _results;
+        var issues, version, _i, _len, _ref, _results;
         issues = Issue.convert_issues(data);
         _ref = $scope.versions;
+        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           version = _ref[_i];
-          version.set_issues(issues);
-        }
-        $scope.version_rows = [];
-        _ref1 = $scope.versions;
-        _results = [];
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          version = _ref1[_j];
-          _results.push($scope.version_rows.push(version.issues));
+          _results.push(version.set_issues(issues));
         }
         return _results;
       }, function(data, status, headers, config) {
