@@ -20,16 +20,16 @@ describe("versionsCtrl",function(){
 	})
 
 	describe("filter_milestone",function(){
-		it("get filtered issues",function(){
-			var filtered_issues = filter_milestone(issues,1000000001);
-			expect(filtered_issues.length).toEqual(1);
-			expect(filtered_issues[0].id,1070000001);
-		})
-		it("get issues which not has milestones",function(){
-			var filtered_issues = filter_milestone(issues,null);
-			expect(filtered_issues.length).toEqual(1);
-			expect(filtered_issues[0].id,1070000004);
-		})
+		// it("get filtered issues",function(){
+		// 	var filtered_issues = filter_milestone(issues,1000000001);
+		// 	expect(filtered_issues.length).toEqual(1);
+		// 	expect(filtered_issues[0].id,1070000001);
+		// })
+		// it("get issues which not has milestones",function(){
+		// 	var filtered_issues = filter_milestone(issues,null);
+		// 	expect(filtered_issues.length).toEqual(1);
+		// 	expect(filtered_issues[0].id,1070000004);
+		// })
 	})
 })
 

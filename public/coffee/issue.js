@@ -16,7 +16,7 @@ Issue = (function() {
         }
       }
     } else {
-      if (version_id === null) {
+      if (version_id == null) {
         return true;
       }
     }

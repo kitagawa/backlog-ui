@@ -15,6 +15,7 @@ src_files:
     - public/js/angular.min.js
     - public/js/angular-route.min.js
     - public/js/**/*.js
+    - public/coffee/**/*.js
 
 # stylesheets
 #
