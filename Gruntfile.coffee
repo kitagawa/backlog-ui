@@ -4,7 +4,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-compass'
-  
+  grunt.loadNpmTasks 'grunt-contrib-jasmine'
+
   grunt.initConfig
     #hamlコンパイル
     haml:
@@ -37,6 +38,13 @@ module.exports = (grunt) ->
         options:
           config: 'config.rb'
 
+    #jasmine　ユニットテスト
+    jasmine:
+      src: ['public/js/jquery.min.js','public/js/angular.min.js','public/coffee/*.js']
+      options:
+        specs: 'spec/javascripts/*Spec.js'
+        helpers: 'spec/helpers/*Helper.js'
+
     #監視設定
     watch:
       coffee:
@@ -50,6 +58,9 @@ module.exports = (grunt) ->
         tasks:['haml']
         options:
           livereload: true #変更があればリロードする
+      jasmine:
+        files: ['public/coffee/*.js','spec/javascripts/*.js']
+        tasks: ['jasmine']
 
   #タスク登録
   grunt.registerTask 'default', ['connect',"watch"]
