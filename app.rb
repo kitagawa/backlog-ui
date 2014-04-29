@@ -39,6 +39,13 @@ get '/find_issue/:projectId' do
 	client.execute("backlog.findIssue",{:projectId => params[:projectId].to_i}).to_json	
 end
 
+# チケットの更新API
+post '/update_issue/:issueKey' do
+	data = JSON.parse request.body.read
+	data[:key] = params[:issueKey]
+	client.execute("backlog.updateIssue",data).to_json
+end
+
 # Backlog接続クライアント取得
 def client
 	BacklogLib::Client.new(

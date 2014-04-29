@@ -40,7 +40,11 @@ module.exports = (grunt) ->
 
     #jasmine　ユニットテスト
     jasmine:
-      src: ['public/js/jquery.min.js','public/js/angular.min.js','public/coffee/*.js']
+      src: ['public/js/jquery.min.js',
+      'public/js/angular.min.js',
+      'public/js/angular-mocks.js',
+      'public/js/*.js',
+      'public/coffee/*.js']
       options:
         specs: 'spec/javascripts/*Spec.js'
         helpers: 'spec/helpers/*Helper.js'

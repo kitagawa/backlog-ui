@@ -25,8 +25,10 @@ versionsCtrl = function($scope, $http, $routeParams) {
     });
     return $scope.sortable_options = {
       connectWith: '.row',
-      update: function(event, ui) {},
-      receive: function(evemt, ui) {}
+      stop: function(event, ui) {
+        return $scope.update_issue(ui);
+      },
+      receive: function(event, ui) {}
     };
   };
   $scope.find_versions = function(on_success, on_error) {
@@ -48,6 +50,28 @@ versionsCtrl = function($scope, $http, $routeParams) {
     }).error(function(data, status, headers, config) {
       return on_error(data, status, headers, config);
     });
+  };
+  $scope.update_issue = function(ui) {
+    var issue, versions;
+    issue = ui.item.sortable.moved;
+    versions = $scope.find_version_included_issue(issue);
+    return issue.update_milestone($http, versions);
+  };
+  $scope.find_version_included_issue = function(issue) {
+    var result, version, _i, _issue, _j, _len, _len1, _ref, _ref1;
+    result = [];
+    _ref = $scope.versions;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      version = _ref[_i];
+      _ref1 = version.issues;
+      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+        _issue = _ref1[_j];
+        if (_issue === issue) {
+          result.push(version);
+        }
+      }
+    }
+    return result;
   };
   return $scope.initialize();
 };

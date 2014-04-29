@@ -24,8 +24,10 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 		# UI-Sortableの変更された時の設定
 		$scope.sortable_options =
 			connectWith: '.row',
-			update: (event,ui) ->
-			receive: (evemt,ui) ->
+			stop: (event,ui) ->
+				$scope.update_issue(ui)
+			receive: (event,ui) ->
+
 
 	# マイルストーンの一覧を取得する
 	$scope.find_versions = (on_success, on_error) ->
@@ -42,6 +44,22 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 			on_success(data)
 		.error (data, status, headers, config)->
 			on_error(data, status, headers, config)
+
+	# チケットの更新を行う
+	$scope.update_issue = (ui)->
+		# console.log(ui)
+		issue = ui.item.sortable.moved
+		versions = $scope.find_version_included_issue(issue)
+		issue.update_milestone($http,versions)
+
+	# 指定のチケットを保持しているマイルストーンを取得する
+	$scope.find_version_included_issue = (issue) ->
+		result = []
+		for version in $scope.versions
+			for _issue in version.issues
+				if _issue == issue
+					result.push(version)
+		return result
 
 	# 初期設定を行う
 	$scope.initialize()

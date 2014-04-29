@@ -5,6 +5,7 @@ Version = (function() {
 
   function Version(attributes) {
     $.extend(this, attributes);
+    this.issues = [];
   }
 
   Version.prototype.set_issues = function(issues) {

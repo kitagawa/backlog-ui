@@ -21,3 +21,9 @@ class Issue
 		for data in data_list
 			issues.push(new Issue(data))
 		return issues
+
+	# 設定されているマイルストーンを更新する
+	update_milestone: ($http,milestones) ->
+		milestone_id_list = milestones.map((n)->n.id)
+		data = {milestoneId: milestone_id_list}
+		$http.post('/update_issue/'+this.key,data)

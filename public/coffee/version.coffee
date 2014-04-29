@@ -5,6 +5,7 @@ class Version
 
 	constructor: (attributes) ->
 		$.extend(this,attributes)
+		this.issues = []
 
 	# マイルストーンに一致するチケットを設定する
 	set_issues: (issues) ->
