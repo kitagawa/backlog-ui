@@ -1,6 +1,7 @@
 var versionsCtrl;
 
 versionsCtrl = function($scope, $http, $routeParams) {
+  $scope.commands = [];
   $scope.initialize = function() {
     $scope.find_versions(function(data) {
       $scope.versions = Version.convert_versions(data);
@@ -26,7 +27,7 @@ versionsCtrl = function($scope, $http, $routeParams) {
     return $scope.sortable_options = {
       connectWith: '.row',
       stop: function(event, ui) {
-        return $scope.update_issue(ui);
+        return $scope.set_update_issue_milestone(ui);
       },
       receive: function(event, ui) {}
     };
@@ -51,11 +52,12 @@ versionsCtrl = function($scope, $http, $routeParams) {
       return on_error(data, status, headers, config);
     });
   };
-  $scope.update_issue = function(ui) {
-    var issue, versions;
+  $scope.set_update_issue_milestone = function(ui) {
+    var command, issue, versions;
     issue = ui.item.sortable.moved;
     versions = $scope.find_version_included_issue(issue);
-    return issue.update_milestone($http, versions);
+    command = issue.create_update_milestone_command(versions);
+    return Command.merge_commmand($scope.commands, command);
   };
   $scope.find_version_included_issue = function(issue) {
     var result, version, _i, _issue, _j, _len, _len1, _ref, _ref1;
@@ -72,6 +74,15 @@ versionsCtrl = function($scope, $http, $routeParams) {
       }
     }
     return result;
+  };
+  $scope.update = function() {
+    var command, _i, _len, _ref;
+    _ref = $scope.commands;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      command = _ref[_i];
+      command.execute($http);
+    }
+    return $scope.commands = [];
   };
   return $scope.initialize();
 };

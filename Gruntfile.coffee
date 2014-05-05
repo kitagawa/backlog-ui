@@ -43,6 +43,7 @@ module.exports = (grunt) ->
       src: ['public/js/jquery.min.js',
       'public/js/angular.min.js',
       'public/js/angular-mocks.js',
+      'public/js/sortable.js',
       'public/js/*.js',
       'public/coffee/*.js']
       options:

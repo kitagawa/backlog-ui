@@ -31,4 +31,12 @@ describe("Issue",function(){
 		})
 	})
 
+	describe("create_update_milestone_command",function(){
+		it("create_command",function(){
+			milestone = data["milestones"][0]
+			command = issue.create_update_milestone_command([milestone])
+			expect(command).toBeTruthy
+			expect(command.data["milestone_id"], [1070000001])
+		})
+	})
 })

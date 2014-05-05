@@ -1,4 +1,7 @@
 versionsCtrl = ($scope,$http,$routeParams) ->
+	#コマンドリスト
+	$scope.commands = []
+
 	# 初期設定
 	$scope.initialize = () ->		
 		$scope.find_versions(
@@ -25,7 +28,7 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 		$scope.sortable_options =
 			connectWith: '.row',
 			stop: (event,ui) ->
-				$scope.update_issue(ui)
+				$scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->
 
 
@@ -45,12 +48,12 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 		.error (data, status, headers, config)->
 			on_error(data, status, headers, config)
 
-	# チケットの更新を行う
-	$scope.update_issue = (ui)->
-		# console.log(ui)
+	# チケットの更新コマンドを蓄積する
+	$scope.set_update_issue_milestone = (ui)->
 		issue = ui.item.sortable.moved
 		versions = $scope.find_version_included_issue(issue)
-		issue.update_milestone($http,versions)
+		command = issue.create_update_milestone_command(versions)
+		Command.merge_commmand($scope.commands,command)
 
 	# 指定のチケットを保持しているマイルストーンを取得する
 	$scope.find_version_included_issue = (issue) ->
@@ -60,6 +63,12 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 				if _issue == issue
 					result.push(version)
 		return result
+
+	# チケットの更新を行う
+	$scope.update = () ->
+		for command in $scope.commands
+			command.execute($http)
+		$scope.commands = [] #コマンドを空にする
 
 	# 初期設定を行う
 	$scope.initialize()

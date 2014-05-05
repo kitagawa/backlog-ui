@@ -1,10 +1,14 @@
 # チケット
 class Issue
 
+	# コンストラクタ
+	# @param attributes 属性
 	constructor: (attributes) ->
 		$.extend(this,attributes)
 	
 	# マイルストーンが一致しているかを返す
+	# @param version_id 検索するマイルストーンのID
+	# @return boolean
 	is_include_milestone: (version_id) ->
 		if this.milestones
 			for milestone in this.milestones 
@@ -16,14 +20,19 @@ class Issue
 		return false
 		
 	# チケットのJSONデータからチケットオブジェクトを生成する
+	# @param data_list 生成元のデータリスト
+	# @return チケットのリスト
 	@convert_issues: (data_list) ->
 		issues = []
 		for data in data_list
 			issues.push(new Issue(data))
 		return issues
 
-	# 設定されているマイルストーンを更新する
-	update_milestone: ($http,milestones) ->
+	#マイルストーン更新コマンドを作成する
+	# @param milestones 変更先のマイルストーン一覧
+	# @return 更新コマンド
+	create_update_milestone_command: (milestones) ->
 		milestone_id_list = milestones.map((n)->n.id)
-		data = {milestoneId: milestone_id_list}
-		$http.post('/update_issue/'+this.key,data)
+		new Command("update_issue", {
+			milestoneId: milestone_id_list
+			},this.key)

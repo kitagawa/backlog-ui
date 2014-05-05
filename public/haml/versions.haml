@@ -9,6 +9,9 @@
 					{{issue.summary}}
 
 %div{:style=>"clear:both"}
+%dib
+	%button{:class => "btn", "ng-click" => "update()"}
+		更新
 %div{"ng-repeat" => "version in versions"}
 	{{version.name}}
 	%ul

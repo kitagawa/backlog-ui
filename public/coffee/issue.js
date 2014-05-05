@@ -33,17 +33,14 @@ Issue = (function() {
     return issues;
   };
 
-  Issue.prototype.update_milestone = function($http, milestones) {
-    var data, milestone_id_list;
-    console.log(milestones);
+  Issue.prototype.create_update_milestone_command = function(milestones) {
+    var milestone_id_list;
     milestone_id_list = milestones.map(function(n) {
       return n.id;
     });
-    console.log(milestone_id_list);
-    data = {
+    return new Command("update_issue", {
       milestoneId: milestone_id_list
-    };
-    return $http.post('/update_issue/' + this.key, data);
+    }, this.key);
   };
 
   return Issue;
