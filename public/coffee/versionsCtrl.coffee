@@ -51,6 +51,7 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 	# チケットの更新コマンドを蓄積する
 	$scope.set_update_issue_milestone = (ui)->
 		issue = ui.item.sortable.moved
+		return if issue is undefined #移動したものがない場合
 		versions = $scope.find_version_included_issue(issue)
 		command = issue.create_update_milestone_command(versions)
 		Command.merge_commmand($scope.commands,command)

@@ -55,6 +55,9 @@ versionsCtrl = function($scope, $http, $routeParams) {
   $scope.set_update_issue_milestone = function(ui) {
     var command, issue, versions;
     issue = ui.item.sortable.moved;
+    if (issue === void 0) {
+      return;
+    }
     versions = $scope.find_version_included_issue(issue);
     command = issue.create_update_milestone_command(versions);
     return Command.merge_commmand($scope.commands, command);
