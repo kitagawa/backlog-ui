@@ -6,8 +6,12 @@ require './public/backlog_lib'
 
 enable :sessions
 
+# アプリケーション名
+set :title, 'BacklogUI'
+
 # ログイン画面
 get '/login' do
+	@title = settings.title
 	haml :login
 end
 
@@ -21,6 +25,7 @@ end
 
 #アプリケーション画面
 get '/' do
+	@title = settings.title
 	haml :app
 end
 
@@ -50,13 +55,4 @@ end
 def client
 	BacklogLib::Client.new(
 		session[:space_id],session[:username],session[:password])
-end
-
-# scss
-get '/css/base.css' do
-  scss :base
-end
-
-get '/css/content.css' do
-  scss :content
 end
