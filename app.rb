@@ -15,12 +15,26 @@ get '/login' do
 	haml :login
 end
 
+get '/logout' do
+	clear_authed
+	redirect '/login'
+end
+
 # ログイン処理
 post '/do_login' do
-	session[:username] = params[:username]
+	session[:user_id] = params[:user_id]
 	session[:password] = params[:password]
 	session[:space_id] = params[:space_id]
-	redirect '/'
+
+	begin
+		# ログインユーザー情報を取得
+		response = get_user_info
+		session[:username] = response["name"]		
+		redirect '/'
+	rescue Exception => e #入力されたログイン情報が正しくない
+		@error = true
+		haml :login
+	end
 end
 
 #アプリケーション画面
@@ -54,5 +68,21 @@ end
 # Backlog接続クライアント取得
 def client
 	BacklogLib::Client.new(
-		session[:space_id],session[:username],session[:password])
+		session[:space_id],session[:user_id],session[:password])
+end
+
+# ログイン状態かをチェックする
+def is_authed?
+	session[:user_id] and session[:password] and session[:space_id]
+end
+
+def get_user_info
+	client.execute("backlog.getUser",session[:user_id])
+end
+
+# ログイン状態をクリアする
+def clear_authed
+	session[:user_id] = nil
+	session[:password] = nil
+	session[:space_id] = nil
 end

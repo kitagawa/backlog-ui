@@ -129,6 +129,7 @@ figure {
 
 /* line 211, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_normalize.scss */
 hr {
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0;
 }
@@ -212,6 +213,8 @@ input[type="number"]::-webkit-outer-spin-button {
 /* line 357, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -366,8 +369,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url(/public/stylesheets/fonts/bootstrap/glyphicons-halflings-regular.eot);
-  src: url(/public/stylesheets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix) format("embedded-opentype"), url(/public/stylesheets/fonts/bootstrap/glyphicons-halflings-regular.woff) format("woff"), url(/public/stylesheets/fonts/bootstrap/glyphicons-halflings-regular.ttf) format("truetype"), url(/public/stylesheets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format("svg");
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 /* line 21, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_glyphicons.scss */
@@ -1386,12 +1389,16 @@ th {
 
 /* line 11, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_scaffolding.scss */
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
 /* line 15, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_scaffolding.scss */
 *:before,
 *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -1467,6 +1474,7 @@ img {
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
   max-width: 100%;
@@ -3437,6 +3445,8 @@ label {
 
 /* line 47, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_forms.scss */
 input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -3496,14 +3506,17 @@ output {
   background-image: none;
   border: 1px solid #cccccc;
   border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 /* line 57, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .form-control:focus {
   border-color: #66afe9;
   outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 /* line 103, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
@@ -3791,11 +3804,13 @@ select[multiple].input-lg,
 /* line 21, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-success .form-control {
   border-color: #3c763d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 /* line 24, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-success .form-control:focus {
   border-color: #2b542c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
 }
 /* line 31, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3821,11 +3836,13 @@ select[multiple].input-lg,
 /* line 21, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-warning .form-control {
   border-color: #8a6d3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 /* line 24, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-warning .form-control:focus {
   border-color: #66512c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
 }
 /* line 31, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -3851,11 +3868,13 @@ select[multiple].input-lg,
 /* line 21, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-error .form-control {
   border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 /* line 24, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-error .form-control:focus {
   border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
 }
 /* line 31, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_forms.scss */
@@ -4008,8 +4027,7 @@ select[multiple].input-lg,
   font-weight: normal;
   text-align: center;
   vertical-align: middle;
-  -ms-touch-action: manipulation;
-      touch-action: manipulation;
+  touch-action: manipulation;
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
@@ -4038,6 +4056,7 @@ select[multiple].input-lg,
 .btn:active, .btn.active {
   outline: 0;
   background-image: none;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 /* line 48, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4046,6 +4065,7 @@ select[multiple].input-lg,
   pointer-events: none;
   opacity: 0.65;
   filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -4220,6 +4240,7 @@ select[multiple].input-lg,
 /* line 97, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link, .btn-link:active, .btn-link.active, .btn-link[disabled], fieldset[disabled] .btn-link {
   background-color: transparent;
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 /* line 104, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_buttons.scss */
@@ -4284,6 +4305,7 @@ input[type="button"].btn-block {
 .fade {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
+  -o-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
 }
 /* line 13, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_component-animations.scss */
@@ -4365,6 +4387,7 @@ tbody.collapse.in {
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
 }
@@ -4613,10 +4636,12 @@ tbody.collapse.in {
 
 /* line 115, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 /* line 119, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group.open .dropdown-toggle.btn-link {
+  -webkit-box-shadow: none;
   box-shadow: none;
 }
 
@@ -5348,6 +5373,7 @@ tbody.collapse.in {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 8px;
   margin-bottom: 8px;
@@ -5432,6 +5458,7 @@ tbody.collapse.in {
     margin-right: 0;
     padding-top: 0;
     padding-bottom: 0;
+    -webkit-box-shadow: none;
     box-shadow: none;
   }
 }
@@ -6087,6 +6114,7 @@ a.badge:hover, a.badge:focus {
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
   transition: border 0.2s ease-in-out;
 }
 /* line 18, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_thumbnails.scss */
@@ -6242,6 +6270,7 @@ a.thumbnail.active {
   margin-bottom: 20px;
   background-color: whitesmoke;
   border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -6255,8 +6284,10 @@ a.thumbnail.active {
   color: white;
   text-align: center;
   background-color: #337ab7;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
+  -o-transition: width 0.6s ease;
   transition: width 0.6s ease;
 }
 
@@ -6264,6 +6295,7 @@ a.thumbnail.active {
 .progress-striped .progress-bar,
 .progress-bar-striped {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-size: 40px 40px;
 }
@@ -6272,6 +6304,7 @@ a.thumbnail.active {
 .progress.active .progress-bar,
 .progress-bar.active {
   -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
   animation: progress-bar-stripes 2s linear infinite;
 }
 
@@ -6282,6 +6315,7 @@ a.thumbnail.active {
 /* line 7, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-success {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
@@ -6292,6 +6326,7 @@ a.thumbnail.active {
 /* line 7, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-info {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
@@ -6302,6 +6337,7 @@ a.thumbnail.active {
 /* line 7, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-warning {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
@@ -6312,6 +6348,7 @@ a.thumbnail.active {
 /* line 7, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/mixins/_progress-bar.scss */
 .progress-striped .progress-bar-danger {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
 }
 
@@ -6566,6 +6603,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   background-color: white;
   border: 1px solid transparent;
   border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
@@ -7026,6 +7064,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
   background-color: whitesmoke;
   border: 1px solid #e3e3e3;
   border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 /* line 15, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_wells.scss */
@@ -7097,14 +7136,18 @@ button.close {
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
   -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
   transform: translate(0, -25%);
   -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
 /* line 36, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_modals.scss */
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
   transform: translate(0, 0);
 }
 
@@ -7128,6 +7171,7 @@ button.close {
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
   outline: 0;
@@ -7223,6 +7267,7 @@ button.close {
 
   /* line 138, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_modals.scss */
   .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   }
 
@@ -7380,6 +7425,7 @@ button.close {
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal;
 }
@@ -7521,6 +7567,7 @@ button.close {
   display: none;
   position: relative;
   -webkit-transition: 0.6s ease-in-out left;
+  -o-transition: 0.6s ease-in-out left;
   transition: 0.6s ease-in-out left;
 }
 /* line 23, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
@@ -7534,29 +7581,23 @@ button.close {
 @media all and (transform-3d), (-webkit-transform-3d) {
   /* line 16, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
   .carousel-inner > .item {
-    -webkit-transition: -webkit-transform .6s ease-in-out;
-            transition: transform .6s ease-in-out;
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-    -webkit-perspective: 1000;
-            perspective: 1000;
+    transition: transform .6s ease-in-out;
+    backface-visibility: hidden;
+    perspective: 1000;
   }
   /* line 35, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
   .carousel-inner > .item.next, .carousel-inner > .item.active.right {
-    -webkit-transform: translate3d(100%, 0, 0);
-            transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
     left: 0;
   }
   /* line 40, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
   .carousel-inner > .item.prev, .carousel-inner > .item.active.left {
-    -webkit-transform: translate3d(-100%, 0, 0);
-            transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
     left: 0;
   }
   /* line 46, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
   .carousel-inner > .item.next.left, .carousel-inner > .item.prev.right, .carousel-inner > .item.active {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
     left: 0;
   }
 }
@@ -7616,6 +7657,7 @@ button.close {
 /* line 108, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.1.0/assets/stylesheets/bootstrap/_carousel.scss */
 .carousel-control.left {
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
@@ -7625,6 +7667,7 @@ button.close {
   left: auto;
   right: 0;
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
@@ -8109,4 +8152,63 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+/* line 1, ../sass/_login.scss */
+.main-title {
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+/* line 5, ../sass/_login.scss */
+.main-title h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: 80px;
+}
+
+/* line 11, ../sass/_login.scss */
+.login-form {
+  width: 50%;
+  padding: 30px;
+  margin-bottom: 18px;
+  -webkit-border-radius: 4px 4px;
+  -moz-border-radius: 4px / 4px;
+  border-radius: 4px / 4px;
+}
+
+/* line 19, ../sass/_login.scss */
+.policy-form {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  height: 200px;
+  overflow: scroll;
+}
+
+/* line 28, ../sass/_login.scss */
+.bordered, .login-form, .policy-form {
+  border: 1px solid #cecece;
+}
+
+/* line 3, ../sass/content.scss */
+.ticket-list {
+  float: left;
+  width: 300px;
+  border: 1px solid #cccccc;
+}
+/* line 11, ../sass/content.scss */
+.ticket-list .list-body ul {
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 0px;
+  padding-bottom: 10px;
+}
+/* line 16, ../sass/content.scss */
+.ticket-list .list-body ul li {
+  border-bottom: 1px solid #cccccc;
+}
+
+/* line 22, ../sass/content.scss */
+.ticket {
+  background-color: #ddff44;
+  padding: 3px;
 }

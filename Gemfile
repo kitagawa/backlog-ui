@@ -9,6 +9,7 @@ gem 'bootstrap-sass'
 group :development do
   gem 'shotgun'
   gem 'compass'
+  gem 'foreman'
 end
 
 group :test do

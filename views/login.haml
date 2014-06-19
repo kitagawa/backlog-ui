@@ -1,19 +1,35 @@
 !!!
-%html
+%html{"ng-app" => "App"}
 	= haml :header
+	%link{href: 'http://fonts.googleapis.com/css?family=Raleway:100', rel: 'stylesheet', type: 'text/css'}
 	%body
-		%div
-			%form{:method => "post",:action => "/do_login"}
-				%div
-					%label
-						スペースID
-					%input{:type => "text", :name =>"space_id"}
-				%div
-					%label
-						ユーザーID
-					%input{:type => "text", :name => "username"}
-				%div
-					%label
-						パスワード
-					%input{:type=>"password", :name => "password"}
-				%input{:type => "submit", :value => "ログイン", :class=> "btn btn-default"}
+		%div{class: 'container'}
+			%div{class: 'main-title'}
+				%h1 BacklogUI
+			%div{class: "login-form center-block"}
+				%div{class: "policy-form"}
+					利用規約
+					%br 1.
+					%br 2.
+					%br 3.
+					%br 4.
+					%br 5.
+					%br 6.
+					%br 7.
+				%div{class: "text-center"}
+					%input{name: "agreement",type: "checkbox","ng-model" => "agreement"}
+					%span
+						同意する
+
+			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
+				-if @error
+					%p{class: "alert alert-danger"}
+						ログインに失敗しました。
+						%br
+						スペースID/ユーザ名/パスワードを確認してください。
+				%div{class: "form-group"}
+					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog APIキー"}
+				%div{class: "form-group"}
+				%button{typ:"submit", "ng-disabled" => "!agreement", class: "btn btn-primary center-block"}
+					%span{class: "fa fa-sign-in"}
+					&nbsp;ログイン
