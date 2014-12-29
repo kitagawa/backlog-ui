@@ -19,17 +19,18 @@
 				%div{class: "text-center"}
 					%input{name: "agreement",type: "checkbox","ng-model" => "agreement"}
 					%span
-						同意する
+						=t.agree
 
 			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
 				-if @error
 					%p{class: "alert alert-danger"}
-						ログインに失敗しました。
+						=t.message.login_failure
 						%br
-						スペースID/ユーザ名/パスワードを確認してください。
+						=t.message.confirm_api_key
 				%div{class: "form-group"}
-					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog APIキー"}
+					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog #{t.api_key}"}
 				%div{class: "form-group"}
 				%button{typ:"submit", "ng-disabled" => "!agreement", class: "btn btn-primary center-block"}
 					%span{class: "fa fa-sign-in"}
-					&nbsp;ログイン
+					&nbsp;
+					=t.login

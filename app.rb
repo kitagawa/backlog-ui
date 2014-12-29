@@ -3,6 +3,7 @@ require 'haml'
 require 'sass'
 require 'json'
 require './public/backlog_lib'
+require 'sinatra/r18n'
 
 enable :sessions
 

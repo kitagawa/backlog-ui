@@ -1,0 +1,6 @@
+agree: 同意する
+login: ログイン
+api_key: APIキー
+message:
+  login_failure: ログインに失敗しました。
+  confirm_api_key: APIキーを確認してください。
