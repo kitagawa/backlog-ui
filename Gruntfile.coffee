@@ -27,8 +27,9 @@ module.exports = (grunt) ->
       compile:
         files: [
           expand: true
-          src: ['public/coffee/*.coffee']
-          dest: './'
+          cwd: 'public/coffee/'
+          src: ['*.coffee']
+          dest: 'public/javascripts/'
           ext: '.js'
         ]
         options: 
@@ -47,7 +48,7 @@ module.exports = (grunt) ->
       'public/js/angular-mocks.js',
       'public/js/sortable.js',
       'public/js/*.js',
-      'public/coffee/*.js']
+      'public/javascripts/*.js']
       options:
         specs: 'spec/javascripts/*Spec.js'
         helpers: 'spec/helpers/*Helper.js'
@@ -75,7 +76,7 @@ module.exports = (grunt) ->
         options:
           livereload: true #変更があればリロードする
       jasmine:
-        files: ['public/coffee/*.js','spec/javascripts/*.js']
+        files: ['public/coffee/*.coffee','spec/javascripts/*.js']
         tasks: ['jasmine']
 
   #タスク登録
