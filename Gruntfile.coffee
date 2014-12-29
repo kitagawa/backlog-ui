@@ -5,7 +5,9 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-compass'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
-
+  grunt.loadNpmTasks 'grunt-postcss'
+  grunt.loadNpmTasks 'grunt-autoprefixer'
+  
   grunt.initConfig
     #hamlコンパイル
     haml:
@@ -49,6 +51,15 @@ module.exports = (grunt) ->
       options:
         specs: 'spec/javascripts/*Spec.js'
         helpers: 'spec/helpers/*Helper.js'
+
+    # cssの自動プレフィックス追加
+    autoprefixer:
+        options: 
+            processors: [
+              browsers: ['last 2 version']
+            ]
+        dist:  
+          src: 'public/stylesheets/*.css'
 
     #監視設定
     watch:

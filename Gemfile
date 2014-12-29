@@ -4,6 +4,8 @@ gem "sinatra"
 gem "sass"
 gem "haml"
 
+gem 'bootstrap-sass'
+
 group :development do
   gem 'shotgun'
   gem 'compass'

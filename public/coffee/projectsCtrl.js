@@ -15,7 +15,7 @@ projectsCtrl = function($scope, $http) {
     }).success(function(data, status, headers, config) {
       return on_success(data);
     }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
+      return on_error(data, statis, headers, config);
     });
   };
   return $scope.initialize();
