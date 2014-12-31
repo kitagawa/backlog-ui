@@ -15,4 +15,6 @@ end
 
 group :test do
   gem 'jasmine'
+  gem 'rspec'
+  gem 'rack-test'
 end

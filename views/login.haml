@@ -28,6 +28,8 @@
 						%br
 						=t.message.confirm_api_key
 				%div{class: "form-group"}
+					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog #{t.space_id} (#{t.example} https://[#{t.space_id}].backlog.jp)"}
+				%div{class: "form-group"}
 					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog #{t.api_key}"}
 					%a{href: "http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html",target: 'blank', class: 'hint'}
 						%span{class: "fa fa-info-circle"}

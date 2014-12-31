@@ -1,6 +1,8 @@
 agree: 同意する
 login: ログイン
 api_key: APIキー
+space_id: スペースID
+example: 例.
 message:
   login_failure: ログインに失敗しました。
   confirm_api_key: APIキーを確認してください。

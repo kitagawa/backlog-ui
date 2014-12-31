@@ -7,6 +7,8 @@ require 'sinatra/r18n'
 
 enable :sessions
 
+R18n::I18n.default = 'ja'
+
 # アプリケーション名
 set :title, 'BacklogUI'
 
@@ -23,14 +25,14 @@ end
 
 # ログイン処理
 post '/do_login' do
-	session[:user_id] = params[:user_id]
-	session[:password] = params[:password]
+	session[:api_key] = params[:api_key]
 	session[:space_id] = params[:space_id]
 
 	begin
 		# ログインユーザー情報を取得
 		response = get_user_info
-		session[:username] = response["name"]		
+		session[:user_id] = response["userId"]
+		session[:user_name] = response["name"]		
 		redirect '/'
 	rescue Exception => e #入力されたログイン情報が正しくない
 		@error = true
@@ -66,24 +68,26 @@ post '/update_issue/:issueKey' do
 	client.execute("backlog.updateIssue",data).to_json
 end
 
-# Backlog接続クライアント取得
-def client
-	BacklogLib::Client.new(
-		session[:space_id],session[:user_id],session[:password])
-end
+private
+	# Backlog接続クライアント取得
+	def client
+		BacklogLib::Client.new(
+			session[:api_key], session[:space_id])
+	end
 
-# ログイン状態かをチェックする
-def is_authed?
-	session[:user_id] and session[:password] and session[:space_id]
-end
+	# ログイン状態かをチェックする
+	def is_authed?
+		session[:api_key] and session[:space_id] and session[:user_name]
+	end
 
-def get_user_info
-	client.execute("backlog.getUser",session[:user_id])
-end
+	def get_user_info
+		client.execute("users/myself")
+	end
 
-# ログイン状態をクリアする
-def clear_authed
-	session[:user_id] = nil
-	session[:password] = nil
-	session[:space_id] = nil
-end
+	# ログイン状態をクリアする
+	def clear_authed
+		session[:api_key] = nil
+		session[:space_id] = nil	
+		session[:user_id] = nil
+		session[:user_name] = nil
+	end
