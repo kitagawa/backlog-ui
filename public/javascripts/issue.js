@@ -7,8 +7,8 @@ Issue = (function() {
 
   Issue.prototype.is_include_milestone = function(version_id) {
     var milestone, _i, _len, _ref;
-    if (this.milestones) {
-      _ref = this.milestones;
+    if (this.milestone && !this.milestone.isEmpty()) {
+      _ref = this.milestone;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         milestone = _ref[_i];
         if (milestone.id === version_id) {
@@ -34,13 +34,16 @@ Issue = (function() {
   };
 
   Issue.prototype.create_update_milestone_command = function(milestones) {
-    var milestone_id_list;
-    milestone_id_list = milestones.map(function(n) {
+    var milestone;
+    milestone = milestones.map(function(n) {
       return n.id;
-    });
+    }).first();
+    if (milestone === void 0) {
+      milestone = null;
+    }
     return new Command("update_issue", {
-      milestoneId: milestone_id_list
-    }, this.key);
+      "milestoneId[]": milestone
+    }, this.id);
   };
 
   return Issue;

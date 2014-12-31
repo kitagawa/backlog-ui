@@ -10,8 +10,8 @@ class Issue
 	# @param version_id 検索するマイルストーンのID
 	# @return boolean
 	is_include_milestone: (version_id) ->
-		if this.milestones
-			for milestone in this.milestones 
+		if this.milestone && !this.milestone.isEmpty()
+			for milestone in this.milestone
 				if milestone.id == version_id
 					return true
 		else				
@@ -31,8 +31,10 @@ class Issue
 	#マイルストーン更新コマンドを作成する
 	# @param milestones 変更先のマイルストーン一覧
 	# @return 更新コマンド
-	create_update_milestone_command: (milestones) ->
-		milestone_id_list = milestones.map((n)->n.id)
+	create_update_milestone_command: (milestones) ->		
+		milestone = milestones.map((n)->n.id).first() #先頭一つのみを使う
+		#TODO 複数対応 milestoneId[indexを入れる]
+		milestone = null if milestone == undefined
 		new Command("update_issue", {
-			milestoneId: milestone_id_list
-			},this.key)
+			"milestoneId[]": milestone
+			},this.id)

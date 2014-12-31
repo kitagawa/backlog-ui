@@ -17,28 +17,45 @@ module BacklogLib
 			self.space_id = space_id
 		end		
 
+		# GETメソッドを実行します
+		def get(method_name, params={})
+			execute(method_name, 'get',params)
+		end
+
+		# PATCHメソッドを実行します
+		def patch(method_name, params={})
+			execute(method_name,'patch',params)
+		end
+
 		# APIを実行します
 		#* method_name: API名
+		#* method: HTTPメソッド(get,post,patch)
 		#* params: APIに送るパラメーター
-		def execute(method_name,params=nil)
+		def execute(method_name,method="get", params={})
 			# APIのurl作成
-			params ||={}
-			params[:apiKey] = self.api_key
-			params_url = params.collect{|k,v| "#{k}=#{v}"}.join("&")
-			url = "https://#{self.space_id}.#{URL}/#{method_name}?#{params_url}"
+			url = "https://#{self.space_id}.#{URL}/#{method_name}?apiKey=#{self.api_key}"
 			uri = URI.parse(url)
+			params_query = params.collect{|k,v| "#{k}=#{v}"}.join("&")
 
 			# API実行
 			response = Net::HTTP.start(uri.host,uri.port, use_ssl: true) do |http|
-				http.get(uri.request_uri)
+				case method 
+				when "get"
+					http.get(uri.request_uri + "&#{params_query}")
+				when "patch"
+					http.patch(uri.request_uri, params_query)
+				end
 			end
 
 			# レスポンス処理
 			case response
 			when Net::HTTPSuccess
-				JSON.parse(response.body)
+				response.body
 			else
+				#エラー
+				puts url
 				puts "#{response.code}: #{response.message}"
+				puts response.body
 				raise Exception
 			end
 		end

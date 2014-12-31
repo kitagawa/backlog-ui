@@ -1,7 +1,7 @@
 require File.expand_path '../spec_helper.rb', __FILE__
 require 'yaml'
 
-describe 'login' do
+describe 'app' do
 	before :each do 
 		# テスト用の設定ファイルを読み込み
 		# 作成されていない場合は作成してください。
@@ -12,10 +12,12 @@ describe 'login' do
 		@project_id = setting['project_id']
 	end
 
-  it "be_ok" do
-    get '/login'
-    expect(last_response).to be_ok
-  end
+	describe "login" do
+	  it "be_ok" do
+	    get '/login'
+	    expect(last_response).to be_ok
+	  end
+	end
 
 	describe 'do_login' do
 	  it "be_ok" do
@@ -29,5 +31,19 @@ describe 'login' do
 	    expect(last_response).to be_ok
 	    expect(session[:user_name]).to be_nil
 	  end
+	end
+
+	describe "api" do
+		before :each do 
+			# ログイン
+			post '/do_login', api_key: @api_key, space_id: @space_id
+		end
+
+		describe "get_projects" do
+			it "should be ok" do
+				get '/get_projects'
+				expect(last_response).to be_ok
+			end
+		end
 	end
 end

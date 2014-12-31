@@ -13,7 +13,7 @@ projectsCtrl = ($scope,$http) ->
 		.success (data, status, headers, config)->
 			on_success(data)
 		.error (data, status, headers, config)->
-			on_error(data,statis,headers,config)
+			on_error(data,status,headers,config)
 
 	# 初期設定を行う
 	$scope.initialize()

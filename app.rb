@@ -6,6 +6,7 @@ require './public/backlog_lib'
 require 'sinatra/r18n'
 
 enable :sessions
+set :session_secret, 'iu_go1kc@b'
 
 R18n::I18n.default = 'ja'
 
@@ -48,24 +49,23 @@ end
 
 # プロジェクト一覧取得API
 get '/get_projects' do
-	client.execute("backlog.getProjects").to_json
+	client.get("projects")
 end
 
-# プロジェクト一覧取得API
+# バージョン一覧取得API
 get '/get_versions/:projectId' do
-	client.execute("backlog.getVersions",params[:projectId].to_i).to_json
+	client.get("projects/#{params[:projectId].to_i}/versions")
 end
 
 # チケット一覧取得API
 get '/find_issue/:projectId' do
-	client.execute("backlog.findIssue",{:projectId => params[:projectId].to_i}).to_json	
+	client.get("issues",{"projectId[]" => params[:projectId].to_i})
 end
 
 # チケットの更新API
 post '/update_issue/:issueKey' do
-	data = JSON.parse request.body.read
-	data[:key] = params[:issueKey]
-	client.execute("backlog.updateIssue",data).to_json
+	data = JSON.parse(request.body.read)
+	client.patch("issues/#{params[:issueKey]}",data)
 end
 
 private

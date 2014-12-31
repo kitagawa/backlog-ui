@@ -1,4 +1,4 @@
-describe("Issue",function(){
+describe("Version",function(){
 	var version;
 
 	beforeEach(function(){
@@ -16,9 +16,9 @@ describe("Issue",function(){
 	describe("set_issues",function(){
 		it("set related_issues", function(){
 			var related_issue = new Issue(
-				{"id":1070000001,"milestones":[{"id":1000000001}]});
+				{"id":1070000001,"milestone":[{"id":1000000001}]});
 			var not_related_issue = new Issue(
-				{"id":1070000002,"milestones":[{"id":1000000002}]});
+				{"id":1070000002,"milestone":[{"id":1000000002}]});
 			version.set_issues([related_issue,not_related_issue]);
 			expect(version.issues).toEqual([related_issue]);
 		})
@@ -27,7 +27,7 @@ describe("Issue",function(){
 			var related_issue = new Issue(
 				{"id":1070000001});
 			var not_related_issue = new Issue(
-				{"id":1070000002,"milestones":[{"id":1000000001}]});
+				{"id":1070000002,"milestone":[{"id":1000000001}]});
 			none_version.set_issues([related_issue,not_related_issue]);
 			expect(none_version.issues).toEqual([related_issue]);
 		})

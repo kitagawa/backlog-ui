@@ -2,7 +2,7 @@ describe("Issue",function(){
 	var issue;
 
 	beforeEach(function(){
-		data = {"id":1070000001,"milestones":[{"id":1000000001}]};
+		data = {"id":1070000001,"milestone":[{"id":1000000001}]};
 		issue = new Issue(data);
 	})
 
@@ -33,7 +33,7 @@ describe("Issue",function(){
 
 	describe("create_update_milestone_command",function(){
 		it("create_command",function(){
-			milestone = data["milestones"][0]
+			milestone = data["milestone"][0]
 			command = issue.create_update_milestone_command([milestone])
 			expect(command).toBeTruthy
 			expect(command.data["milestone_id"], [1070000001])
