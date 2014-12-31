@@ -4,3 +4,4 @@ api_key: APIキー
 message:
   login_failure: ログインに失敗しました。
   confirm_api_key: APIキーを確認してください。
+  generate_api_key: APIキーの発行

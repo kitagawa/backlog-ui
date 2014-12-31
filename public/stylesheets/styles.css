@@ -8153,6 +8153,12 @@ button.close {
     display: none !important;
   }
 }
+/* line 1, ../sass/_base.scss */
+.hint {
+  font-size: 12px;
+  padding-left: 10px;
+}
+
 /* line 1, ../sass/_login.scss */
 .main-title {
   text-align: center;
