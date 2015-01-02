@@ -1,5 +1,6 @@
 agree: 同意する
 login: ログイン
+logout: ログアウト
 api_key: APIキー
 space_id: スペースID
 example: 例.

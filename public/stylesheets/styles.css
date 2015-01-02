@@ -8159,6 +8159,14 @@ button.close {
   padding-left: 10px;
 }
 
+/* line 6, ../sass/_base.scss */
+.icon {
+  max-width: 48px;
+  max-height: 48px;
+  border: #8c8c8c 3px solid;
+  border-radius: 10px;
+}
+
 /* line 1, ../sass/_login.scss */
 .main-title {
   text-align: center;

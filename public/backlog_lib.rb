@@ -27,6 +27,11 @@ module BacklogLib
 			execute(method_name,'patch',params)
 		end
 
+		# BacklogへのAPIのURLを返す
+		def raw(method_name,params={})
+			return "https://#{self.space_id}.#{URL}/#{method_name}?apiKey=#{self.api_key}"
+		end
+
 		# APIを実行します
 		#* method_name: API名
 		#* method: HTTPメソッド(get,post,patch)
@@ -34,16 +39,26 @@ module BacklogLib
 		def execute(method_name,method="get", params={})
 			# APIのurl作成
 			url = "https://#{self.space_id}.#{URL}/#{method_name}?apiKey=#{self.api_key}"
-			uri = URI.parse(url)
 			params_query = params.collect{|k,v| "#{k}=#{v}"}.join("&")
 
 			# API実行
+			case method 
+			when "get"
+				send(url + "&#{params_query}","get")
+			when "patch"
+				send(url, params_query, "patch")
+			end
+		end
+
+		# API実行
+		def send(url, method, query=nil)
+			uri = URI.parse(url)
 			response = Net::HTTP.start(uri.host,uri.port, use_ssl: true) do |http|
 				case method 
 				when "get"
-					http.get(uri.request_uri + "&#{params_query}")
+					http.get(uri.request_uri)
 				when "patch"
-					http.patch(uri.request_uri, params_query)
+					http.patch(uri.request_uri, query)
 				end
 			end
 
@@ -51,13 +66,18 @@ module BacklogLib
 			case response
 			when Net::HTTPSuccess
 				response.body
+			when Net::HTTPFound
+				send(response['location'],method,query) #リダイレクト
+			when Net::HTTPSeeOther
+				send(response['location'],method,query) #リダイレクト
 			else
 				#エラー
 				puts url
 				puts "#{response.code}: #{response.message}"
+				puts response
 				puts response.body
 				raise Exception
-			end
+			end			
 		end
 	end
 end

@@ -41,9 +41,14 @@ post '/do_login' do
 	end
 end
 
+get '/my_icon' do
+	client.get("users/1073874170/icon")
+end
+
 #アプリケーション画面
 get '/' do
 	@title = settings.title
+	@user_name = session[:user_name]
 	haml :app
 end
 
@@ -81,7 +86,7 @@ private
 	end
 
 	def get_user_info
-		client.execute("users/myself")
+		JSON.parse client.get("users/myself")
 	end
 
 	# ログイン状態をクリアする

@@ -2,3 +2,10 @@
 	font-size: $font-size-small;
 	padding-left: 10px;
 }
+
+.icon{
+	max-width: 48px;
+	max-height: 48px;
+	border: $gray-light 3px solid;
+	border-radius: 10px;
+}
