@@ -9,11 +9,13 @@
     "grunt-contrib-qunit": "*",
     "grunt-contrib-concat": "*",
     "grunt-contrib-uglify": "*",
-    "grunt-contrib-connect" :"*",
+    "grunt-contrib-connect": "*",
     "grunt-contrib-coffee": "*",
     "grunt-contrib-compass": "*",
     "grunt-contrib-jasmine": "*",
+    "grunt-haml": "*",
     "grunt-postcss": "*",
-    "grunt-autoprefixer": "*"
+    "grunt-autoprefixer": "*",
+    "load-grunt-config": "~0.16.0"
   }
 }
