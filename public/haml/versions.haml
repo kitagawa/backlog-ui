@@ -1,4 +1,9 @@
 - # encoding: UTF-8
+- require 'sinatra/r18n'
+- R18n::I18n.default = 'ja'
+- t = R18n::I18n.new('ja','i18n').t
+
+
 %div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
 	%div{:class=>"list-header"}
 		{{versions[$index].name}}
@@ -7,11 +12,10 @@
 			%li{"ng-repeat" => "issue in version.issues"}
 				%div{:class=>"ticket"}
 					{{issue.summary}}
-
 %div{:style=>"clear:both"}
 %dib
 	%button{:class => "btn", "ng-click" => "update()"}
-		更新
+		=t.button.save
 %div{"ng-repeat" => "version in versions"}
 	{{version.name}}
 	%ul

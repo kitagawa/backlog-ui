@@ -1,6 +1,8 @@
-%ul
-	%li{"ng-repeat" => "project in projects"}
-		%a{:href => "#/{{project.id}}"}
-			{{project.id}}/
-			{{project.key}}/
-			{{project.name}}
+- # encoding: UTF-8
+- require 'sinatra/r18n'
+- R18n::I18n.default = 'ja'
+- t = R18n::I18n.new('ja','i18n').t
+
+%div{class: "container"}
+	%center{class: "well"}
+		= t.message.select_project

@@ -4,4 +4,4 @@ module.exports =
 	    'public/html/projects.html': 'public/haml/projects.haml'
 	    'public/html/versions.html': 'public/haml/versions.haml'
 	  options:
-	    language: "ruby"
+	  	language: 'ruby'
