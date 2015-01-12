@@ -13,16 +13,16 @@
 //
 //## Gray and brand colors for use across Bootstrap.
 
-// $gray-base:              #000
+$gray-base:              #000;
 // $gray-darker:            lighten($gray-base, 13.5%) // #222
 // $gray-dark:              lighten($gray-base, 20%)   // #333
 // $gray:                   lighten($gray-base, 33.5%) // #555
 $gray-light:             lighten($gray-base, 55%);
 $gray-lighter:           lighten($gray-base, 80.7%);
 
-// $brand-primary:         darken(#428bca, 6.5%)
+$brand-primary:         darken(#428bca, 6.5%);
 // $brand-success:         #5cb85c
-// $brand-info:            #5bc0de
+$brand-info:            #5bc0de;
 // $brand-warning:         #f0ad4e
 // $brand-danger:          #d9534f
 
@@ -44,7 +44,7 @@ $body-bg:               #fff;
 
 //== Typography
 //
-//## Font, line-height, and color for body text, headings, and more.
+// Font, line-height, and color for body text, headings, and more.
 
 // $font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif
 // $font-family-serif:       Georgia, "Times New Roman", Times, serif
@@ -345,7 +345,7 @@ $body-bg:               #fff;
 // Basics of a navbar
 // $navbar-height:                    50px
 // $navbar-margin-bottom:             $line-height-computed
-// $navbar-border-radius:             $border-radius-base
+$navbar-border-radius:             0px;
 // $navbar-padding-horizontal:        floor(($grid-gutter-width / 2))
 // $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2)
 // $navbar-collapse-max-height:       340px
@@ -563,7 +563,7 @@ $body-bg:               #fff;
 //##
 
 //* Padding applied to the modal body
-// $modal-inner-padding:         15px
+$modal-inner-padding:         5px;
 
 //* Padding applied to the modal title
 // $modal-title-padding:         15px

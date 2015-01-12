@@ -3,19 +3,39 @@
 - R18n::I18n.default = 'ja'
 - t = R18n::I18n.new('ja','i18n').t
 
+%div{class: "container-fluid"}
+	%div{class: "row"}
+		%div{class: "col-md-2"}
+			%div{class: "well"}
+				%center
+					%button{:class => "btn btn-primary", "ng-click" => "update()"}
+						=t.button.save
+		%div{class: "col-md-10"}
+			%div{class: "well"}
+				%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
+					%div{:class=>"list-header"}
+						{{versions[$index].name}}
+					%div{:class=>"list-body"}
+						%ul{"ui-sortable"=>"sortable_options", "ng-model"=>"version.issues", :class=>"row"}
+							%li{"ng-repeat" => "issue in version.issues"}
+								%div{:class=>"ticket"}
+									%div{class: "float-left ticket-icon"}
+										%img{src: "/my_icon", class: "icon"}
+										%div{class: "ticket-user"}
+											{{issue.assignee.name}}
+									%div{class: "float-left ticket-body"}
+										%div{class: "ticket-key"}
+											%a{href: "/url/{{issue.issueKey}}", target: "window"}
+												{{issue.issueKey}}
+										%div{class: "ticket-title"}
+											{{issue.summary}}
+										%div{class: "ticket-status ticket-status-{{issue.status.id}}"}
+											{{issue.status.name}}
+									%div{class: "clear"}	
+				%div{:style=>"clear:both"}
 
-%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
-	%div{:class=>"list-header"}
-		{{versions[$index].name}}
-	%div{:class=>"list-body"}
-		%ul{"ui-sortable"=>"sortable_options", "ng-model"=>"version.issues", :class=>"row"}
-			%li{"ng-repeat" => "issue in version.issues"}
-				%div{:class=>"ticket"}
-					{{issue.summary}}
-%div{:style=>"clear:both"}
-%dib
-	%button{:class => "btn", "ng-click" => "update()"}
-		=t.button.save
+
+/ デバッグ用
 %div{"ng-repeat" => "version in versions"}
 	{{version.name}}
 	%ul

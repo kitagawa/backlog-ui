@@ -73,6 +73,11 @@ post '/update_issue/:issueKey' do
 	client.patch("issues/#{params[:issueKey]}",data)
 end
 
+# チケットのページへ遷移
+get '/url/:issueKey' do
+	redirect "https://#{session[:space_id]}.backlog.jp/view/#{params[:issueKey]}"
+end
+
 private
 	# Backlog接続クライアント取得
 	def client

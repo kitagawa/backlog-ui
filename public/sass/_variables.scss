@@ -1,2 +1,16 @@
-$border: #CCC;
-$ticket: #DF4;
+$ticket: #fffeed;
+$ticket-width: 300px;
+$ticket-icon-width: 100px;
+
+
+//// 状態色
+// デフォルト
+$status-default: #d6ff99;
+// 未対応
+$status-undone: #fcc;
+// 処理中
+$status-doing: #d3e0ef;
+// 処理済み 
+$status-done: #acd9d3;
+// 完了
+$stauts-complete: #c2d3a3;

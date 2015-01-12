@@ -1,3 +1,16 @@
+<div class='container-fluid'>
+<div class='row'>
+<div class='col-md-2'>
+<div class='well'>
+<center>
+<button class='btn btn-primary' ng-click='update()'>
+保存
+</button>
+</center>
+</div>
+</div>
+<div class='col-md-10'>
+<div class='well'>
 <div class='ticket-list' ng-repeat='version in versions'>
 <div class='list-header'>
 {{versions[$index].name}}
@@ -6,18 +19,37 @@
 <ul class='row' ng-model='version.issues' ui-sortable='sortable_options'>
 <li ng-repeat='issue in version.issues'>
 <div class='ticket'>
+<div class='float-left ticket-icon'>
+<img class='icon' src='/my_icon'>
+<div class='ticket-user'>
+{{issue.assignee.name}}
+</div>
+</div>
+<div class='float-left ticket-body'>
+<div class='ticket-key'>
+<a href='/url/{{issue.issueKey}}' target='window'>
+{{issue.issueKey}}
+</a>
+</div>
+<div class='ticket-title'>
 {{issue.summary}}
+</div>
+<div class='ticket-status ticket-status-{{issue.status.id}}'>
+{{issue.status.name}}
+</div>
+</div>
+<div class='clear'></div>
 </div>
 </li>
 </ul>
 </div>
 </div>
 <div style='clear:both'></div>
-<dib>
-<button class='btn' ng-click='update()'>
-保存
-</button>
-</dib>
+</div>
+</div>
+</div>
+</div>
+<!-- デバッグ用 -->
 <div ng-repeat='version in versions'>
 {{version.name}}
 <ul>
