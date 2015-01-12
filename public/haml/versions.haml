@@ -20,7 +20,7 @@
 							%li{"ng-repeat" => "issue in version.issues"}
 								%div{:class=>"ticket"}
 									%div{class: "float-left ticket-icon"}
-										%img{src: "/my_icon", class: "icon"}
+										%img{"ng-src" => "/icon?id={{issue.assignee.id}}", class: "icon"}
 										%div{class: "ticket-user"}
 											{{issue.assignee.name}}
 									%div{class: "float-left ticket-body"}

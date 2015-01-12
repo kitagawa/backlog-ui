@@ -32,7 +32,7 @@ post '/do_login' do
 	begin
 		# ログインユーザー情報を取得
 		response = get_user_info
-		session[:user_id] = response["userId"]
+		session[:user_id] = response["id"]
 		session[:user_name] = response["name"]		
 		redirect '/'
 	rescue Exception => e #入力されたログイン情報が正しくない
@@ -41,8 +41,18 @@ post '/do_login' do
 	end
 end
 
+# ログインユーザーのアイコン画像取得
 get '/my_icon' do
-	client.get("users/1073874170/icon")
+	client.get("users/#{session[:user_id]}/icon")
+end
+
+# ユーザーのアイコンが画像取得
+get '/icon' do
+	if params[:id] and params[:id] != ""
+	client.get("users/#{params[:id]}/icon")
+	else
+	redirect '/images/person.png'
+	end
 end
 
 #アプリケーション画面

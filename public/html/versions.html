@@ -20,7 +20,7 @@
 <li ng-repeat='issue in version.issues'>
 <div class='ticket'>
 <div class='float-left ticket-icon'>
-<img class='icon' src='/my_icon'>
+<img class='icon' ng-src='/icon?id={{issue.assignee.id}}'>
 <div class='ticket-user'>
 {{issue.assignee.name}}
 </div>
