@@ -1,4 +1,6 @@
 - # encoding: UTF-8
+- require './haml_helper'
+
 - require 'sinatra/r18n'
 - R18n::I18n.default = 'ja'
 - t = R18n::I18n.new('ja','i18n').t
@@ -8,10 +10,12 @@
 		%div{class: "col-md-2"}
 			%div{class: "well"}
 				%center
-					%button{:class => "btn btn-primary", "ng-click" => "update()"}
+					%button{:class => "btn btn-primary btn-save", "ng-click" => "update()"}
+						%span{class: "fa fa-save"}
 						=t.button.save
 		%div{class: "col-md-10"}
 			%div{class: "well"}
+				= HamlHelper.render "shared/mode_tab"
 				%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
 					%div{:class=>"list-header"}
 						{{versions[$index].name}}
@@ -33,12 +37,3 @@
 											{{issue.status.name}}
 									%div{class: "clear"}	
 				%div{:style=>"clear:both"}
-
-
-/ デバッグ用
-%div{"ng-repeat" => "version in versions"}
-	{{version.name}}
-	%ul
-		%li{"ng-repeat" => "issue in version.issues"}
-			{{issue.summary}}
-	%br

@@ -3,3 +3,4 @@ node_modules/*
 .ruby-version
 Procfile
 Gemfile.lock
+spec/setting.yml

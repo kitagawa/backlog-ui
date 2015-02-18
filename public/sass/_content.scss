@@ -3,6 +3,9 @@
 @mixin border{
 	border: 1px solid $gray-lighter;
 }
+.btn-save{
+	width: 100%;
+}
 
 .ticket-list{
 	float: left;

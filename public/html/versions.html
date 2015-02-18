@@ -3,7 +3,8 @@
 <div class='col-md-2'>
 <div class='well'>
 <center>
-<button class='btn btn-primary' ng-click='update()'>
+<button class='btn btn-primary btn-save' ng-click='update()'>
+<span class='fa fa-save'></span>
 保存
 </button>
 </center>
@@ -11,6 +12,17 @@
 </div>
 <div class='col-md-10'>
 <div class='well'>
+<div class='control-panel'>
+  <div class='btn-group'>
+    <button class='btn btn-default'>
+      <span class='fa fa-2x fa-flag'></span>
+    </button>
+    <button class='btn btn-default'>
+      <span class='fa fa-2x fa-tasks'></span>
+    </button>
+  </div>
+</div>
+
 <div class='ticket-list' ng-repeat='version in versions'>
 <div class='list-header'>
 {{versions[$index].name}}
@@ -48,14 +60,4 @@
 </div>
 </div>
 </div>
-</div>
-<!-- デバッグ用 -->
-<div ng-repeat='version in versions'>
-{{version.name}}
-<ul>
-<li ng-repeat='issue in version.issues'>
-{{issue.summary}}
-</li>
-</ul>
-<br>
 </div>
