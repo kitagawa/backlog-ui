@@ -57,8 +57,6 @@ end
 
 #アプリケーション画面
 get '/' do
-	@title = settings.title
-	@user_name = session[:user_name]
 	haml :app
 end
 
