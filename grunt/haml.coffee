@@ -1,8 +1,8 @@
-module.exports =
-	one:
-	  files:
-	    'public/html/projects.html': 'public/haml/projects.haml'
-	    'public/html/versions.html': 'public/haml/versions.haml'
-	    'public/html/shared/mode_tab.html': 'public/haml/shared/mode_tab.haml'
-	  options:
-	  	language: 'ruby'
+module.exports = (grunt) ->
+	two:
+		files: 
+			grunt.file.expandMapping(['public/haml/*.haml','public/haml/shared/*.haml'], './',
+          rename: (base, path) ->
+            base + path.replace(/\/haml\//, '/html/').replace(/\.haml$/, '.html'))
+		options:
+			language: 'ruby'
