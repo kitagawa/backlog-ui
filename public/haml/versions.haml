@@ -15,7 +15,7 @@
 						=t.button.save
 		%div{class: "col-md-10"}
 			%div{class: "well"}
-				= HamlHelper.render "shared/mode_tab"
+				%ng-include{:src => "'html/shared/mode_tab.html'"}
 				%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
 					%div{:class=>"list-header"}
 						{{versions[$index].name}}

@@ -7,7 +7,7 @@ module.exports =
     files: ['public/sass/*.scss']
     tasks: ['compass']
   haml:
-    files: ['public/haml/*.haml']
+    files: ['public/haml/*.haml', 'public/haml/shared/*.haml']
     tasks: ['haml']
     options:
       livereload: true #変更があればリロードする
