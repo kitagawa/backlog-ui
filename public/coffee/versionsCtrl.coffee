@@ -6,16 +6,16 @@ app.controller('versionsCtrl',($scope,$http,$routeParams) ->
 	$scope.initialize = () ->		
 		$scope.find_versions(
 			(data) ->
-				$scope.versions = Version.convert_versions(data)
+				$scope.columns = Version.convert_versions(data)
 				# 未設定用のバージョンを一覧に追加
-				$scope.versions.unshift(new Version(name: "未設定"))
+				$scope.columns.unshift(new Version(name: "未設定"))
 
 				# # チケットの一覧を取得
 				$scope.find_issues(
 					(data) ->
 						# チケットにあったバージョンに配置
 						issues = Issue.convert_issues(data)
-						for version in $scope.versions
+						for version in $scope.columns
 						 	version.set_issues(issues)
 					,(data, status, headers, config)->
 						alert status
@@ -59,7 +59,7 @@ app.controller('versionsCtrl',($scope,$http,$routeParams) ->
 	# 指定のチケットを保持しているマイルストーンを取得する
 	$scope.find_version_included_issue = (issue) ->
 		result = []
-		for version in $scope.versions
+		for version in $scope.columns
 			for _issue in version.issues
 				if _issue == issue
 					result.push(version)

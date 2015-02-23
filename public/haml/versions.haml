@@ -2,31 +2,9 @@
 	%div{class: "row"}
 		%div{class: "col-md-2"}
 			%div{class: "well"}
-				%center
-					%button{:class => "btn btn-primary btn-save", "ng-click" => "update()"}
-						%span{class: "fa fa-save"}
-						{{ 'BUTTON.SAVE' | translate }}
+				%ng-include{:src => "'html/shared/save_button.html'"}
 		%div{class: "col-md-10"}
 			%div{class: "well"}
 				%ng-include{:src => "'html/shared/mode_tab.html'"}
-				%div{"ng-repeat" => "version in versions", :class=>"ticket-list"}
-					%div{:class=>"list-header"}
-						{{versions[$index].name}}
-					%div{:class=>"list-body"}
-						%ul{"ui-sortable"=>"sortable_options", "ng-model"=>"version.issues", :class=>"row"}
-							%li{"ng-repeat" => "issue in version.issues"}
-								%div{:class=>"ticket"}
-									%div{class: "float-left ticket-icon"}
-										%img{"ng-src" => "/icon?id={{issue.assignee.id}}", class: "icon"}
-										%div{class: "ticket-user"}
-											{{issue.assignee.name}}
-									%div{class: "float-left ticket-body"}
-										%div{class: "ticket-key"}
-											%a{href: "/url/{{issue.issueKey}}", target: "window"}
-												{{issue.issueKey}}
-										%div{class: "ticket-title"}
-											{{issue.summary}}
-										%div{class: "ticket-status ticket-status-{{issue.status.id}}"}
-											{{issue.status.name}}
-									%div{class: "clear"}	
+				%ng-include{:src => "'html/shared/issue_list.html'"}
 				%div{:style=>"clear:both"}

@@ -1,0 +1,33 @@
+<div class='ticket-list' ng-repeat='column in columns'>
+<div class='list-header'>
+{{columns[$index].name}}
+</div>
+<div class='list-body'>
+<ul class='row' ng-model='column.issues' ui-sortable='sortable_options'>
+<li ng-repeat='issue in column.issues'>
+<div class='ticket'>
+<div class='float-left ticket-icon'>
+<img class='icon' ng-src='/icon?id={{issue.assignee.id}}'>
+<div class='ticket-user'>
+{{issue.assignee.name}}
+</div>
+</div>
+<div class='float-left ticket-body'>
+<div class='ticket-key'>
+<a href='/url/{{issue.issueKey}}' target='window'>
+{{issue.issueKey}}
+</a>
+</div>
+<div class='ticket-title'>
+{{issue.summary}}
+</div>
+<div class='ticket-status ticket-status-{{issue.status.id}}'>
+{{issue.status.name}}
+</div>
+</div>
+<div class='clear'></div>
+</div>
+</li>
+</ul>
+</div>
+</div>

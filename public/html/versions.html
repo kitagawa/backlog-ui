@@ -2,50 +2,13 @@
 <div class='row'>
 <div class='col-md-2'>
 <div class='well'>
-<center>
-<button class='btn btn-primary btn-save' ng-click='update()'>
-<span class='fa fa-save'></span>
-{{ 'BUTTON.SAVE' | translate }}
-</button>
-</center>
+<ng-include src="'html/shared/save_button.html'"></ng-include>
 </div>
 </div>
 <div class='col-md-10'>
 <div class='well'>
 <ng-include src="'html/shared/mode_tab.html'"></ng-include>
-<div class='ticket-list' ng-repeat='version in versions'>
-<div class='list-header'>
-{{versions[$index].name}}
-</div>
-<div class='list-body'>
-<ul class='row' ng-model='version.issues' ui-sortable='sortable_options'>
-<li ng-repeat='issue in version.issues'>
-<div class='ticket'>
-<div class='float-left ticket-icon'>
-<img class='icon' ng-src='/icon?id={{issue.assignee.id}}'>
-<div class='ticket-user'>
-{{issue.assignee.name}}
-</div>
-</div>
-<div class='float-left ticket-body'>
-<div class='ticket-key'>
-<a href='/url/{{issue.issueKey}}' target='window'>
-{{issue.issueKey}}
-</a>
-</div>
-<div class='ticket-title'>
-{{issue.summary}}
-</div>
-<div class='ticket-status ticket-status-{{issue.status.id}}'>
-{{issue.status.name}}
-</div>
-</div>
-<div class='clear'></div>
-</div>
-</li>
-</ul>
-</div>
-</div>
+<ng-include src="'html/shared/issue_list.html'"></ng-include>
 <div style='clear:both'></div>
 </div>
 </div>

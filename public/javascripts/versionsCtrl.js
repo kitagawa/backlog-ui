@@ -2,14 +2,14 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams) {
   $scope.commands = [];
   $scope.initialize = function() {
     $scope.find_versions(function(data) {
-      $scope.versions = Version.convert_versions(data);
-      $scope.versions.unshift(new Version({
+      $scope.columns = Version.convert_versions(data);
+      $scope.columns.unshift(new Version({
         name: "未設定"
       }));
       return $scope.find_issues(function(data) {
         var issues, version, _i, _len, _ref, _results;
         issues = Issue.convert_issues(data);
-        _ref = $scope.versions;
+        _ref = $scope.columns;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           version = _ref[_i];
@@ -63,7 +63,7 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams) {
   $scope.find_version_included_issue = function(issue) {
     var result, version, _i, _issue, _j, _len, _len1, _ref, _ref1;
     result = [];
-    _ref = $scope.versions;
+    _ref = $scope.columns;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       version = _ref[_i];
       _ref1 = version.issues;

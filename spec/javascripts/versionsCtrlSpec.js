@@ -24,16 +24,16 @@ describe("versionsCtrl",function(){
 
 	beforeEach(module("App"));	
 	beforeEach(inject(function($controller){
-		scope = {versions:versions};
+		scope = {columns:versions};
 		versionCtrl = $controller("versionsCtrl",{$scope:scope});
 	}))
 	
 	describe("find_version_included_issue",function(){
 		it("create issue", function(){
 			var issue = issues[0];
-			scope.versions[0].issues.push(issue);
-			scope.versions[1].issues.push(issue);
-			expect(scope.find_version_included_issue(issue)).toEqual([scope.versions[0],scope.versions[1]]);
+			scope.columns[0].issues.push(issue);
+			scope.columns[1].issues.push(issue);
+			expect(scope.find_version_included_issue(issue)).toEqual([scope.columns[0],scope.columns[1]]);
 		})
 	})
 })
