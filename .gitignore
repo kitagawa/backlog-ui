@@ -4,3 +4,4 @@ node_modules/*
 Procfile
 Gemfile.lock
 spec/setting.yml
+bower_components/*

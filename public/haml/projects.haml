@@ -1,8 +1,3 @@
-- # encoding: UTF-8
-- require 'sinatra/r18n'
-- R18n::I18n.default = 'ja'
-- t = R18n::I18n.new('ja','i18n').t
-
 %div{class: "container"}
 	%center{class: "well"}
-		= t.message.select_project
+		{{ 'MESSAGE.SELECT_PROJECT' | translate }}

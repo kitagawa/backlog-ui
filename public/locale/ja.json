@@ -1,0 +1,8 @@
+{
+	"BUTTON": {
+  	"SAVE": "保存"
+	},
+  "MESSAGE": {
+    "SELECT_PROJECT": "メニューからプロジェクトを選択してください。"
+  }
+}

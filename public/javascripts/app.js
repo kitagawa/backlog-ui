@@ -1,6 +1,6 @@
 var app;
 
-app = angular.module('App', ['ngRoute', 'ui.sortable', 'utils']);
+app = angular.module('App', ['ngRoute', 'ui.sortable', 'utils', 'pascalprecht.translate']);
 
 app.config(function($routeProvider) {
   return $routeProvider.when('/', {
@@ -11,3 +11,15 @@ app.config(function($routeProvider) {
     controller: "versionsCtrl"
   });
 });
+
+app.config([
+  '$translateProvider', function($translateProvider) {
+    $translateProvider.useStaticFilesLoader({
+      prefix: 'locale/',
+      suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('ja');
+    $translateProvider.fallbackLanguage('en');
+    return $translateProvider.useMissingTranslationHandlerLog();
+  }
+]);

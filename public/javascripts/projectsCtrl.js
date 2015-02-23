@@ -1,6 +1,4 @@
-var projectsCtrl;
-
-projectsCtrl = function($scope, $http) {
+app.controller('projectsCtrl', function($scope, $http) {
   $scope.initialize = function() {
     return $scope.find_projects(function(data) {
       return $scope.projects = data;
@@ -19,4 +17,4 @@ projectsCtrl = function($scope, $http) {
     });
   };
   return $scope.initialize();
-};
+});

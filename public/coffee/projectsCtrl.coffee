@@ -1,4 +1,4 @@
-projectsCtrl = ($scope,$http) ->
+app.controller('projectsCtrl',($scope,$http) ->
 	# 初期設定を行う
 	$scope.initialize = () ->
 		# プロジェクトの一覧を設定する
@@ -17,3 +17,4 @@ projectsCtrl = ($scope,$http) ->
 
 	# 初期設定を行う
 	$scope.initialize()
+)

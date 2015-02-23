@@ -1,4 +1,4 @@
-versionsCtrl = ($scope,$http,$routeParams) ->
+app.controller('versionsCtrl',($scope,$http,$routeParams) ->
 	#コマンドリスト
 	$scope.commands = []
 
@@ -73,3 +73,4 @@ versionsCtrl = ($scope,$http,$routeParams) ->
 
 	# 初期設定を行う
 	$scope.initialize()
+)

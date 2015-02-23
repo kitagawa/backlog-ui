@@ -1,6 +1,4 @@
-var versionsCtrl;
-
-versionsCtrl = function($scope, $http, $routeParams) {
+app.controller('versionsCtrl', function($scope, $http, $routeParams) {
   $scope.commands = [];
   $scope.initialize = function() {
     $scope.find_versions(function(data) {
@@ -88,4 +86,4 @@ versionsCtrl = function($scope, $http, $routeParams) {
     return $scope.commands = [];
   };
   return $scope.initialize();
-};
+});
