@@ -19,7 +19,6 @@ app.config([
       suffix: '.json'
     });
     $translateProvider.preferredLanguage('ja');
-    $translateProvider.fallbackLanguage('en');
     return $translateProvider.useMissingTranslationHandlerLog();
   }
 ]);

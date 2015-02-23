@@ -3,12 +3,9 @@ require 'haml'
 require 'sass'
 require 'json'
 require './public/backlog_lib'
-require 'sinatra/r18n'
 
 enable :sessions
 set :session_secret, 'iu_go1kc@b'
-
-R18n::I18n.default = 'ja'
 
 # アプリケーション名
 set :title, 'BacklogUI'

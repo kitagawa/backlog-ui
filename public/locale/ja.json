@@ -1,8 +1,19 @@
 {
+	"AGREE": "同意する",
+	"LOGIN": "ログイン",
+	"LOGOUT": "ログアウト",
+	"API_KEY": "APIキー",
+	"SPACE_ID": "スペースID",
+	"EXAMPLE": "例.",
+	"PROJECTS": "プロジェクト",
+
 	"BUTTON": {
   	"SAVE": "保存"
 	},
   "MESSAGE": {
-    "SELECT_PROJECT": "メニューからプロジェクトを選択してください。"
+ 		"LOGIN_FAILURE": "ログインに失敗しました。",
+  	"CONFIRM_API_KEY": "APIキーを確認してください。",
+    "SELECT_PROJECT": "メニューからプロジェクトを選択してください。",
+    "GENERATE_API_KEY": "APIキーの発行"
   }
 }

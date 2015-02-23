@@ -19,23 +19,23 @@
 				%div{class: "text-center"}
 					%input{name: "agreement",type: "checkbox","ng-model" => "agreement"}
 					%span
-						=t.agree
+						{{'AGREE' | translate}}
 
 			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
 				-if @error
 					%p{class: "alert alert-danger"}
-						=t.message.login_failure
+						{{ 'MESSAGE.LOGIN_FAILURE' | translate }}
 						%br
-						=t.message.confirm_api_key
+						{{ 'MESSAGE.CONFIRM_API_KEY' | translate }}
 				%div{class: "form-group"}
-					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog #{t.space_id} (#{t.example} https://[#{t.space_id}].backlog.jp)"}
+					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog  ({{ 'EXAMPLE' | translate }} https://[{{ 'SPACE_ID' | translate }}].backlog.jp)"}
 				%div{class: "form-group"}
-					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog #{t.api_key}"}
+					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog {{ 'API_KEY' | translate }}"}
 					%a{href: "http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html",target: 'blank', class: 'hint'}
 						%span{class: "fa fa-info-circle"}
-						=t.message.generate_api_key
+						{{ 'MESSAGE.GENERATE_API_KEY' | translate }}
 				%div{class: "form-group"}
 				%button{typ:"submit", "ng-disabled" => "!agreement", class: "btn btn-primary center-block"}
 					%span{class: "fa fa-sign-in"}
 					&nbsp;
-					=t.login
+					{{ 'LOGIN' | translate }}

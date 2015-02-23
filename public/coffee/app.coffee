@@ -15,7 +15,7 @@ app.config ['$translateProvider', ($translateProvider) ->
     suffix: '.json'
   )
   $translateProvider.preferredLanguage('ja');
-  $translateProvider.fallbackLanguage('en');
+  # $translateProvider.fallbackLanguage('en');
   $translateProvider.useMissingTranslationHandlerLog();
   # $translateProvider.useLocalStorage();
 ]
