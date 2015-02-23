@@ -46,7 +46,7 @@ module BacklogLib
 			when "get"
 				send(url + "&#{params_query}","get")
 			when "patch"
-				send(url, params_query, "patch")
+				send(url, "patch", params_query)
 			end
 		end
 
