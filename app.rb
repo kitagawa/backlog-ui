@@ -67,6 +67,11 @@ get '/get_versions/:projectId' do
 	client.get("projects/#{params[:projectId].to_i}/versions")
 end
 
+# 状態の一覧取得API
+get '/get_statuses' do
+	client.get("statuses")
+end
+
 # チケット一覧取得API
 get '/find_issue/:projectId' do
 	client.get("issues",{"projectId[]" => params[:projectId].to_i})
