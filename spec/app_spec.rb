@@ -45,5 +45,12 @@ describe 'app' do
 				expect(last_response).to be_ok
 			end
 		end
+
+		describe "get_statuses" do
+			it "should be ok" do
+				get '/get_statuses'
+				expect(last_response).to be_ok
+			end
+		end
 	end
 end

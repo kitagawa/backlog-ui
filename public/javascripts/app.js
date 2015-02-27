@@ -9,6 +9,9 @@ app.config(function($routeProvider) {
   }).when('/:project_id', {
     templateUrl: "/html/versions.html",
     controller: "versionsCtrl"
+  }).when('/:project_id/status', {
+    templateUrl: "/html/status.html",
+    controller: "statusCtrl"
   });
 });
 

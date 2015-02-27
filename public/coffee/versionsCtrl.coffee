@@ -1,12 +1,12 @@
-app.controller('versionsCtrl',($scope,$http,$routeParams) ->
-	#コマンドリスト
-	$scope.commands = []
+app.controller('versionsCtrl',($scope,$http,$routeParams,$controller) ->
+	# 基底コントローラーを継承
+	$controller('baseCtrl',{$scope: $scope})
 
 	# 初期設定
 	$scope.initialize = () ->		
-		$scope.find_versions(
+		Version.find_all($http,$routeParams.project_id,
 			(data) ->
-				$scope.columns = Version.convert_versions(data)
+				$scope.columns = data
 				# 未設定用のバージョンを一覧に追加
 				$scope.columns.unshift(new Version(name: "未設定"))
 
@@ -30,15 +30,6 @@ app.controller('versionsCtrl',($scope,$http,$routeParams) ->
 			stop: (event,ui) ->
 				$scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->
-
-
-	# マイルストーンの一覧を取得する
-	$scope.find_versions = (on_success, on_error) ->
-		$http(method: 'GET', url: '/get_versions/'+$routeParams.project_id)
-		.success (data, status, headers, config)->
-			on_success(data)
-		.error (data, status, headers, config)->
-			on_error(data, status, headers, config)
 
 	# チケットの一覧を取得する
 	$scope.find_issues = (on_success, on_error) ->
@@ -64,12 +55,6 @@ app.controller('versionsCtrl',($scope,$http,$routeParams) ->
 				if _issue == issue
 					result.push(version)
 		return result
-
-	# チケットの更新を行う
-	$scope.update = () ->
-		for command in $scope.commands
-			command.execute($http)
-		$scope.commands = [] #コマンドを空にする
 
 	# 初期設定を行う
 	$scope.initialize()

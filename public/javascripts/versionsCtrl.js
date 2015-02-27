@@ -1,8 +1,10 @@
-app.controller('versionsCtrl', function($scope, $http, $routeParams) {
-  $scope.commands = [];
+app.controller('versionsCtrl', function($scope, $http, $routeParams, $controller) {
+  $controller('baseCtrl', {
+    $scope: $scope
+  });
   $scope.initialize = function() {
-    $scope.find_versions(function(data) {
-      $scope.columns = Version.convert_versions(data);
+    Version.find_all($http, $routeParams.project_id, function(data) {
+      $scope.columns = data;
       $scope.columns.unshift(new Version({
         name: "未設定"
       }));
@@ -29,16 +31,6 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams) {
       },
       receive: function(event, ui) {}
     };
-  };
-  $scope.find_versions = function(on_success, on_error) {
-    return $http({
-      method: 'GET',
-      url: '/get_versions/' + $routeParams.project_id
-    }).success(function(data, status, headers, config) {
-      return on_success(data);
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
   };
   $scope.find_issues = function(on_success, on_error) {
     return $http({
@@ -75,15 +67,6 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams) {
       }
     }
     return result;
-  };
-  $scope.update = function() {
-    var command, _i, _len, _ref;
-    _ref = $scope.commands;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      command = _ref[_i];
-      command.execute($http);
-    }
-    return $scope.commands = [];
   };
   return $scope.initialize();
 });
