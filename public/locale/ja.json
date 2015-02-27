@@ -15,5 +15,9 @@
   	"CONFIRM_API_KEY": "APIキーを確認してください。",
     "SELECT_PROJECT": "メニューからプロジェクトを選択してください。",
     "GENERATE_API_KEY": "APIキーの発行"
+  },
+  "VERSION": {
+  	"UNSET": "未設定"
+  	"ALL": "すべて"
   }
 }

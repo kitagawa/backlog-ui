@@ -5,9 +5,11 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $controller
   $scope.initialize = function() {
     Version.find_all($http, $routeParams.project_id, function(data) {
       $scope.columns = data;
-      $scope.columns.unshift(new Version({
-        name: "未設定"
-      }));
+      $translate('VERSION.UNSET').then(function(translation) {
+        return $scope.columns.unshift(new Version({
+          name: translation
+        }));
+      });
       return $scope.find_issues(function(data) {
         var issues, version, _i, _len, _ref, _results;
         issues = Issue.convert_issues(data);

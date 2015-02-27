@@ -1,4 +1,6 @@
-app.controller('statusCtrl',($scope,$http,$routeParams) ->
+app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) ->
+	# 基底コントローラーを継承
+	$controller('baseCtrl',{$scope: $scope})
 
 	# 初期設定
 	$scope.initialize = () ->		
@@ -16,8 +18,13 @@ app.controller('statusCtrl',($scope,$http,$routeParams) ->
 				Version.find_all($http,$routeParams.project_id,
 					(versions_list) ->
 						$scope.versions = versions_list
+						# 「すべて」を一覧に追加
+						$translate('VERSION.ALL').then((translation)->
+							$scope.versions.unshift(new Version(name: translation))
+					  )
+						
 						# 期間中のマイルストーンを初期設定にする
-						$scope.selecting_version = Version.select_count(versions_list)
+						$scope.selecting_version = Version.select_current(versions_list)
 
 					,(data, status, headers, config)->
 						alert status

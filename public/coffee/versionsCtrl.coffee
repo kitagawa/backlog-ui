@@ -8,9 +8,11 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$controller) ->
 			(data) ->
 				$scope.columns = data
 				# 未設定用のバージョンを一覧に追加
-				$scope.columns.unshift(new Version(name: "未設定"))
+				$translate('VERSION.UNSET').then((translation)->
+					$scope.columns.unshift(new Version(name: translation))
+			  )
 
-				# # チケットの一覧を取得
+				# チケットの一覧を取得
 				$scope.find_issues(
 					(data) ->
 						# チケットにあったバージョンに配置
