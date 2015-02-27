@@ -6,7 +6,7 @@
 			%li{"ng-repeat" => "issue in column.issues"}
 				%div{:class=>"ticket"}
 					%div{class: "float-left ticket-icon"}
-						%img{"ng-src" => "/icon?id={{issue.assignee.id}}", class: "icon"}
+						%img{"ng-src" => "/icon?id={{issue.assignee.id || null}}", class: "icon"}
 						%div{class: "ticket-user"}
 							{{issue.assignee.name}}
 					%div{class: "float-left ticket-body"}

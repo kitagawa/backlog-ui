@@ -7,7 +7,7 @@
 <li ng-repeat='issue in column.issues'>
 <div class='ticket'>
 <div class='float-left ticket-icon'>
-<img class='icon' ng-src='/icon?id={{issue.assignee.id}}'>
+<img class='icon' ng-src='/icon?id={{issue.assignee.id || null}}'>
 <div class='ticket-user'>
 {{issue.assignee.name}}
 </div>
