@@ -24,7 +24,7 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 					  )
 						
 						# 期間中のマイルストーンを初期設定にする
-						$scope.selecting_version = Version.select_current(versions_list)
+						$scope.switch_selecting_version(Version.select_current(versions_list))
 
 					,(data, status, headers, config)->
 						alert status
@@ -77,4 +77,12 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 
 	# 初期設定を行う
 	$scope.initialize()
+
+	# 選択中のバージョンを切り替える
+	$scope.switch_selecting_version = (version) ->
+		$scope.selecting_version.selected = false
+		$scope.selecting_version = version
+		$scope.selecting_version.selected = true
 )
+
+

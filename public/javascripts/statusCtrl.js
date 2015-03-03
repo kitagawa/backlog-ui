@@ -14,7 +14,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
             name: translation
           }));
         });
-        return $scope.selecting_version = Version.select_current(versions_list);
+        return $scope.switch_selecting_version(Version.select_current(versions_list));
       }, function(data, status, headers, config) {
         return alert(status);
       });
@@ -27,5 +27,10 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
       receive: function(event, ui) {}
     };
   };
-  return $scope.initialize();
+  $scope.initialize();
+  return $scope.switch_selecting_version = function(version) {
+    $scope.selecting_version.selected = false;
+    $scope.selecting_version = version;
+    return $scope.selecting_version.selected = true;
+  };
 });

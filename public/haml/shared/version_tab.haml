@@ -1,4 +1,4 @@
 %div{class: "control-panel"}
 	%div{class: "btn-group", "ng-repeat" => "version in versions"}
-		%a{class: "btn btn-default", :href => "#"}
+		%a{class: "btn btn-default", :href => "#", "ng-class" => "{active: version.selected}"}
 			{{version.name}}
