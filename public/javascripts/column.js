@@ -5,8 +5,12 @@ Column = (function() {
 
   function Column(attributes) {
     $.extend(this, attributes);
-    this.issues = [];
+    this.clear();
   }
+
+  Column.prototype.clear = function() {
+    return this.issues = [];
+  };
 
   return Column;
 

@@ -1,6 +1,6 @@
 <div class='control-panel'>
 <div class='btn-group' ng-repeat='version in versions'>
-<a class='btn btn-default' href='#' ng-class='{active: version.selected}'>
+<a class='btn btn-default' ng-class='{active: version.selected}' ng-click='switch_version(version)'>
 {{version.name}}
 </a>
 </div>

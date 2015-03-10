@@ -24,21 +24,10 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 					  )						
 						# 期間中のマイルストーンを初期設定にする
 						selecting_version = Version.select_current(versions_list)
-						$scope.switch_selecting_version(selecting_version)
 
-						# チケットの一覧を取得
-						option = {}
-						if selecting_version
-							option['milestoneId'] = selecting_version.id
-						Issue.find_all($http,$routeParams.project_id,
-							(data)->
-								# チケットにあったステータスに配置
-								for column in $scope.columns
-									column.set_issues(data)
-							,(data, status, headers, config)->
-								alert status
-							,option
-						)
+						# 選択しているマイルストーンを切り替える
+						$scope.switch_version(selecting_version)
+						
 					,(data, status, headers, config)->
 						alert status
 				)
@@ -73,11 +62,41 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 	# 初期設定を行う
 	$scope.initialize()
 
+
+	# バージョンを切り替える
+	$scope.switch_version = (version) ->
+		# 選択中のバージョンを変更
+		$scope.toggle_selecting_version(version)
+		# バージョンにあったチケットを取得
+		$scope.get_issues_by_version(version
+			, (data)->
+				# チケットにあったステータスに配置
+				for column in $scope.columns
+					column.clear()
+					column.set_issues(data)
+			,(data, status, headers, config)->
+				alert status
+		)
+
 	# 選択中のバージョンを切り替える
-	$scope.switch_selecting_version = (version) ->
+	$scope.toggle_selecting_version = (version) ->
 		$scope.selecting_version.selected = false
 		$scope.selecting_version = version
 		$scope.selecting_version.selected = true
+
+	# バージョンにあったチケットの一覧を取得する
+	# バージョン指定しない場合(すべて)の場合はversionをnullで指定
+	$scope.get_issues_by_version = (version, onSuccess, onError) ->
+		option = {}
+		if version
+			option['milestoneId'] = version.id
+		Issue.find_all($http,$routeParams.project_id,
+			(data)->
+				onSuccess(data)
+			,(data, status, headers, config)->
+				onError(data, status, headers, config)
+			,option
+		)
 )
 
 
