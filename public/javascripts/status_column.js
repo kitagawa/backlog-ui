@@ -31,6 +31,23 @@ StatusColumn = (function(_super) {
     return statuses;
   };
 
+  StatusColumn.prototype.set_issues = function(issues) {
+    var issue, _i, _len, _results;
+    if (this.issues == null) {
+      this.issues = [];
+    }
+    _results = [];
+    for (_i = 0, _len = issues.length; _i < _len; _i++) {
+      issue = issues[_i];
+      if (issue.status && issue.status.id === this.id) {
+        _results.push(this.issues.push(issue));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+
   return StatusColumn;
 
 })(Column);

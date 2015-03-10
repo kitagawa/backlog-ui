@@ -46,6 +46,22 @@ Issue = (function() {
     }, this.id);
   };
 
+  Issue.find_all = function($http, project_id, on_success, on_error, option) {
+    var url;
+    url = '/find_issue/' + project_id;
+    if (option && option['milestoneId']) {
+      url += '?milestoneId=' + option['milestoneId'];
+    }
+    return $http({
+      method: 'GET',
+      url: url
+    }).success(function(data, status, headers, config) {
+      return on_success(Issue.convert_issues(data));
+    }).error(function(data, status, headers, config) {
+      return on_error(data, status, headers, config);
+    });
+  };
+
   return Issue;
 
 })();

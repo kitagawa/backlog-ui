@@ -1,4 +1,4 @@
-app.controller('versionsCtrl',($scope,$http,$routeParams,$controller) ->
+app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller) ->
 	# 基底コントローラーを継承
 	$controller('baseCtrl',{$scope: $scope})
 
@@ -13,12 +13,11 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$controller) ->
 			  )
 
 				# チケットの一覧を取得
-				$scope.find_issues(
+				Issue.find_all($http, $routeParams.project_id,
 					(data) ->
 						# チケットにあったバージョンに配置
-						issues = Issue.convert_issues(data)
 						for version in $scope.columns
-						 	version.set_issues(issues)
+						 	version.set_issues(data)
 					,(data, status, headers, config)->
 						alert status
 				)
@@ -32,14 +31,6 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$controller) ->
 			stop: (event,ui) ->
 				$scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->
-
-	# チケットの一覧を取得する
-	$scope.find_issues = (on_success, on_error) ->
-		$http(method: 'GET', url: '/find_issue/'+$routeParams.project_id)
-		.success (data, status, headers, config) ->		
-			on_success(data)
-		.error (data, status, headers, config)->
-			on_error(data, status, headers, config)
 
 	# チケットの更新コマンドを蓄積する
 	$scope.set_update_issue_milestone = (ui)->

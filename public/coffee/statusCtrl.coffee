@@ -21,24 +21,27 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 						# 「すべて」を一覧に追加
 						$translate('VERSION.ALL').then((translation)->
 							$scope.versions.unshift(new Version(name: translation))
-					  )
-						
+					  )						
 						# 期間中のマイルストーンを初期設定にする
-						$scope.switch_selecting_version(Version.select_current(versions_list))
+						selecting_version = Version.select_current(versions_list)
+						$scope.switch_selecting_version(selecting_version)
 
+						# チケットの一覧を取得
+						option = {}
+						if selecting_version
+							option['milestoneId'] = selecting_version.id
+						Issue.find_all($http,$routeParams.project_id,
+							(data)->
+								# チケットにあったステータスに配置
+								for column in $scope.columns
+									column.set_issues(data)
+							,(data, status, headers, config)->
+								alert status
+							,option
+						)
 					,(data, status, headers, config)->
 						alert status
 				)
-		# 		# # チケットの一覧を取得
-		# 		$scope.find_issues(
-		# 			(data) ->
-		# 				# チケットにあったバージョンに配置
-		# 				issues = Issue.convert_issues(data)
-		# 				for version in $scope.columns
-		# 				 	version.set_issues(issues)
-		# 			,(data, status, headers, config)->
-		# 				alert status
-		# 		)
 			,(data, status, headers, config)->
 				alert status
 		)
@@ -49,14 +52,6 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 			stop: (event,ui) ->
 				# $scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->
-
-	# # チケットの一覧を取得する
-	# $scope.find_issues = (on_success, on_error) ->
-	# 	$http(method: 'GET', url: '/find_issue/'+$routeParams.project_id)
-	# 	.success (data, status, headers, config) ->		
-	# 		on_success(data)
-	# 	.error (data, status, headers, config)->
-	# 		on_error(data, status, headers, config)
 
 	# # チケットの更新コマンドを蓄積する
 	# $scope.set_update_issue_milestone = (ui)->

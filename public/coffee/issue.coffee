@@ -38,3 +38,16 @@ class Issue
 		new Command("update_issue", {
 			"milestoneId[]": milestone
 			},this.id)
+
+	# チケットの一覧を取得する
+	@find_all:($http, project_id, on_success, on_error,option) ->
+		url = '/find_issue/'+ project_id		
+		# パラメーター設定
+		if option && option['milestoneId']
+			url += '?milestoneId=' + option['milestoneId'] 
+			
+		$http(method: 'GET', url: url)
+		.success (data, status, headers, config) ->		
+			on_success(Issue.convert_issues(data))
+		.error (data, status, headers, config)->
+			on_error(data, status, headers, config)

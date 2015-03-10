@@ -74,7 +74,9 @@ end
 
 # チケット一覧取得API
 get '/find_issue/:projectId' do
-	client.get("issues",{"projectId[]" => params[:projectId].to_i})
+	_params = {"projectId[]" => params[:projectId].to_i}
+	_params["milestoneId[]"] = params[:milestoneId].to_i if params[:milestoneId]
+	client.get("issues",_params)
 end
 
 # チケットの更新API

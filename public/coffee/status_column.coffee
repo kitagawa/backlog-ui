@@ -17,3 +17,8 @@ class StatusColumn extends Column
 		for data in data_list
 			statuses.push(new StatusColumn(data))
 		return statuses
+
+	set_issues: (issues)->
+		this.issues = [] unless this.issues?
+		for issue in issues			
+			this.issues.push(issue) if issue.status && issue.status.id == this.id

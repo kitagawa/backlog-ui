@@ -1,4 +1,4 @@
-app.controller('versionsCtrl', function($scope, $http, $routeParams, $controller) {
+app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate, $controller) {
   $controller('baseCtrl', {
     $scope: $scope
   });
@@ -10,14 +10,13 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $controller
           name: translation
         }));
       });
-      return $scope.find_issues(function(data) {
-        var issues, version, _i, _len, _ref, _results;
-        issues = Issue.convert_issues(data);
+      return Issue.find_all($http, $routeParams.project_id, function(data) {
+        var version, _i, _len, _ref, _results;
         _ref = $scope.columns;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           version = _ref[_i];
-          _results.push(version.set_issues(issues));
+          _results.push(version.set_issues(data));
         }
         return _results;
       }, function(data, status, headers, config) {
@@ -33,16 +32,6 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $controller
       },
       receive: function(event, ui) {}
     };
-  };
-  $scope.find_issues = function(on_success, on_error) {
-    return $http({
-      method: 'GET',
-      url: '/find_issue/' + $routeParams.project_id
-    }).success(function(data, status, headers, config) {
-      return on_success(data);
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
   };
   $scope.set_update_issue_milestone = function(ui) {
     var command, issue, versions;
