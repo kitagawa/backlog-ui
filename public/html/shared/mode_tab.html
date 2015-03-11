@@ -1,9 +1,9 @@
 <div class='control-panel'>
 <div class='btn-group'>
-<a class='btn btn-default' href='#/{{project_id}}'>
+<a class='btn btn-default' href='#/{{project_id}}' ng-class="{active: active_mode('version')}">
 <span class='fa fa-2x fa-flag'></span>
 </a>
-<a class='btn btn-default' href='#/{{project_id}}/status'>
+<a class='btn btn-default' href='#/{{project_id}}/status' ng-class="{active: active_mode('status')}">
 <span class='fa fa-2x fa-tasks'></span>
 </a>
 </div>

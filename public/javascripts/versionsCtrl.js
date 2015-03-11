@@ -2,6 +2,7 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate,
   $controller('baseCtrl', {
     $scope: $scope
   });
+  $scope.mode = 'version';
   $scope.initialize = function() {
     Version.find_all($http, $routeParams.project_id, function(data) {
       $scope.columns = data;

@@ -2,6 +2,9 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 	# 基底コントローラーを継承
 	$controller('baseCtrl',{$scope: $scope})
 
+	# マイルストーン表示タイプ
+	$scope.mode = 'version'
+
 	# 初期設定
 	$scope.initialize = () ->		
 		Version.find_all($http,$routeParams.project_id,

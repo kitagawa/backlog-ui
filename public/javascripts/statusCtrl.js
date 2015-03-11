@@ -2,6 +2,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
   $controller('baseCtrl', {
     $scope: $scope
   });
+  $scope.mode = 'status';
   $scope.initialize = function() {
     $scope.versions = [];
     $scope.selecting_version = {};
