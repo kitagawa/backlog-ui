@@ -28,12 +28,12 @@ describe("versionsCtrl",function(){
 		versionCtrl = $controller("versionsCtrl",{$scope:scope});
 	}))
 	
-	describe("find_version_included_issue",function(){
+	describe("find_column_include_issue",function(){
 		it("create issue", function(){
 			var issue = issues[0];
 			scope.columns[0].issues.push(issue);
 			scope.columns[1].issues.push(issue);
-			expect(scope.find_version_included_issue(issue)).toEqual([scope.columns[0],scope.columns[1]]);
+			expect(scope.find_column_include_issue(issue)).toEqual([scope.columns[0],scope.columns[1]]);
 		})
 	})
 })

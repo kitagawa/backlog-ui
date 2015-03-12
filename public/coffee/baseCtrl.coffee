@@ -17,4 +17,14 @@ app.controller('baseCtrl',($scope,$http,$routeParams) ->
 	# 現在の表示タイプとあっているか
 	$scope.active_mode = (mode) ->
 		mode == $scope.mode			
+
+	# 指定のチケットを保持しているカラムを取得する
+	$scope.find_column_include_issue = (issue) ->
+		result = []
+		for column in $scope.columns
+			for _issue in column.issues
+				if _issue == issue
+					result.push(column)
+		return result
+
 )

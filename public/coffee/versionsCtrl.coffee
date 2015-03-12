@@ -39,18 +39,9 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 	$scope.set_update_issue_milestone = (ui)->
 		issue = ui.item.sortable.moved
 		return if issue is undefined #移動したものがない場合
-		versions = $scope.find_version_included_issue(issue)
+		versions = $scope.find_column_include_issue(issue)
 		command = issue.create_update_milestone_command(versions)
 		Command.merge_commmand($scope.commands,command)
-
-	# 指定のチケットを保持しているマイルストーンを取得する
-	$scope.find_version_included_issue = (issue) ->
-		result = []
-		for version in $scope.columns
-			for _issue in version.issues
-				if _issue == issue
-					result.push(version)
-		return result
 
 	# 初期設定を行う
 	$scope.initialize()

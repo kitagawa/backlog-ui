@@ -46,6 +46,15 @@ Issue = (function() {
     }, this.id);
   };
 
+  Issue.prototype.create_update_status_command = function(status) {
+    if (status === void 0) {
+      status = null;
+    }
+    return new Command("update_issue", {
+      "statusId": status.id
+    }, this.id);
+  };
+
   Issue.find_all = function($http, project_id, on_success, on_error, option) {
     var url;
     url = '/find_issue/' + project_id;

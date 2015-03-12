@@ -39,6 +39,16 @@ class Issue
 			"milestoneId[]": milestone
 			},this.id)
 
+	#ステータス更新コマンドを作成する
+	# @param status 変更先のステータス一覧
+	# @return 更新コマンド
+	create_update_status_command: (status) ->		
+		status = null if status == undefined
+		new Command("update_issue", {
+			"statusId": status.id
+			},this.id)
+
+
 	# チケットの一覧を取得する
 	@find_all:($http, project_id, on_success, on_error,option) ->
 		url = '/find_issue/'+ project_id		

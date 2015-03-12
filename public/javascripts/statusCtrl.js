@@ -26,9 +26,21 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
     });
     return $scope.sortable_options = {
       connectWith: '.row',
-      stop: function(event, ui) {},
+      stop: function(event, ui) {
+        return $scope.set_update_status_command(ui);
+      },
       receive: function(event, ui) {}
     };
+  };
+  $scope.set_update_status_command = function(ui) {
+    var command, issue, status_column;
+    issue = ui.item.sortable.moved;
+    if (issue === void 0) {
+      return;
+    }
+    status_column = $scope.find_column_include_issue(issue).first();
+    command = issue.create_update_status_command(status_column);
+    return Command.merge_commmand($scope.commands, command);
   };
   $scope.initialize();
   $scope.switch_version = function(version) {

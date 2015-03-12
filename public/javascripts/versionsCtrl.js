@@ -40,25 +40,9 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate,
     if (issue === void 0) {
       return;
     }
-    versions = $scope.find_version_included_issue(issue);
+    versions = $scope.find_column_include_issue(issue);
     command = issue.create_update_milestone_command(versions);
     return Command.merge_commmand($scope.commands, command);
-  };
-  $scope.find_version_included_issue = function(issue) {
-    var result, version, _i, _issue, _j, _len, _len1, _ref, _ref1;
-    result = [];
-    _ref = $scope.columns;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      version = _ref[_i];
-      _ref1 = version.issues;
-      for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-        _issue = _ref1[_j];
-        if (_issue === issue) {
-          result.push(version);
-        }
-      }
-    }
-    return result;
   };
   return $scope.initialize();
 });
