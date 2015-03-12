@@ -3,6 +3,10 @@
 @mixin border{
 	border: 1px solid $gray-lighter;
 }
+.scrollable{
+	overflow: scroll;
+}
+
 .btn-save{
 	width: 200px;
 	margin-bottom: 15px;
@@ -26,7 +30,7 @@
 table.ticket-list{
 	border: 1px solid $gray-lighter;
 	th{
-		width: $ticket-width;
+		min-width: $ticket-width;
 		text-align: center;
 		padding: 10px;
 		border: 1px solid $gray-lighter;
