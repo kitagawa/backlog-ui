@@ -1,7 +1,14 @@
-<div class='control-panel'>
-<div class='btn-group' ng-repeat='version in versions'>
-<a class='btn btn-default' ng-class='{active: version.selected}' ng-click='switch_version(version)'>
+<div class='control-block row'>
+<div class='col-md-1'>
+<label>
+{{'VERSIONS' | translate}}
+</label>
+</div>
+<div class='col-md-11'>
+<div class='btn-group'>
+<a class='btn btn-default' ng-class='{active: version.selected}' ng-click='switch_version(version)' ng-repeat='version in versions'>
 {{version.name}}
 </a>
+</div>
 </div>
 </div>

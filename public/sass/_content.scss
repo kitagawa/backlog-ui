@@ -4,7 +4,23 @@
 	border: 1px solid $gray-lighter;
 }
 .btn-save{
-	width: 100%;
+	width: 200px;
+	margin-bottom: 15px;
+}
+
+.control-panel{
+	padding: 10px 10px 5px;
+	border: 1px solid $gray-lighter;
+	background: $body-bg;
+	margin-bottom: 15px;
+	.control-block{
+		margin-bottom: 5px;
+		label{
+			vertical-align: top;
+			color: $gray-light;
+			padding-right: 3px;
+		}
+	}
 }
 
 table.ticket-list{

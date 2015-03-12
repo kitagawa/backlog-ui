@@ -2,10 +2,12 @@
 	%div{class: "row"}
 		%div{class: "col-md-2"}
 			%div{class: "well"}
-				%ng-include{:src => "'html/shared/save_button.html'"}
+				
 		%div{class: "col-md-10"}
 			%div{class: "well"}
-				%ng-include{:src => "'html/shared/mode_tab.html'"}
-				%ng-include{:src => "'html/shared/version_tab.html'"}
+				%div{class: "control-panel"}
+					%ng-include{:src => "'html/shared/mode_tab.html'"}
+					%ng-include{:src => "'html/shared/version_tab.html'"}
+				%ng-include{:src => "'html/shared/save_button.html'"}
 				%ng-include{:src => "'html/shared/issue_list.html'"}
 				%div{:style=>"clear:both"}

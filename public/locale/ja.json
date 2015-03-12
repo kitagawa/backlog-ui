@@ -16,8 +16,10 @@
     "SELECT_PROJECT": "メニューからプロジェクトを選択してください。",
     "GENERATE_API_KEY": "APIキーの発行"
   },
+  "VERSIONS": "バージョン",
   "VERSION": {
   	"UNSET": "未設定",
   	"ALL": "すべて"
-  }
+  },
+  "VIEW-MODE": "表示タイプ"
 }

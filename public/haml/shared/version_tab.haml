@@ -1,4 +1,8 @@
-%div{class: "control-panel"}
-	%div{class: "btn-group", "ng-repeat" => "version in versions"}
-		%a{class: "btn btn-default", "ng-class" => "{active: version.selected}","ng-click"=>"switch_version(version)"}
-			{{version.name}}
+%div{class: "control-block row"}
+	%div{class: "col-md-1"}
+		%label
+			{{'VERSIONS' | translate}}
+	%div{class: "col-md-11"}
+		%div{class: "btn-group"}
+			%a{"ng-repeat" => "version in versions", class: "btn btn-default", "ng-class" => "{active: version.selected}","ng-click"=>"switch_version(version)"}
+				{{version.name}}

@@ -1,6 +1,10 @@
-%div{class: "control-panel"}
-	%div{class: "btn-group"}
-		%a{class: "btn btn-default", :href => "#/{{project_id}}/status", "ng-class" => "{active: active_mode('status')}"}
-			%span{class: "fa fa-2x fa-tasks"}
-		%a{class: "btn btn-default", :href => "#/{{project_id}}", "ng-class" => "{active: active_mode('version')}"}
-			%span{class: "fa fa-2x fa-flag"}
+%div{class: "control-block row"}
+	%div{class: "col-md-1"}
+		%label
+			{{'VIEW-MODE' | translate}}
+	%div{class: "col-md-11"}
+		%div{class: "btn-group"}
+			%a{class: "btn btn-default", :href => "#/{{project_id}}/status", "ng-class" => "{active: active_mode('status')}"}
+				%span{class: "fa fa-2x fa-tasks"}
+			%a{class: "btn btn-default", :href => "#/{{project_id}}", "ng-class" => "{active: active_mode('version')}"}
+				%span{class: "fa fa-2x fa-flag"}
