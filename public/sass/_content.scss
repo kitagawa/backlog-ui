@@ -7,27 +7,20 @@
 	width: 100%;
 }
 
-.ticket-list{
-	float: left;
-	width: $ticket-width;
+table.ticket-list{
 	border: 1px solid $gray-lighter;
-	.list-header{
+	th{
+		width: $ticket-width;
 		text-align: center;
 		padding: 10px;
+		border: 1px solid $gray-lighter;
 		border-bottom: 3px solid $brand-primary;
 		background: $body-bg;
 	}
-	.list-body{		
-		ul{
-			list-style-type: none;
-			margin: 0px;
-			padding-left: 0px;
-			padding-bottom: 10px;
-			background: $body-bg;
-			li{
-				// border-bottom: 1px solid $gray-lighter;
-			}		
-		}
+	td{		
+		background: $body-bg;
+		border: 1px solid $gray-lighter;
+		vertical-align: top;
 	}
 }
 .ticket{
@@ -37,6 +30,7 @@
 	@include box-shadow($gray-lighter 1px 1px 1px );
 	padding: 3px;	
 	margin: 3px;
+	cursor: move;
 
 	.ticket-icon{
 		font-size: $font-size-small;

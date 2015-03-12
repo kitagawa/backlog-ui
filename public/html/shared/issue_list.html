@@ -1,10 +1,13 @@
-<div class='ticket-list' ng-repeat='column in columns'>
-<div class='list-header'>
+<table class='ticket-list'>
+<tbody>
+<tr>
+<th ng-repeat='column in columns'>
 {{columns[$index].name}}
-</div>
-<div class='list-body'>
-<ul class='row' ng-model='column.issues' ui-sortable='sortable_options'>
-<li ng-repeat='issue in column.issues'>
+</th>
+</tr>
+<tr>
+<td class='row' ng-model='column.issues' ng-repeat='column in columns' ui-sortable='sortable_options'>
+<div ng-repeat='issue in column.issues'>
 <div class='ticket'>
 <div class='float-left ticket-icon'>
 <img class='icon' ng-src='/icon?id={{issue.assignee.id || null}}'>
@@ -27,7 +30,8 @@
 </div>
 <div class='clear'></div>
 </div>
-</li>
-</ul>
 </div>
-</div>
+</td>
+</tr>
+</tbody>
+</table>

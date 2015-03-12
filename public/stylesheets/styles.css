@@ -8213,29 +8213,32 @@ button.close {
   border: 1px solid #cecece;
 }
 
-/* line 7, ../sass/_content.scss */
-.ticket-list {
-  float: left;
-  width: 300px;
+/* line 6, ../sass/_content.scss */
+.btn-save {
+  width: 100%;
+}
+
+/* line 10, ../sass/_content.scss */
+table.ticket-list {
   border: 1px solid #cecece;
 }
-/* line 11, ../sass/_content.scss */
-.ticket-list .list-header {
+/* line 12, ../sass/_content.scss */
+table.ticket-list th {
+  width: 300px;
   text-align: center;
   padding: 10px;
+  border: 1px solid #cecece;
   border-bottom: 3px solid #337ab7;
   background: white;
 }
-/* line 18, ../sass/_content.scss */
-.ticket-list .list-body ul {
-  list-style-type: none;
-  margin: 0px;
-  padding-left: 0px;
-  padding-bottom: 10px;
+/* line 20, ../sass/_content.scss */
+table.ticket-list td {
   background: white;
+  border: 1px solid #cecece;
+  vertical-align: top;
 }
 
-/* line 30, ../sass/_content.scss */
+/* line 26, ../sass/_content.scss */
 .ticket {
   background-color: #fffeed;
   border: 1px solid #cecece;
@@ -8247,31 +8250,32 @@ button.close {
   box-shadow: #cecece 1px 1px 1px;
   padding: 3px;
   margin: 3px;
+  cursor: move;
 }
-/* line 38, ../sass/_content.scss */
+/* line 35, ../sass/_content.scss */
 .ticket .ticket-icon {
   font-size: 12px;
   padding: 5px 15px 5px 10px;
 }
-/* line 42, ../sass/_content.scss */
+/* line 39, ../sass/_content.scss */
 .ticket .ticket-body {
   width: 200px;
 }
-/* line 45, ../sass/_content.scss */
+/* line 42, ../sass/_content.scss */
 .ticket .ticket-user {
   font-size: 12px;
   color: #555555;
 }
-/* line 49, ../sass/_content.scss */
+/* line 46, ../sass/_content.scss */
 .ticket .ticket-key {
   border-bottom: 1px solid #cecece;
 }
-/* line 52, ../sass/_content.scss */
+/* line 49, ../sass/_content.scss */
 .ticket .ticket-title {
   font-weight: bold;
   padding: 5px 0px;
 }
-/* line 56, ../sass/_content.scss */
+/* line 53, ../sass/_content.scss */
 .ticket .ticket-status {
   color: #555555;
   font-size: 12px;
@@ -8284,19 +8288,19 @@ button.close {
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 64, ../sass/_content.scss */
+/* line 61, ../sass/_content.scss */
 .ticket .ticket-status-1 {
   background-color: #ffcccc;
 }
-/* line 67, ../sass/_content.scss */
+/* line 64, ../sass/_content.scss */
 .ticket .ticket-status-2 {
   background-color: #d3e0ef;
 }
-/* line 70, ../sass/_content.scss */
+/* line 67, ../sass/_content.scss */
 .ticket .ticket-status-3 {
   background-color: #acd9d3;
 }
-/* line 73, ../sass/_content.scss */
+/* line 70, ../sass/_content.scss */
 .ticket .ticket-status-4 {
   background-color: #c2d3a3;
 }
