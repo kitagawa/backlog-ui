@@ -30,7 +30,7 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 
 		# UI-Sortableの変更された時の設定
 		$scope.sortable_options =
-			connectWith: '.row',
+			connectWith: '.column',
 			stop: (event,ui) ->
 				$scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->

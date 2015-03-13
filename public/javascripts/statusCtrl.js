@@ -25,7 +25,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
       return alert(status);
     });
     return $scope.sortable_options = {
-      connectWith: '.row',
+      connectWith: '.column',
       stop: function(event, ui) {
         return $scope.set_update_status_command(ui);
       },
