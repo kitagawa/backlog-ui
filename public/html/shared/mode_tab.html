@@ -4,13 +4,15 @@
 {{'VIEW-MODE' | translate}}
 </label>
 </div>
-<div class='col-md-11'>
+<div class='col-md-11 view-mode'>
 <div class='btn-group'>
 <a class='btn btn-default' href='#/{{project_id}}/status' ng-class="{active: active_mode('status')}">
-<span class='fa fa-2x fa-tasks'></span>
+<span class='fa fa fa-tasks'></span>
+{{'VIEW-MODES.STATUS' | translate}}
 </a>
 <a class='btn btn-default' href='#/{{project_id}}' ng-class="{active: active_mode('version')}">
-<span class='fa fa-2x fa-flag'></span>
+<span class='fa fa fa-flag'></span>
+{{'VIEW-MODES.VERSION' | translate}}
 </a>
 </div>
 </div>

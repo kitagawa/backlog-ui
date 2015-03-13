@@ -21,5 +21,9 @@
   	"UNSET": "未設定",
   	"ALL": "すべて"
   },
-  "VIEW-MODE": "表示タイプ"
+  "VIEW-MODE": "表示タイプ",
+  "VIEW-MODES":{
+    "STATUS": "状態別",
+    "VERSION": "バージョン別"
+  }
 }
