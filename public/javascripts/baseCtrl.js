@@ -1,6 +1,7 @@
 app.controller('baseCtrl', function($scope, $http, $routeParams) {
   $scope.commands = [];
   $scope.mode = '';
+  $scope.loading = false;
   $scope.project_id = $routeParams.project_id;
   $scope.update = function() {
     var command, _i, _len, _ref;

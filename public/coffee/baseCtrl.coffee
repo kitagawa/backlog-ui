@@ -5,6 +5,9 @@ app.controller('baseCtrl',($scope,$http,$routeParams) ->
 	# 表示タイプ
 	$scope.mode = ''
 
+	# ローディング表示
+	$scope.loading = false
+
 	# プロジェクトID
 	$scope.project_id = $routeParams.project_id
 

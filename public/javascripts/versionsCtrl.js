@@ -4,6 +4,7 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate,
   });
   $scope.mode = 'version';
   $scope.initialize = function() {
+    $scope.loading = true;
     Version.find_all($http, $routeParams.project_id, function(data) {
       $scope.columns = data;
       $translate('VERSION.UNSET').then(function(translation) {
@@ -12,14 +13,13 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate,
         }));
       });
       return Issue.find_all($http, $routeParams.project_id, function(data) {
-        var version, _i, _len, _ref, _results;
+        var version, _i, _len, _ref;
         _ref = $scope.columns;
-        _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           version = _ref[_i];
-          _results.push(version.set_issues(data));
+          version.set_issues(data);
         }
-        return _results;
+        return $scope.loading = false;
       }, function(data, status, headers, config) {
         return alert(status);
       });

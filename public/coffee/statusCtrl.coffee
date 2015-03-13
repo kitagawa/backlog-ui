@@ -11,6 +11,8 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 		$scope.versions = []
 		#選択中のマイルストーン
 		$scope.selecting_version = {}
+		# ローディング表示
+		$scope.loading = true;
 
 		# 状態一覧を取得
 		StatusColumn.find_all($http,
@@ -58,6 +60,8 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 
 	# バージョンを切り替える
 	$scope.switch_version = (version) ->
+		$scope.loading = true #ローディング表示
+
 		# 選択中のバージョンを変更
 		$scope.toggle_selecting_version(version)
 		# バージョンにあったチケットを取得
@@ -67,6 +71,7 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 				for column in $scope.columns
 					column.clear()
 					column.set_issues(data)
+				$scope.loading = false #ローディング非表示
 			,(data, status, headers, config)->
 				alert status
 		)

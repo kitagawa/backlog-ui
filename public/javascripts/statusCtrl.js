@@ -6,6 +6,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
   $scope.initialize = function() {
     $scope.versions = [];
     $scope.selecting_version = {};
+    $scope.loading = true;
     StatusColumn.find_all($http, function(data) {
       $scope.columns = data;
       return Version.find_all($http, $routeParams.project_id, function(versions_list) {
@@ -44,17 +45,17 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
   };
   $scope.initialize();
   $scope.switch_version = function(version) {
+    $scope.loading = true;
     $scope.toggle_selecting_version(version);
     return $scope.get_issues_by_version(version, function(data) {
-      var column, _i, _len, _ref, _results;
+      var column, _i, _len, _ref;
       _ref = $scope.columns;
-      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         column = _ref[_i];
         column.clear();
-        _results.push(column.set_issues(data));
+        column.set_issues(data);
       }
-      return _results;
+      return $scope.loading = false;
     }, function(data, status, headers, config) {
       return alert(status);
     });

@@ -7,6 +7,9 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 
 	# 初期設定
 	$scope.initialize = () ->		
+		# ローディング表示
+		$scope.loading = true;
+
 		Version.find_all($http,$routeParams.project_id,
 			(data) ->
 				$scope.columns = data
@@ -21,6 +24,7 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 						# チケットにあったバージョンに配置
 						for version in $scope.columns
 						 	version.set_issues(data)
+						$scope.loading = false #ローディング非表示
 					,(data, status, headers, config)->
 						alert status
 				)
