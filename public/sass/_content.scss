@@ -1,5 +1,13 @@
 @import "variables";
 
+#error_dialog{
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-align: center;
+	z-index: 100;
+}
+
 @mixin border{
 	border: 1px solid $gray-lighter;
 }

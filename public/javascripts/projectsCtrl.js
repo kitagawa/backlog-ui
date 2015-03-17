@@ -1,9 +1,12 @@
-app.controller('projectsCtrl', function($scope, $http) {
+app.controller('projectsCtrl', function($scope, $http, $controller) {
+  $controller('baseCtrl', {
+    $scope: $scope
+  });
   $scope.initialize = function() {
     return $scope.find_projects(function(data) {
       return $scope.projects = data;
     }, function(data, status, headers, config) {
-      return alert(status);
+      return $scope.show_error(status);
     });
   };
   $scope.find_projects = function(on_success, on_error) {

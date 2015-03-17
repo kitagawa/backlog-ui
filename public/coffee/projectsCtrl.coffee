@@ -1,10 +1,14 @@
-app.controller('projectsCtrl',($scope,$http) ->
+app.controller('projectsCtrl',($scope,$http,$controller) ->
+		# 基底コントローラーを継承
+	$controller('baseCtrl',{$scope: $scope})
+
 	# 初期設定を行う
 	$scope.initialize = () ->
 		# プロジェクトの一覧を設定する
 		$scope.find_projects(
 			(data)-> $scope.projects = data
-			(data, status, headers, config)-> alert status
+			(data, status, headers, config)-> 
+				$scope.show_error(status)
 		)		
 
 	# プロジェクトの一覧を取得する

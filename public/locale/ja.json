@@ -11,10 +11,12 @@
   	"SAVE": "保存"
 	},
   "MESSAGE": {
- 		"LOGIN_FAILURE": "ログインに失敗しました。",
-  	"CONFIRM_API_KEY": "APIキーを確認してください。",
+    "ERROR": "エラーが発生しました。",
+    "LOGIN_FAILURE": "ログインに失敗しました。",
+    "CONFIRM_API_KEY": "APIキーを確認してください。",
     "SELECT_PROJECT": "メニューからプロジェクトを選択してください。",
-    "GENERATE_API_KEY": "APIキーの発行"
+    "GENERATE_API_KEY": "APIキーの発行",
+    "CONNECTION_ERROR" : "通信状態が回復してから再度試してください。"
   },
   "VERSIONS": "バージョン",
   "VERSION": {

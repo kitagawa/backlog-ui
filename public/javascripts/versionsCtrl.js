@@ -1,5 +1,5 @@
 app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate, $controller) {
-  $controller('baseCtrl', {
+  $controller('listBaseCtrl', {
     $scope: $scope
   });
   $scope.mode = 'version';
@@ -21,10 +21,10 @@ app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate,
         }
         return $scope.loading = false;
       }, function(data, status, headers, config) {
-        return alert(status);
+        return $scope.show_error(status);
       });
     }, function(data, status, headers, config) {
-      return alert(status);
+      return $scope.show_error(status);
     });
     return $scope.sortable_options = {
       connectWith: '.column',

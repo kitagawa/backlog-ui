@@ -1,5 +1,5 @@
 app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $controller) {
-  $controller('baseCtrl', {
+  $controller('listBaseCtrl', {
     $scope: $scope
   });
   $scope.mode = 'status';
@@ -20,10 +20,10 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
         selecting_version = Version.select_current(versions_list);
         return $scope.switch_version(selecting_version);
       }, function(data, status, headers, config) {
-        return alert(status);
+        return $scope.show_error(status);
       });
     }, function(data, status, headers, config) {
-      return alert(status);
+      return $scope.show_error(status);
     });
     return $scope.sortable_options = {
       connectWith: '.column',
@@ -57,7 +57,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
       }
       return $scope.loading = false;
     }, function(data, status, headers, config) {
-      return alert(status);
+      return $scope.show_error(status);
     });
   };
   $scope.toggle_selecting_version = function(version) {

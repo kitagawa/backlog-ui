@@ -1,0 +1,7 @@
+%div{:id=> "error_dialog",:class=>"alert alert-danger alert-dismissible", :role=>"alert", "ng-show"=>"error"}
+	%button{:type=>"button", :class=>"close"}
+		%span{"aria-hidden"=>"true"}
+			&times;
+	%strong
+		{{'MESSAGE.ERROR' | translate}}
+	{{error_message}}

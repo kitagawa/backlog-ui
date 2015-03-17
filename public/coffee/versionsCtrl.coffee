@@ -1,6 +1,6 @@
 app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller) ->
 	# 基底コントローラーを継承
-	$controller('baseCtrl',{$scope: $scope})
+	$controller('listBaseCtrl',{$scope: $scope})
 
 	# マイルストーン表示タイプ
 	$scope.mode = 'version'
@@ -26,10 +26,10 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 						 	version.set_issues(data)
 						$scope.loading = false #ローディング非表示
 					,(data, status, headers, config)->
-						alert status
+						$scope.show_error(status)
 				)
 			,(data, status, headers, config)->
-				alert status
+				$scope.show_error(status)
 		)
 
 		# UI-Sortableの変更された時の設定
