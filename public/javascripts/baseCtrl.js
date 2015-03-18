@@ -1,7 +1,17 @@
 app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
   $scope.loading = false;
+  $scope.success = false;
+  $scope.success_message = "";
   $scope.error = false;
   $scope.error_message = "";
+  $scope.show_success = function(message) {
+    $scope.success = true;
+    $scope.loading = false;
+    $scope.success_message = message;
+    return $timeout(function() {
+      return $scope.success = false;
+    }, 2000);
+  };
   return $scope.show_error = function(status) {
     $scope.error = true;
     $scope.loading = false;

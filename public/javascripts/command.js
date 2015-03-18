@@ -7,13 +7,17 @@ Command = (function() {
     this.key = key;
   }
 
-  Command.prototype.execute = function($http) {
+  Command.prototype.execute = function($http, on_success, on_error) {
     var url;
     url = '/' + this.name + '/';
     if (this.key) {
       url += this.key;
     }
-    return $http.post(url, this.data);
+    return $http.post(url, this.data).success(function(data, status, headers, config) {
+      return on_success(data);
+    }).error(function(data, status, headers, config) {
+      return on_error(data, status, headers, config);
+    });
   };
 
   Command.merge_commmand = function(command_list, command) {

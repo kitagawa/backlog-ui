@@ -11,6 +11,7 @@
   	"SAVE": "保存"
 	},
   "MESSAGE": {
+    "UPDATE_COMPLETE": "更新を完了しました。",
     "ERROR": "エラーが発生しました。",
     "LOGIN_FAILURE": "ログインに失敗しました。",
     "CONFIRM_API_KEY": "APIキーを確認してください。",

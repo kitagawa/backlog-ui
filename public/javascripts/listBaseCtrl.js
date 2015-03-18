@@ -6,11 +6,23 @@ app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate,
   $scope.mode = '';
   $scope.project_id = $routeParams.project_id;
   $scope.update = function() {
-    var command, _i, _len, _ref;
+    var command, commands_count, success_count, _i, _len, _ref;
+    commands_count = $scope.commands.length;
+    success_count = 0;
     _ref = $scope.commands;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       command = _ref[_i];
-      command.execute($http);
+      $scope.loading = true;
+      command.execute($http, function(data) {
+        success_count += 1;
+        console.log(commands_count);
+        console.log(success_count);
+        return $translate('MESSAGE.UPDATE_COMPLETE').then(function(translation) {
+          return $scope.show_success(translation);
+        });
+      }, function(data, status, headers, config) {
+        return $scope.show_error(data);
+      });
     }
     return $scope.commands = [];
   };

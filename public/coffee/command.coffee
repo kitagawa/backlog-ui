@@ -11,10 +11,14 @@ class Command
 		@key = key
 
 	# コマンドを実行
-	execute: ($http) ->
+	execute: ($http,on_success,on_error) ->
 		url = '/'+@name+'/'
 		url += @key if @key
 		$http.post(url,@data)
+		.success (data, status, headers, config) ->		
+			on_success(data)
+		.error (data, status, headers, config)->
+			on_error(data, status, headers, config)
 
 	# コマンドリストにコマンドをマージ
 	# @param command_list 対象のコマンドリンスと

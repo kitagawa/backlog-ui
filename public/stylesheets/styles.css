@@ -8240,7 +8240,7 @@ button.close {
 }
 
 /* line 3, ../sass/_content.scss */
-#error_dialog {
+.message_dialog {
   position: absolute;
   left: 0;
   right: 0;
