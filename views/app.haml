@@ -1,6 +1,6 @@
 -#encoding: utf-8
 !!!
-%html{"ng-app" => "App"}
+%html{"ng-app" => "App", "ng-controller" => "baseCtrl"}
   = haml :header
   %body
     / navbar
@@ -34,5 +34,11 @@
                 %a{href: "/logout"}
                   %span{class: "fa fa-sign-out"}
                   {{'LOGOUT' | translate}}
+
+    / error-dialog
+    %ng-include{:src => "'html/shared/error_dialog.html'"}
+    / success-dialog
+    %ng-include{:src => "'html/shared/success_dialog.html'"}
+
     /body
     %ng-view

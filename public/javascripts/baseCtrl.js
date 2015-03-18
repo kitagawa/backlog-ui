@@ -1,12 +1,10 @@
 app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
-  $scope.loading = false;
   $scope.success = false;
   $scope.success_message = "";
   $scope.error = false;
   $scope.error_message = "";
   $scope.show_success = function(message) {
     $scope.success = true;
-    $scope.loading = false;
     $scope.success_message = message;
     return $timeout(function() {
       return $scope.success = false;
@@ -14,7 +12,6 @@ app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
   };
   return $scope.show_error = function(status) {
     $scope.error = true;
-    $scope.loading = false;
     $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
       return $scope.error_message = translation;
     });

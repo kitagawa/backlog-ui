@@ -1,7 +1,5 @@
 # 基底コントローラークラス
 app.controller('baseCtrl',($scope,$http,$translate,$timeout) ->
-	# ローディング表示
-	$scope.loading = false
 
 	# 完了表示
 	$scope.success = false
@@ -14,7 +12,6 @@ app.controller('baseCtrl',($scope,$http,$translate,$timeout) ->
 	# 完了メッセージを表示
 	$scope.show_success = (message) ->
 		$scope.success = true
-		$scope.loading = false
 		$scope.success_message = message
 		$timeout(()->
 				$scope.success = false
@@ -24,7 +21,6 @@ app.controller('baseCtrl',($scope,$http,$translate,$timeout) ->
 	# エラーメッセージを表示
 	$scope.show_error = (status) ->
 		$scope.error = true
-		$scope.loading = false
 		$translate('MESSAGE.CONNECTION_ERROR').then((translation)->
 			$scope.error_message = translation
 	  )

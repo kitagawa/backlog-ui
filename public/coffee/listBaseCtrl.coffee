@@ -1,7 +1,8 @@
 # チケットリスト基底コントローラークラス
 app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller) ->
-	# 基底コントローラーを継承
-	$controller('baseCtrl',{$scope: $scope})
+
+	# ローディング表示
+	$scope.loading = false
 
 	#コマンドリスト
 	$scope.commands = []
@@ -45,4 +46,14 @@ app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller)
 				if _issue == issue
 					result.push(column)
 		return result
+
+	# エラーメッセージを表示する
+	$scope.show_error = (status) ->
+		$scope.$parent.show_error(status)
+		$scope.loading = false
+
+	# 完了メッセージを表示する
+	$scope.show_success = (status) ->
+		$scope.$parent.show_success(status)
+		$scope.loading = false	
 )

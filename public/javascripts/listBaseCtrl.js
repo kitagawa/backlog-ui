@@ -1,7 +1,5 @@
 app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate, $controller) {
-  $controller('baseCtrl', {
-    $scope: $scope
-  });
+  $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
   $scope.project_id = $routeParams.project_id;
@@ -29,7 +27,7 @@ app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate,
   $scope.active_mode = function(mode) {
     return mode === $scope.mode;
   };
-  return $scope.find_column_include_issue = function(issue) {
+  $scope.find_column_include_issue = function(issue) {
     var column, result, _i, _issue, _j, _len, _len1, _ref, _ref1;
     result = [];
     _ref = $scope.columns;
@@ -44,5 +42,13 @@ app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate,
       }
     }
     return result;
+  };
+  $scope.show_error = function(status) {
+    $scope.$parent.show_error(status);
+    return $scope.loading = false;
+  };
+  return $scope.show_success = function(status) {
+    $scope.$parent.show_success(status);
+    return $scope.loading = false;
   };
 });
