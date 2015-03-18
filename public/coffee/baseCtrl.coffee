@@ -1,5 +1,5 @@
 # 基底コントローラークラス
-app.controller('baseCtrl',($scope,$http,$translate) ->
+app.controller('baseCtrl',($scope,$http,$translate,$timeout) ->
 	# ローディング表示
 	$scope.loading = false
 
@@ -14,11 +14,8 @@ app.controller('baseCtrl',($scope,$http,$translate) ->
 		$translate('MESSAGE.CONNECTION_ERROR').then((translation)->
 			$scope.error_message = translation
 	  )
-		setTimeout(()->
-				$('#error_dialog').animate({opacity: '0'}, 3000, ()->
-					$scope.error = false
-					$scope.$apply()
-				);
+		$timeout(()->
+				$scope.error = false
 			,2000
 		);
 )

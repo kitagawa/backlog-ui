@@ -1,6 +1,6 @@
 var app;
 
-app = angular.module('App', ['ngRoute', 'ui.sortable', 'utils', 'pascalprecht.translate']);
+app = angular.module('App', ['ngAnimate', 'ngRoute', 'ui.sortable', 'utils', 'pascalprecht.translate']);
 
 app.config(function($routeProvider) {
   return $routeProvider.when('/', {

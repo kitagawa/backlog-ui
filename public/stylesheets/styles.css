@@ -8192,6 +8192,17 @@ button.close {
   color: #8c8c8c;
 }
 
+/* line 33, ../sass/_base.scss */
+.alert {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+}
+
+/* line 38, ../sass/_base.scss */
+.alert.ng-hide {
+  opacity: 0;
+}
+
 /* line 1, ../sass/_login.scss */
 .main-title {
   text-align: center;

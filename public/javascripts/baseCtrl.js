@@ -1,4 +1,4 @@
-app.controller('baseCtrl', function($scope, $http, $translate) {
+app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
   $scope.loading = false;
   $scope.error = false;
   $scope.error_message = "";
@@ -8,13 +8,8 @@ app.controller('baseCtrl', function($scope, $http, $translate) {
     $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
       return $scope.error_message = translation;
     });
-    return setTimeout(function() {
-      return $('#error_dialog').animate({
-        opacity: '0'
-      }, 3000, function() {
-        $scope.error = false;
-        return $scope.$apply();
-      });
+    return $timeout(function() {
+      return $scope.error = false;
     }, 2000);
   };
 });
