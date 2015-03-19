@@ -17,22 +17,19 @@ app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller)
 		commands_count = $scope.commands.length
 		success_count = 0
 
-		for command in $scope.commands
+		for command,i in $scope.commands by -1
 			$scope.loading = true
 			command.execute($http,
 				(data)->
-					success_count += 1
-					# if(success_count == commands_count)
-					console.log(commands_count)
-					console.log(success_count)
-
-					$translate('MESSAGE.UPDATE_COMPLETE').then((translation)->
-						$scope.show_success(translation)
-				  )
+					$scope.commands.removeAt(i) #実行したものは削除
+					# すべてのコマンドが実行されたら完了メッセージを表示
+					if $scope.commands.isEmpty()
+						$translate('MESSAGE.UPDATE_COMPLETE').then((translation)->
+							$scope.show_success(translation)
+					  )
 				,(data, status, headers, config)->
 					$scope.show_error(data)
 			)
-		$scope.commands = [] #コマンドを空にする
 
 	# 現在の表示タイプとあっているか
 	$scope.active_mode = (mode) ->
