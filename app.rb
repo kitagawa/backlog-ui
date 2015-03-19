@@ -76,7 +76,30 @@ end
 get '/find_issue/:projectId' do
 	_params = {"projectId[]" => params[:projectId].to_i}
 	_params["milestoneId[]"] = params[:milestoneId].to_i if params[:milestoneId]
-	client.get("issues",_params)
+	_params["count"] = count = 100 #100件ごと取得
+
+	# ページング初期設定
+	page = 0
+	complete = false
+	response_body = []
+
+	# 全件取得するまでまわす
+	while not complete
+		_params["offset"] = page * count
+		response = client.get("issues",_params)
+
+		# 結果が配列になるのでデータを結合
+		body = JSON.parse(response)
+		response_body += body
+
+		# 取得内容が空だったらもう取りきったと判断
+		if body.empty?
+			complete = true
+		else
+			page += 1 #ページインクリメント
+		end
+	end
+	return response_body.to_json
 end
 
 # チケットの更新API
