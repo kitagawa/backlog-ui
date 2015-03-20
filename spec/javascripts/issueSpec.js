@@ -11,6 +11,42 @@ describe("Issue",function(){
 		expect(issue.id).toEqual(2);
 	})
 
+	describe("due_over",function(){
+		it("over",function(){
+			issue.dueDate = Date.create().addDays(-1)
+			expect(issue.due_over()).toBeTruthy();
+		})
+		it("not over",function(){
+			issue.dueDate = Date.create().addDays(1)
+			expect(issue.due_over()).toBeFalsy();
+		})
+		it("undefined", function(){
+			expect(issue.due_over()).toBeFalsy();
+		})		
+		it("null", function(){
+			issue.dueDate = null
+			expect(issue.due_over()).toBeFalsy();
+		})
+	})
+
+	describe("due_soon",function(){
+		it("soon",function(){
+			issue.dueDate = Date.create().addDays(1)
+			expect(issue.due_soon()).toBeTruthy();
+		})
+		it("not soon",function(){
+			issue.dueDate = Date.create().addDays(10)
+			expect(issue.due_soon()).toBeFalsy();
+		})
+		it("undefined", function(){
+			expect(issue.due_soon()).toBeFalsy();
+		})		
+		it("null", function(){
+			issue.dueDate = null
+			expect(issue.due_soon()).toBeFalsy();
+		})
+	})
+
 	describe("convert_issues",function(){
 		it("creates issue",function(){
 			var issues = Issue.convert_issues([data]);

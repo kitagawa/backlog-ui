@@ -82,43 +82,80 @@ table.ticket-list{
 	margin: 3px;
 	cursor: move;
 
+	// チケット左部分
 	.ticket-icon{
 		font-size: $font-size-small;
 		padding: 5px 15px 5px 10px;
-	}
-	.ticket-body{
-		width: $ticket-width - $ticket-icon-width;
-	}
-	.ticket-user{
-		font-size: $font-size-small;
-		color: $gray;
-	}
-	.ticket-key{
-		border-bottom: 1px solid $gray-lighter;
-	}
-	.ticket-title{
-		font-weight: bold;
-		padding: 5px 0px;
-	}
-	.ticket-status{
-		color: $gray;
-		font-size: $font-size-small;
-		background-color: $status-default;
-		display: inline;
-		padding: 2px 10px;
-		@include border-radius($border-radius-base);
-	}
-	.ticket-status-1{
-		background-color: $status-undone;
-	}
-	.ticket-status-2{
-		background-color: $status-doing;
-	}
-	.ticket-status-3{
-		background-color: $status-done;
-	}
-	.ticket-status-4{
-		background-color: $stauts-complete;
+
+		// チケットのユーザー表示
+		.ticket-user{
+			font-size: $font-size-small;
+			color: $gray;
+		}
 	}
 
+	// チケット右部分
+	.ticket-body{
+		width: $ticket-width - $ticket-icon-width;
+
+		// チケットのキー
+		.ticket-key{
+			border-bottom: 1px solid $gray-lighter;
+		}
+
+		// チケットのタイトル
+		.ticket-title{
+			font-weight: bold;
+			padding: 5px 0px;
+		}
+
+		// チケットのステータス表示
+		.ticket-status{
+			color: $gray;
+			font-size: $font-size-small;
+			background-color: $status-default;
+			display: inline;
+			padding: 2px 10px;
+			margin-right: 5px;
+			@include border-radius($border-radius-base);
+		}
+		.ticket-status-1{
+			background-color: $status-undone;
+		}
+		.ticket-status-2{
+			background-color: $status-doing;
+		}
+		.ticket-status-3{
+			background-color: $status-done;
+		}
+		.ticket-status-4{
+			background-color: $stauts-complete;
+		}
+
+		// チケットの期限表示
+		.ticket-date{
+			display: inline;
+			float: right;
+		}
+
+		// チケットの優先度
+		.ticket-priority{
+			display: inline;
+			// 優先度高
+			.fa-arrow-up{
+				color: $brand-danger;
+			}
+			// 優先度中
+			.fa-arrow-right{
+				color: $brand-info;
+			}
+			// 優先度低
+			.fa-arrow-down{
+				color: $brand-success;
+			}
+		}
+	}
+	.danger{
+		color: red;
+	}
 }

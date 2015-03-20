@@ -25,4 +25,9 @@
 										{{issue.summary}}
 									%div{class: "ticket-status ticket-status-{{issue.status.id}}"}
 										{{issue.status.name}}
+									%div{class: "ticket-priority"}
+										%span{class: "fa", "ng-class"=> "{'fa-arrow-up': issue.high_priority(), 'fa-arrow-right': issue.mid_priority(), 'fa-arrow-down': issue.low_priority()}"}
+									%div{class: "ticket-date", "ng-show"=> "issue.dueDate"}
+										%span{class: "fa fa-clock-o","ng-class"=>"{'text-danger': issue.due_over()}"}
+											{{issue.dueDate|date: 'yyyy/MM/dd'}}
 								%div{class: "clear"}

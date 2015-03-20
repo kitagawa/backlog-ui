@@ -5,7 +5,36 @@ class Issue
 	# @param attributes 属性
 	constructor: (attributes) ->
 		$.extend(this,attributes)
-	
+
+	# 期限をすぎているか
+	# @return boolean
+	due_over: () ->
+		return false if this.dueDate == null
+		new Date(this.dueDate) < new Date()
+
+	# 期限が近いか
+	# 3日前ならtrue
+	# @return boolean
+	due_soon: () ->
+		return false if this.dueDate == null
+		new Date(this.dueDate) <= Date.create().addDays(3)
+
+	# 高優先度
+	# @return boolean
+	high_priority: () ->
+		this.priority.id == 2 
+
+	# 中優先度
+	# @return boolean
+	mid_priority: () ->
+		this.priority.id == 3
+
+	# 高優先度
+	# @return boolean
+	low_priority: () ->
+		this.priority.id == 4 
+
+
 	# マイルストーンが一致しているかを返す
 	# @param version_id 検索するマイルストーンのID
 	# @return boolean

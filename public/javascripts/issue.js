@@ -5,6 +5,32 @@ Issue = (function() {
     $.extend(this, attributes);
   }
 
+  Issue.prototype.due_over = function() {
+    if (this.dueDate === null) {
+      return false;
+    }
+    return new Date(this.dueDate) < new Date();
+  };
+
+  Issue.prototype.due_soon = function() {
+    if (this.dueDate === null) {
+      return false;
+    }
+    return new Date(this.dueDate) <= Date.create().addDays(3);
+  };
+
+  Issue.prototype.high_priority = function() {
+    return this.priority.id === 2;
+  };
+
+  Issue.prototype.mid_priority = function() {
+    return this.priority.id === 3;
+  };
+
+  Issue.prototype.low_priority = function() {
+    return this.priority.id === 4;
+  };
+
   Issue.prototype.is_include_milestone = function(version_id) {
     var milestone, _i, _len, _ref;
     if (this.milestone && !this.milestone.isEmpty()) {

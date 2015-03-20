@@ -8298,15 +8298,10 @@ button.close {
 }
 
 /* line 60, ../sass/_content.scss */
-.column {
-  max-height: 500px;
-}
-
-/* line 64, ../sass/_content.scss */
 table.ticket-list {
   border: 1px solid #cecece;
 }
-/* line 66, ../sass/_content.scss */
+/* line 62, ../sass/_content.scss */
 table.ticket-list th {
   min-width: 300px;
   text-align: center;
@@ -8315,14 +8310,14 @@ table.ticket-list th {
   border-bottom: 3px solid #337ab7;
   background: white;
 }
-/* line 74, ../sass/_content.scss */
+/* line 70, ../sass/_content.scss */
 table.ticket-list td {
   background: white;
   border: 1px solid #cecece;
   vertical-align: top;
 }
 
-/* line 80, ../sass/_content.scss */
+/* line 76, ../sass/_content.scss */
 .ticket {
   background-color: #fffeed;
   border: 1px solid #cecece;
@@ -8336,55 +8331,81 @@ table.ticket-list td {
   margin: 3px;
   cursor: move;
 }
-/* line 89, ../sass/_content.scss */
+/* line 86, ../sass/_content.scss */
 .ticket .ticket-icon {
   font-size: 12px;
   padding: 5px 15px 5px 10px;
 }
-/* line 93, ../sass/_content.scss */
-.ticket .ticket-body {
-  width: 200px;
-}
-/* line 96, ../sass/_content.scss */
-.ticket .ticket-user {
+/* line 91, ../sass/_content.scss */
+.ticket .ticket-icon .ticket-user {
   font-size: 12px;
   color: #555555;
 }
-/* line 100, ../sass/_content.scss */
-.ticket .ticket-key {
+/* line 98, ../sass/_content.scss */
+.ticket .ticket-body {
+  width: 200px;
+}
+/* line 102, ../sass/_content.scss */
+.ticket .ticket-body .ticket-key {
   border-bottom: 1px solid #cecece;
 }
-/* line 103, ../sass/_content.scss */
-.ticket .ticket-title {
+/* line 107, ../sass/_content.scss */
+.ticket .ticket-body .ticket-title {
   font-weight: bold;
   padding: 5px 0px;
 }
-/* line 107, ../sass/_content.scss */
-.ticket .ticket-status {
+/* line 113, ../sass/_content.scss */
+.ticket .ticket-body .ticket-status {
   color: #555555;
   font-size: 12px;
   background-color: #d6ff99;
   display: inline;
   padding: 2px 10px;
+  margin-right: 5px;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 115, ../sass/_content.scss */
-.ticket .ticket-status-1 {
+/* line 122, ../sass/_content.scss */
+.ticket .ticket-body .ticket-status-1 {
   background-color: #ffcccc;
 }
-/* line 118, ../sass/_content.scss */
-.ticket .ticket-status-2 {
+/* line 125, ../sass/_content.scss */
+.ticket .ticket-body .ticket-status-2 {
   background-color: #d3e0ef;
 }
-/* line 121, ../sass/_content.scss */
-.ticket .ticket-status-3 {
+/* line 128, ../sass/_content.scss */
+.ticket .ticket-body .ticket-status-3 {
   background-color: #acd9d3;
 }
-/* line 124, ../sass/_content.scss */
-.ticket .ticket-status-4 {
+/* line 131, ../sass/_content.scss */
+.ticket .ticket-body .ticket-status-4 {
   background-color: #c2d3a3;
+}
+/* line 136, ../sass/_content.scss */
+.ticket .ticket-body .ticket-date {
+  display: inline;
+  float: right;
+}
+/* line 142, ../sass/_content.scss */
+.ticket .ticket-body .ticket-priority {
+  display: inline;
+}
+/* line 145, ../sass/_content.scss */
+.ticket .ticket-body .ticket-priority .fa-arrow-up {
+  color: #d9534f;
+}
+/* line 149, ../sass/_content.scss */
+.ticket .ticket-body .ticket-priority .fa-arrow-right {
+  color: #5bc0de;
+}
+/* line 153, ../sass/_content.scss */
+.ticket .ticket-body .ticket-priority .fa-arrow-down {
+  color: #5cb85c;
+}
+/* line 158, ../sass/_content.scss */
+.ticket .danger {
+  color: red;
 }
