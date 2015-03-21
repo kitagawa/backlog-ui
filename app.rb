@@ -99,6 +99,15 @@ get '/find_issue/:projectId' do
 			page += 1 #ページインクリメント
 		end
 	end
+
+	# 並び替え
+	# 期限日 > 優先度 > 状態
+	response_body.sort_by!{|issue| [
+		issue['dueDate'] ? issue['dueDate'] : "null", #nullのものは後ろに持っていく
+		issue['priority']['id'],
+		issue['status']['id']
+		]}
+
 	return response_body.to_json
 end
 
