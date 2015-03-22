@@ -25,13 +25,3 @@ app.config([
     return $translateProvider.useMissingTranslationHandlerLog();
   }
 ]);
-
-app.filter('priority', function() {
-  return function(input) {
-    if (input.id === 3) {
-      return "t";
-    } else {
-      return "s";
-    }
-  };
-});

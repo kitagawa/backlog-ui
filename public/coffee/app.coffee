@@ -24,13 +24,3 @@ app.config ['$translateProvider', ($translateProvider) ->
   $translateProvider.useMissingTranslationHandlerLog();
   # $translateProvider.useLocalStorage();
 ]
-
-# 優先順位表示フィルター
-# 優先順位を矢印で表示する
-app.filter('priority',()->
-  (input)->
-    if input.id == 3
-      "t"
-    else
-      "s"
-)
