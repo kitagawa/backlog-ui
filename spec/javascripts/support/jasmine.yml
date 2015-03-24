@@ -14,8 +14,8 @@ src_files:
     - public/js/jquery.min.js
     - public/js/angular/angular.js
     - public/js/angular-route.min.js
+    - public/js/*.js
     - public/js/**/*.js
-    - public/coffee/**/*.js
 
 # stylesheets
 #

@@ -16,5 +16,8 @@ module.exports =
     options:
       livereload: true
   jasmine:
-    files: ['public/coffee/*.coffee','spec/javascripts/*.js']
+    files: ['public/js/*.js','spec/javascripts/*.js']
     tasks: ['jasmine']
+    options:
+      livereload: false
+

@@ -1,11 +1,10 @@
 module.exports =
   compile:
-    files: [
-      expand: true
-      cwd: 'public/coffee/'
-      src: ['*.coffee']
-      dest: 'public/javascripts/'
-      ext: '.js'
-    ]
-    options: 
+    options:
+      join: true
       bare: true
+    files:
+      'public/js/app.js': [
+        'public/coffee/app.coffee'
+        'public/coffee/*.coffee'
+      ]

@@ -1,6 +1,5 @@
 # チケット
 class Issue
-
 	# コンストラクタ
 	# @param attributes 属性
 	constructor: (attributes) ->
