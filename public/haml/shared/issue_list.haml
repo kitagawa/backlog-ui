@@ -12,7 +12,7 @@
 				%td{"ng-repeat" => "column in columns"}
 					%div{:class=>"scrollable column full-height","ui-sortable"=>"sortable_options", "ng-model"=>"column.issues"}
 						%div{"ng-repeat" => "issue in column.issues"}
-							%div{:class=>"ticket"}
+							%div{:class=>"ticket", "ng-click"=>"select_issue(issue)"}
 								%div{class: "float-left ticket-icon"}
 									%img{"ng-src" => "/icon?id={{issue.assignee.id || null}}", class: "icon"}
 									%div{class: "ticket-user"}

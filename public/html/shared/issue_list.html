@@ -15,7 +15,7 @@
 <td ng-repeat='column in columns'>
 <div class='scrollable column full-height' ng-model='column.issues' ui-sortable='sortable_options'>
 <div ng-repeat='issue in column.issues'>
-<div class='ticket'>
+<div class='ticket' ng-click='select_issue(issue)'>
 <div class='float-left ticket-icon'>
 <img class='icon' ng-src='/icon?id={{issue.assignee.id || null}}'>
 <div class='ticket-user'>

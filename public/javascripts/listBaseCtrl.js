@@ -2,6 +2,7 @@ app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate,
   $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
+  $scope.selecting_issue = {};
   $scope.project_id = $routeParams.project_id;
   $scope.update = function() {
     var command, commands_count, i, success_count, _i, _ref, _results;
@@ -43,6 +44,9 @@ app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate,
       }
     }
     return result;
+  };
+  $scope.select_issue = function(issue) {
+    return $scope.selecting_issue = issue;
   };
   $scope.show_error = function(status) {
     $scope.$parent.show_error(status);

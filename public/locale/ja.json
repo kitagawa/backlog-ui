@@ -28,5 +28,21 @@
   "VIEW-MODES":{
     "STATUS": "状態別",
     "VERSION": "バージョン別"
+  },
+  "ISSUE": {
+    "INFORMATION": "チケット情報",
+    "ISSUE_TYPE": "種別",
+    "PRIORITY": "優先度",
+    "CATEGORY": "カテゴリー",
+    "RESOLUTION": "完了理由",
+    "VERSIONS": "発生バージョン",
+    "MILESTONE": "マイルストーン",
+    "ASSIGNEE": "担当者",
+    "ESTIMATED_HOURS": "予定時間",
+    "ACTUAL_HOURS": "実績時間",
+    "DESCRIPTION": "詳細",
+    "CREATED": "登録日",
+    "START_DATE": "開始日",
+    "DUE_DATE": "期限日"
   }
 }

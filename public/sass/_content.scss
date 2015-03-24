@@ -57,6 +57,36 @@
 	}
 }
 
+.issue-panel{
+	.panel-heading{
+		padding-top: 7px;
+		padding-bottom: 7px;
+		color: $gray;
+	}
+	hr{
+		margin-top: 0px;
+		margin-bottom: 10px;
+	}
+	.issue-title{
+		font-weight: bold;
+	}
+	table.issue-information{
+		width: 100%;
+		font-size: $font-size-small;
+		color: $gray-light;
+		tr{
+			border-bottom: 1px solid $gray-lighter;
+		}
+		td{
+			padding-right: 7px;
+		}
+	}
+	.issue-description{
+		white-space: pre-wrap;
+		font-size: $font-size-small;
+	}
+}
+
 table.ticket-list{
 	border: 1px solid $gray-lighter;
 	th{

@@ -9,6 +9,9 @@ app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller)
 	# 表示タイプ
 	$scope.mode = ''
 
+	# 選択中のチケット
+	$scope.selecting_issue = {}
+
 	# プロジェクトID
 	$scope.project_id = $routeParams.project_id
 
@@ -43,6 +46,10 @@ app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller)
 				if _issue == issue
 					result.push(column)
 		return result
+
+	# チケット選択
+	$scope.select_issue = (issue) ->
+		$scope.selecting_issue = issue
 
 	# エラーメッセージを表示する
 	$scope.show_error = (status) ->

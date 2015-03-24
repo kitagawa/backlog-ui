@@ -1,0 +1,126 @@
+<div class='panel panel-default issue-panel'>
+<div class='panel-heading'>
+<span class='fa fa-info-circle'>
+{{ 'ISSUE.INFORMATION' | translate }}
+</span>
+</div>
+<div class='panel-body'>
+<div class='issue-key'>
+<a href='/url/{{selecting_issue.issueKey}}' target='window'>
+{{selecting_issue.issueKey}}
+</a>
+</div>
+<hr>
+<div class='issue-title'>
+{{selecting_issue.summary}}
+</div>
+<hr>
+<table class='issue-information'>
+<tr>
+<td>
+{{ 'ISSUE.ISSUE_TYPE' | translate }}
+</td>
+<td>
+{{selecting_issue.issueType.name}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.PRIORITY' | translate }}
+</td>
+<td>
+{{selecting_issue.priority.name}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.CATEGORY' | translate }}
+</td>
+<td>
+<div ng-repeat='category in selecting_issue.category'>
+{{category.name}}
+</div>
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.RESOLUTION' | translate }}
+</td>
+<td>
+{{selecting_issue.resolution.name}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.VERSIONS' | translate }}
+</td>
+<td>
+<div ng-repeat='version in selecting_issue.versions'>
+{{version.name}}
+</div>
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.MILESTONE' | translate }}
+</td>
+<td>
+<div ng-repeat='milestone in selecting_issue.milestone'>
+{{milestone.name}}
+</div>
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.ASSIGNEE' | translate }}
+</td>
+<td>
+{{selecting_issue.assignee.name}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.ESTIMATED_HOURS' | translate }}
+</td>
+<td>
+{{selecting_issue.estimatedHours}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.ACTUAL_HOURS' | translate }}
+</td>
+<td>
+{{selecting_issue.actualHours}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.CREATED' | translate }}
+</td>
+<td>
+{{selecting_issue.created|date: 'yyyy/MM/dd'}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.START_DATE' | translate }}
+</td>
+<td>
+{{selecting_issue.startDate|date: 'yyyy/MM/dd'}}
+</td>
+</tr>
+<tr>
+<td>
+{{ 'ISSUE.DUE_DATE' | translate }}
+</td>
+<td>
+{{selecting_issue.dueDate|date: 'yyyy/MM/dd'}}
+</td>
+</tr>
+</table>
+<div class='issue-description'>
+{{selecting_issue.description}}
+</div>
+</div>
+</div>
