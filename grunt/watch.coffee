@@ -3,14 +3,18 @@ module.exports =
   coffee:
     files: ['public/coffee/*.coffee']
     tasks: ['coffee']
+    options:
+      livereload: true
   sass:
     files: ['public/sass/*.scss']
     tasks: ['compass']
+    options:
+      livereload: true
   haml:
     files: ['public/haml/*.haml', 'public/haml/shared/*.haml']
     tasks: ['haml']
     options:
-      livereload: true #変更があればリロードする
+      livereload: true
   jasmine:
     files: ['public/coffee/*.coffee','spec/javascripts/*.js']
     tasks: ['jasmine']

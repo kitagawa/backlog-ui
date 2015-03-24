@@ -17,6 +17,7 @@
     "grunt-postcss": "*",
     "grunt-autoprefixer": "*",
     "load-grunt-config": "~0.16.0",
-    "grunt-bower-task": "~0.4.0"
+    "grunt-bower-task": "~0.4.0",
+    "grunt-connect-proxy": "~0.1.11"
   }
 }

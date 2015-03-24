@@ -3,4 +3,8 @@ module.exports = (grunt) ->
   require('load-grunt-config')(grunt)
 
   #タスク登録
-  grunt.registerTask 'default', ['connect',"watch"]
+  grunt.registerTask 'default', [
+  	'configureProxies'
+    'connect:livereload'
+    'watch'
+  ]
