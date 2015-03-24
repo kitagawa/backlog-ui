@@ -8208,10 +8208,10 @@ button.close {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 50px;
-}
-/* line 5, ../sass/_login.scss */
-.main-title h1 {
   font-family: 'Raleway', sans-serif;
+}
+/* line 6, ../sass/_login.scss */
+.main-title h1 {
   font-size: 80px;
 }
 
@@ -8233,8 +8233,12 @@ button.close {
   height: 200px;
   overflow: scroll;
 }
+/* line 26, ../sass/_login.scss */
+.policy-form span {
+  white-space: pre-wrap;
+}
 
-/* line 28, ../sass/_login.scss */
+/* line 31, ../sass/_login.scss */
 .bordered, .login-form, .policy-form {
   border: 1px solid #cecece;
 }

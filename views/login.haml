@@ -6,36 +6,26 @@
 		%div{class: 'container'}
 			%div{class: 'main-title'}
 				%h1 BacklogUI
-			%div{class: "login-form center-block"}
-				%div{class: "policy-form"}
-					利用規約
-					%br 1.
-					%br 2.
-					%br 3.
-					%br 4.
-					%br 5.
-					%br 6.
-					%br 7.
-				%div{class: "text-center"}
-					%input{name: "agreement",type: "checkbox","ng-model" => "agreement"}
-					%span
-						{{'AGREE' | translate}}
+				%h3 ver.α
 
 			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
+				%div{class: "policy-form"}
+					%ng-include{:src => "'terms.txt'"}
+
 				-if @error
 					%p{class: "alert alert-danger"}
 						{{ 'MESSAGE.LOGIN_FAILURE' | translate }}
 						%br
 						{{ 'MESSAGE.CONFIRM_API_KEY' | translate }}
 				%div{class: "form-group"}
-					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog  ({{ 'EXAMPLE' | translate }} https://[{{ 'SPACE_ID' | translate }}].backlog.jp)"}
+					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog{{ 'SPACE_ID' | translate }}  ({{ 'EXAMPLE' | translate }} https://[{{ 'SPACE_ID' | translate }}].backlog.jp)"}
 				%div{class: "form-group"}
 					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog {{ 'API_KEY' | translate }}"}
 					%a{href: "http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html",target: 'blank', class: 'hint'}
 						%span{class: "fa fa-info-circle"}
 						{{ 'MESSAGE.GENERATE_API_KEY' | translate }}
 				%div{class: "form-group"}
-				%button{typ:"submit", "ng-disabled" => "!agreement", class: "btn btn-primary center-block"}
+				%button{typ:"submit", class: "btn btn-primary center-block"}
 					%span{class: "fa fa-sign-in"}
 					&nbsp;
 					{{ 'LOGIN' | translate }}
