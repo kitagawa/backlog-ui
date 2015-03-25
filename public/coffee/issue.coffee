@@ -33,6 +33,10 @@ class Issue
 	low_priority: () ->
 		this.priority.id == 4 
 
+	# ステータス変更
+	change_status: (status) ->
+		this.status.id = status.id
+		this.status.name = status.name
 
 	# マイルストーンが一致しているかを返す
 	# @param version_id 検索するマイルストーンのID

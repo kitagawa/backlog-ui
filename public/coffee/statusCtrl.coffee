@@ -44,14 +44,21 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 		$scope.sortable_options =
 			connectWith: '.column',
 			stop: (event,ui) ->
-				$scope.set_update_status_command(ui)
+				$scope.status_changed(ui)
 			receive: (event,ui) ->
 
-	# チケットの更新コマンドを蓄積する
-	$scope.set_update_status_command = (ui)->
+	# ステータスを変更時の処理
+	$scope.status_changed = (ui) ->
 		issue = ui.item.sortable.moved
 		return if issue is undefined #移動したものがない場合
 		status_column = $scope.find_column_include_issue(issue).first()
+		# チケットのステータス変更
+		issue.change_status(status_column)
+		# 更新コマンドを作成
+		$scope.set_update_status_command(issue,status_column)
+
+	# チケットの更新コマンドを蓄積する
+	$scope.set_update_status_command = (issue, status_column)->
 		command = issue.create_update_status_command(status_column)
 		Command.merge_commmand($scope.commands,command)
 

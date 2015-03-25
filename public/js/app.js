@@ -140,6 +140,11 @@ Issue = (function() {
     return this.priority.id === 4;
   };
 
+  Issue.prototype.change_status = function(status) {
+    this.status.id = status.id;
+    return this.status.name = status.name;
+  };
+
   Issue.prototype.is_include_milestone = function(version_id) {
     var milestone, _i, _len, _ref;
     if (this.milestone && !this.milestone.isEmpty()) {
@@ -324,18 +329,23 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
     return $scope.sortable_options = {
       connectWith: '.column',
       stop: function(event, ui) {
-        return $scope.set_update_status_command(ui);
+        return $scope.status_changed(ui);
       },
       receive: function(event, ui) {}
     };
   };
-  $scope.set_update_status_command = function(ui) {
-    var command, issue, status_column;
+  $scope.status_changed = function(ui) {
+    var issue, status_column;
     issue = ui.item.sortable.moved;
     if (issue === void 0) {
       return;
     }
     status_column = $scope.find_column_include_issue(issue).first();
+    issue.change_status(status_column);
+    return $scope.set_update_status_command(issue, status_column);
+  };
+  $scope.set_update_status_command = function(issue, status_column) {
+    var command;
     command = issue.create_update_status_command(status_column);
     return Command.merge_commmand($scope.commands, command);
   };

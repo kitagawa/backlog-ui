@@ -47,6 +47,16 @@ describe("Issue",function(){
 		})
 	})
 
+	describe("change_status", function(){
+		it("changed", function(){
+			var issue = new Issue({"status": {"id": 1}});
+			_status = new StatusColumn({"id":3, "name": "対応済み"});
+			issue.change_status(_status);
+			expect(issue.status.id).toEqual(3);
+			expect(issue.status.name).toEqual("対応済み");
+		})
+	})
+
 	describe("convert_issues",function(){
 		it("creates issue",function(){
 			var issues = Issue.convert_issues([data]);
