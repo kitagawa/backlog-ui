@@ -2,18 +2,42 @@ var Column, Command, Issue, StatusColumn, Version, app, set_sortable, utils, _re
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-app = angular.module('App', ['ngAnimate', 'ngRoute', 'ui.sortable', 'utils', 'pascalprecht.translate']);
+app = angular.module('App', ['ngAnimate', 'ui.router', 'ui.sortable', 'utils', 'pascalprecht.translate']);
 
-app.config(function($routeProvider) {
-  return $routeProvider.when('/', {
+app.config(function($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise('/');
+  return $stateProvider.state('projects', {
+    url: '/',
     templateUrl: "/html/projects.html",
     controller: "projectsCtrl"
-  }).when('/:project_id', {
-    templateUrl: "/html/versions.html",
-    controller: "versionsCtrl"
-  }).when('/:project_id/status', {
-    templateUrl: "/html/status.html",
-    controller: "statusCtrl"
+  }).state('versions', {
+    url: '/:project_id',
+    views: {
+      '': {
+        templateUrl: "/html/body.html",
+        controller: "versionsCtrl"
+      },
+      'menu@versions': {
+        templateUrl: "/html/shared/issue.html"
+      },
+      'list@versions': {
+        templateUrl: "/html/versions.html"
+      }
+    }
+  }).state('status', {
+    url: '/:project_id/status',
+    views: {
+      '': {
+        templateUrl: "/html/body.html",
+        controller: "statusCtrl"
+      },
+      'menu@status': {
+        templateUrl: "/html/shared/issue.html"
+      },
+      'list@status': {
+        templateUrl: "/html/status.html"
+      }
+    }
   });
 });
 
@@ -215,12 +239,12 @@ Issue = (function() {
 
 })();
 
-app.controller('listBaseCtrl', function($scope, $http, $routeParams, $translate, $controller) {
+app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate, $controller) {
   $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
   $scope.selecting_issue = {};
-  $scope.project_id = $routeParams.project_id;
+  $scope.project_id = $stateParams.project_id;
   $scope.update = function() {
     var command, commands_count, i, success_count, _i, _ref, _results;
     commands_count = $scope.commands.length;
@@ -299,7 +323,7 @@ app.controller('projectsCtrl', function($scope, $http, $controller) {
   return $scope.initialize();
 });
 
-app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $controller) {
+app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -310,7 +334,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
     $scope.loading = true;
     StatusColumn.find_all($http, function(data) {
       $scope.columns = data;
-      return Version.find_all($http, $routeParams.project_id, function(versions_list) {
+      return Version.find_all($http, $stateParams.project_id, function(versions_list) {
         var selecting_version;
         $scope.versions = versions_list;
         $translate('VERSION.ALL').then(function(translation) {
@@ -377,7 +401,7 @@ app.controller('statusCtrl', function($scope, $http, $routeParams, $translate, $
     if (version) {
       option['milestoneId'] = version.id;
     }
-    return Issue.find_all($http, $routeParams.project_id, function(data) {
+    return Issue.find_all($http, $stateParams.project_id, function(data) {
       return onSuccess(data);
     }, function(data, status, headers, config) {
       return onError(data, status, headers, config);
@@ -548,21 +572,21 @@ Version = (function(_super) {
 
 })(Column);
 
-app.controller('versionsCtrl', function($scope, $http, $routeParams, $translate, $controller) {
+app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
   $scope.mode = 'version';
   $scope.initialize = function() {
     $scope.loading = true;
-    Version.find_all($http, $routeParams.project_id, function(data) {
+    Version.find_all($http, $stateParams.project_id, function(data) {
       $scope.columns = data;
       $translate('VERSION.UNSET').then(function(translation) {
         return $scope.columns.unshift(new Version({
           name: translation
         }));
       });
-      return Issue.find_all($http, $routeParams.project_id, function(data) {
+      return Issue.find_all($http, $stateParams.project_id, function(data) {
         var version, _i, _len, _ref1;
         _ref1 = $scope.columns;
         for (_i = 0, _len = _ref1.length; _i < _len; _i++) {

@@ -1,5 +1,5 @@
 # チケットリスト基底コントローラークラス
-app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller) ->
+app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller) ->
 
 	# ローディング表示
 	$scope.loading = false
@@ -13,7 +13,7 @@ app.controller('listBaseCtrl',($scope,$http,$routeParams,$translate,$controller)
 	$scope.selecting_issue = {}
 
 	# プロジェクトID
-	$scope.project_id = $routeParams.project_id
+	$scope.project_id = $stateParams.project_id
 
 	# チケットの更新を行う
 	$scope.update = () ->

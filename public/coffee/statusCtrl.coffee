@@ -1,4 +1,4 @@
-app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) ->
+app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -20,7 +20,7 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 				$scope.columns = data
 
 				#マイルストーンの一覧を取得
-				Version.find_all($http,$routeParams.project_id,
+				Version.find_all($http,$stateParams.project_id,
 					(versions_list) ->
 						$scope.versions = versions_list
 						# 「すべて」を一覧に追加
@@ -95,7 +95,7 @@ app.controller('statusCtrl',($scope,$http,$routeParams,$translate,$controller) -
 		option = {}
 		if version
 			option['milestoneId'] = version.id
-		Issue.find_all($http,$routeParams.project_id,
+		Issue.find_all($http,$stateParams.project_id,
 			(data)->
 				onSuccess(data)
 			,(data, status, headers, config)->

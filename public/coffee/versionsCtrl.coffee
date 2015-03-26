@@ -1,4 +1,4 @@
-app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller) ->
+app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -9,8 +9,7 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 	$scope.initialize = () ->		
 		# ローディング表示
 		$scope.loading = true;
-
-		Version.find_all($http,$routeParams.project_id,
+		Version.find_all($http,$stateParams.project_id,
 			(data) ->
 				$scope.columns = data
 				# 未設定用のバージョンを一覧に追加
@@ -19,7 +18,7 @@ app.controller('versionsCtrl',($scope,$http,$routeParams,$translate,$controller)
 			  )
 
 				# チケットの一覧を取得
-				Issue.find_all($http, $routeParams.project_id,
+				Issue.find_all($http, $stateParams.project_id,
 					(data) ->
 						# チケットにあったバージョンに配置
 						for version in $scope.columns

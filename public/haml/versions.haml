@@ -1,11 +1,6 @@
-%div{class: "container-fluid"}
-	%div{class: "row"}
-		%div{class: "col-md-2"}
-			%ng-include{:src => "'html/shared/issue.html'"}	
-		%div{class: "col-md-10"}
-			%div{class: "well"}
-				%div{class: "control-panel"}
-					%ng-include{:src => "'html/shared/mode_tab.html'"}
-				%ng-include{:src => "'html/shared/save_button.html'"}
-				%ng-include{:src => "'html/shared/issue_list.html'"}
-				%div{:style=>"clear:both"}
+%div{class: "well"}
+	%div{class: "control-panel"}
+		%ng-include{:src => "'html/shared/mode_tab.html'"}
+	%ng-include{:src => "'html/shared/save_button.html'"}
+	%ng-include{:src => "'html/shared/issue_list.html'"}
+	%div{:style=>"clear:both"}
