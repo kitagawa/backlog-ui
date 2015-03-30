@@ -1739,12 +1739,12 @@ textarea {
 
 /* line 48, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #4e9c00;
+  color: #55ab00;
   text-decoration: none;
 }
 /* line 52, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:hover, a:focus {
-  color: #284f00;
+  color: #2f5e00;
   text-decoration: underline;
 }
 /* line 58, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -2008,12 +2008,12 @@ mark,
 
 /* line 5, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-primary {
-  color: #4e9c00;
+  color: #55ab00;
 }
 
 /* line 8, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 a.text-primary:hover {
-  color: #346900;
+  color: #3c7800;
 }
 
 /* line 5, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
@@ -2063,12 +2063,12 @@ a.text-danger:hover {
 
 /* line 5, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-primary {
-  background-color: #4e9c00;
+  background-color: #55ab00;
 }
 
 /* line 8, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 a.bg-primary:hover {
-  background-color: #346900;
+  background-color: #3c7800;
 }
 
 /* line 5, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
@@ -4476,14 +4476,14 @@ select[multiple].input-lg,
 /* line 63, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: #fff;
-  background-color: #4e9c00;
-  border-color: #418200;
+  background-color: #55ab00;
+  border-color: #499100;
 }
 /* line 11, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #346900;
-  border-color: #224500;
+  background-color: #3c7800;
+  border-color: #2a5400;
 }
 /* line 21, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
@@ -4491,12 +4491,12 @@ select[multiple].input-lg,
 }
 /* line 29, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary.focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: #4e9c00;
-  border-color: #418200;
+  background-color: #55ab00;
+  border-color: #499100;
 }
 /* line 40, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_buttons.scss */
 .btn-primary .badge {
-  color: #4e9c00;
+  color: #55ab00;
   background-color: #fff;
 }
 
@@ -4610,7 +4610,7 @@ select[multiple].input-lg,
 
 /* line 88, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link {
-  color: #4e9c00;
+  color: #55ab00;
   font-weight: normal;
   border-radius: 0;
 }
@@ -4626,7 +4626,7 @@ select[multiple].input-lg,
 }
 /* line 107, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link:hover, .btn-link:focus {
-  color: #284f00;
+  color: #2f5e00;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4802,7 +4802,7 @@ tbody.collapse.in {
   color: #fff;
   text-decoration: none;
   outline: 0;
-  background-color: #4e9c00;
+  background-color: #55ab00;
 }
 
 /* line 102, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_dropdowns.scss */
@@ -5320,7 +5320,7 @@ tbody.collapse.in {
 /* line 46, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: #cecece;
-  border-color: #4e9c00;
+  border-color: #55ab00;
 }
 /* line 59, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_navs.scss */
 .nav .nav-divider {
@@ -5378,7 +5378,7 @@ tbody.collapse.in {
 /* line 131, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_navs.scss */
 .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
   color: #fff;
-  background-color: #4e9c00;
+  background-color: #55ab00;
 }
 
 /* line 144, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_navs.scss */
@@ -6150,7 +6150,7 @@ tbody.collapse.in {
   padding: 6px 12px;
   line-height: 1.42857143;
   text-decoration: none;
-  color: #4e9c00;
+  color: #55ab00;
   background-color: #fff;
   border: 1px solid #ddd;
   margin-left: -1px;
@@ -6172,7 +6172,7 @@ tbody.collapse.in {
 .pagination > li > a:hover, .pagination > li > a:focus,
 .pagination > li > span:hover,
 .pagination > li > span:focus {
-  color: #284f00;
+  color: #2f5e00;
   background-color: #cecece;
   border-color: #ddd;
 }
@@ -6183,8 +6183,8 @@ tbody.collapse.in {
 .pagination > .active > span:focus {
   z-index: 2;
   color: #fff;
-  background-color: #4e9c00;
-  border-color: #4e9c00;
+  background-color: #55ab00;
+  border-color: #55ab00;
   cursor: default;
 }
 /* line 63, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_pagination.scss */
@@ -6334,11 +6334,11 @@ a.label:hover, a.label:focus {
 
 /* line 48, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_labels.scss */
 .label-primary {
-  background-color: #4e9c00;
+  background-color: #55ab00;
 }
 /* line 7, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_labels.scss */
 .label-primary[href]:hover, .label-primary[href]:focus {
-  background-color: #346900;
+  background-color: #3c7800;
 }
 
 /* line 52, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_labels.scss */
@@ -6408,7 +6408,7 @@ a.label:hover, a.label:focus {
 }
 /* line 41, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_badges.scss */
 .list-group-item.active > .badge, .nav-pills > .active > a > .badge {
-  color: #4e9c00;
+  color: #55ab00;
   background-color: #fff;
 }
 /* line 47, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_badges.scss */
@@ -6510,7 +6510,7 @@ a.badge:hover, a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #4e9c00;
+  border-color: #55ab00;
 }
 
 /* line 9, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_alerts.scss */
@@ -6649,7 +6649,7 @@ a.thumbnail.active {
   line-height: 17px;
   color: #fff;
   text-align: center;
-  background-color: #4e9c00;
+  background-color: #55ab00;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
@@ -6846,8 +6846,8 @@ a.list-group-item:hover, a.list-group-item:focus {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: #fff;
-  background-color: #4e9c00;
-  border-color: #4e9c00;
+  background-color: #55ab00;
+  border-color: #55ab00;
 }
 /* line 90, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item.active .list-group-item-heading,
@@ -6861,7 +6861,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 }
 /* line 95, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_list-group.scss */
 .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
-  color: #b4ff69;
+  color: #bbff78;
 }
 
 /* line 4, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_list-group.scss */
@@ -7294,26 +7294,26 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:hover, a.list-g
 
 /* line 251, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_panels.scss */
 .panel-primary {
-  border-color: #4e9c00;
+  border-color: #55ab00;
 }
 /* line 6, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading {
   color: #fff;
-  background-color: #4e9c00;
-  border-color: #4e9c00;
+  background-color: #55ab00;
+  border-color: #55ab00;
 }
 /* line 11, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-  border-top-color: #4e9c00;
+  border-top-color: #55ab00;
 }
 /* line 14, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-heading .badge {
-  color: #4e9c00;
+  color: #55ab00;
   background-color: #fff;
 }
 /* line 20, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/mixins/_panels.scss */
 .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-  border-bottom-color: #4e9c00;
+  border-bottom-color: #55ab00;
 }
 
 /* line 254, ../../../../../.rvm/gems/ruby-2.1.2@kanban/gems/bootstrap-sass-3.3.4.1/assets/stylesheets/bootstrap/_panels.scss */
@@ -8760,7 +8760,7 @@ table.ticket-list th {
   text-align: center;
   padding: 10px;
   border: 1px solid #cecece;
-  border-bottom: 3px solid #4e9c00;
+  border-bottom: 3px solid #55ab00;
   background: #fff;
 }
 /* line 100, ../sass/_content.scss */

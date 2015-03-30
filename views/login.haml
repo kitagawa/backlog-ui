@@ -5,7 +5,7 @@
 	%body
 		%div{class: 'container'}
 			%div{class: 'main-title'}
-				%h1 BacklogUI
+				%h1.text-primary BacklogUI
 				%h3 ver.α
 
 			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
@@ -29,3 +29,6 @@
 					%span{class: "fa fa-sign-in"}
 					&nbsp;
 					{{ 'LOGIN' | translate }}
+			%center
+				%a{href: 'https://twitter.com/BacklogUI'}
+					%span{class: "fa fa-twitter fa-3x"}
