@@ -108,24 +108,27 @@ table.ticket-list{
 	@include border;
 	@include border-radius($border-radius-base, $border-radius-base);
 	@include box-shadow($gray-lighter 1px 1px 1px );
-	padding: 3px;	
-	margin: 3px;
+	// padding: 3px;	
+	// margin: 3px;
 	cursor: move;
 
 	// チケット左部分
 	.ticket-icon{
 		font-size: $font-size-small;
-		padding: 5px 15px 5px 10px;
+		padding: 5px 0px 5px 10px;
+		width: $ticket-icon-width;
 
 		// チケットのユーザー表示
 		.ticket-user{
 			font-size: $font-size-small;
 			color: $gray;
+			word-wrap: break-word;
 		}
 	}
 
 	// チケット右部分
 	.ticket-body{
+		padding: 5px;
 		width: $ticket-width - $ticket-icon-width;
 
 		// チケットのキー

@@ -8780,34 +8780,35 @@ table.ticket-list td {
   -moz-box-shadow: #cecece 1px 1px 1px;
   -webkit-box-shadow: #cecece 1px 1px 1px;
   box-shadow: #cecece 1px 1px 1px;
-  padding: 3px;
-  margin: 3px;
   cursor: move;
 }
 /* line 116, ../sass/_content.scss */
 .ticket .ticket-icon {
   font-size: 11px;
-  padding: 5px 15px 5px 10px;
+  padding: 5px 0px 5px 10px;
+  width: 65px;
 }
-/* line 121, ../sass/_content.scss */
+/* line 122, ../sass/_content.scss */
 .ticket .ticket-icon .ticket-user {
   font-size: 11px;
   color: #555555;
+  word-wrap: break-word;
 }
-/* line 128, ../sass/_content.scss */
+/* line 130, ../sass/_content.scss */
 .ticket .ticket-body {
-  width: 180px;
+  padding: 5px;
+  width: 215px;
 }
-/* line 132, ../sass/_content.scss */
+/* line 135, ../sass/_content.scss */
 .ticket .ticket-body .ticket-key {
   border-bottom: 1px solid #cecece;
 }
-/* line 137, ../sass/_content.scss */
+/* line 140, ../sass/_content.scss */
 .ticket .ticket-body .ticket-title {
   font-weight: bold;
   padding: 5px 0px;
 }
-/* line 143, ../sass/_content.scss */
+/* line 146, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status {
   color: #555555;
   font-size: 11px;
@@ -8819,44 +8820,44 @@ table.ticket-list td {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 152, ../sass/_content.scss */
+/* line 155, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-1 {
   background-color: #fcc;
 }
-/* line 155, ../sass/_content.scss */
+/* line 158, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-2 {
   background-color: #d3e0ef;
 }
-/* line 158, ../sass/_content.scss */
+/* line 161, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-3 {
   background-color: #acd9d3;
 }
-/* line 161, ../sass/_content.scss */
+/* line 164, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-4 {
   background-color: #c2d3a3;
 }
-/* line 166, ../sass/_content.scss */
+/* line 169, ../sass/_content.scss */
 .ticket .ticket-body .ticket-date {
   display: inline;
   float: right;
 }
-/* line 172, ../sass/_content.scss */
+/* line 175, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority {
   display: inline;
 }
-/* line 175, ../sass/_content.scss */
+/* line 178, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-up {
   color: #d9534f;
 }
-/* line 179, ../sass/_content.scss */
+/* line 182, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-right {
   color: #5bc0de;
 }
-/* line 183, ../sass/_content.scss */
+/* line 186, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-down {
   color: #5cb85c;
 }
-/* line 188, ../sass/_content.scss */
+/* line 191, ../sass/_content.scss */
 .ticket .danger {
   color: red;
 }
