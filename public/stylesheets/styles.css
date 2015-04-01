@@ -8667,12 +8667,17 @@ button.close {
 }
 
 /* line 15, ../sass/_content.scss */
-.btn-save {
-  width: 200px;
+.btn-panel {
   margin-bottom: 15px;
 }
 
-/* line 20, ../sass/_content.scss */
+/* line 19, ../sass/_content.scss */
+.btn-save {
+  width: 200px;
+  margin-right: 20px;
+}
+
+/* line 24, ../sass/_content.scss */
 .list-block {
   position: relative;
   width: 100%;
@@ -8680,81 +8685,81 @@ button.close {
   display: block;
 }
 
-/* line 27, ../sass/_content.scss */
+/* line 31, ../sass/_content.scss */
 .loading {
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.5);
   position: absolute;
 }
-/* line 32, ../sass/_content.scss */
+/* line 36, ../sass/_content.scss */
 .loading img {
   margin-top: 10px;
 }
 
-/* line 37, ../sass/_content.scss */
+/* line 41, ../sass/_content.scss */
 .control-panel {
   padding: 10px 10px 5px;
   border: 1px solid #cecece;
   background: #fff;
   margin-bottom: 15px;
 }
-/* line 42, ../sass/_content.scss */
+/* line 46, ../sass/_content.scss */
 .control-panel .control-block {
   margin-bottom: 5px;
 }
-/* line 44, ../sass/_content.scss */
+/* line 48, ../sass/_content.scss */
 .control-panel .control-block label {
   vertical-align: top;
   color: #8c8c8c;
   padding-right: 3px;
 }
 
-/* line 54, ../sass/_content.scss */
+/* line 58, ../sass/_content.scss */
 .view-mode .btn-group span {
   font-size: 18px;
 }
 
-/* line 61, ../sass/_content.scss */
+/* line 65, ../sass/_content.scss */
 .issue-panel .panel-heading {
   padding-top: 7px;
   padding-bottom: 7px;
   color: #555555;
 }
-/* line 66, ../sass/_content.scss */
+/* line 70, ../sass/_content.scss */
 .issue-panel hr {
   margin-top: 0px;
   margin-bottom: 10px;
 }
-/* line 70, ../sass/_content.scss */
+/* line 74, ../sass/_content.scss */
 .issue-panel .issue-title {
   font-weight: bold;
 }
-/* line 73, ../sass/_content.scss */
+/* line 77, ../sass/_content.scss */
 .issue-panel table.issue-information {
   width: 100%;
   font-size: 11px;
   color: #8c8c8c;
 }
-/* line 77, ../sass/_content.scss */
+/* line 81, ../sass/_content.scss */
 .issue-panel table.issue-information tr {
   border-bottom: 1px solid #cecece;
 }
-/* line 80, ../sass/_content.scss */
+/* line 84, ../sass/_content.scss */
 .issue-panel table.issue-information td {
   padding-right: 7px;
 }
-/* line 84, ../sass/_content.scss */
+/* line 88, ../sass/_content.scss */
 .issue-panel .issue-description {
   white-space: pre-wrap;
   font-size: 11px;
 }
 
-/* line 90, ../sass/_content.scss */
+/* line 94, ../sass/_content.scss */
 table.ticket-list {
   border: 1px solid #cecece;
 }
-/* line 92, ../sass/_content.scss */
+/* line 96, ../sass/_content.scss */
 table.ticket-list th {
   min-width: 280px;
   text-align: center;
@@ -8763,14 +8768,14 @@ table.ticket-list th {
   border-bottom: 3px solid #55ab00;
   background: #fff;
 }
-/* line 100, ../sass/_content.scss */
+/* line 104, ../sass/_content.scss */
 table.ticket-list td {
   background: #fff;
   border: 1px solid #cecece;
   vertical-align: top;
 }
 
-/* line 106, ../sass/_content.scss */
+/* line 110, ../sass/_content.scss */
 .ticket {
   background-color: #fffeed;
   border: 1px solid #cecece;
@@ -8782,33 +8787,33 @@ table.ticket-list td {
   box-shadow: #cecece 1px 1px 1px;
   cursor: move;
 }
-/* line 116, ../sass/_content.scss */
+/* line 120, ../sass/_content.scss */
 .ticket .ticket-icon {
   font-size: 11px;
   padding: 5px 0px 5px 10px;
   width: 65px;
 }
-/* line 122, ../sass/_content.scss */
+/* line 126, ../sass/_content.scss */
 .ticket .ticket-icon .ticket-user {
   font-size: 11px;
   color: #555555;
   word-wrap: break-word;
 }
-/* line 130, ../sass/_content.scss */
+/* line 134, ../sass/_content.scss */
 .ticket .ticket-body {
   padding: 5px;
-  width: 215px;
+  width: 210px;
 }
-/* line 135, ../sass/_content.scss */
+/* line 139, ../sass/_content.scss */
 .ticket .ticket-body .ticket-key {
   border-bottom: 1px solid #cecece;
 }
-/* line 140, ../sass/_content.scss */
+/* line 144, ../sass/_content.scss */
 .ticket .ticket-body .ticket-title {
   font-weight: bold;
   padding: 5px 0px;
 }
-/* line 146, ../sass/_content.scss */
+/* line 150, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status {
   color: #555555;
   font-size: 11px;
@@ -8820,44 +8825,44 @@ table.ticket-list td {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-/* line 155, ../sass/_content.scss */
+/* line 159, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-1 {
   background-color: #fcc;
 }
-/* line 158, ../sass/_content.scss */
+/* line 162, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-2 {
   background-color: #d3e0ef;
 }
-/* line 161, ../sass/_content.scss */
+/* line 165, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-3 {
   background-color: #acd9d3;
 }
-/* line 164, ../sass/_content.scss */
+/* line 168, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-4 {
   background-color: #c2d3a3;
 }
-/* line 169, ../sass/_content.scss */
+/* line 173, ../sass/_content.scss */
 .ticket .ticket-body .ticket-date {
   display: inline;
   float: right;
 }
-/* line 175, ../sass/_content.scss */
+/* line 179, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority {
   display: inline;
 }
-/* line 178, ../sass/_content.scss */
+/* line 182, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-up {
   color: #d9534f;
 }
-/* line 182, ../sass/_content.scss */
+/* line 186, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-right {
   color: #5bc0de;
 }
-/* line 186, ../sass/_content.scss */
+/* line 190, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-down {
   color: #5cb85c;
 }
-/* line 191, ../sass/_content.scss */
+/* line 195, ../sass/_content.scss */
 .ticket .danger {
   color: red;
 }
