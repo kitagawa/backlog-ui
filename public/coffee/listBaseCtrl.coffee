@@ -60,4 +60,22 @@ app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller)
 	$scope.show_success = (status) ->
 		$scope.$parent.show_success(status)
 		$scope.loading = false	
+
+	# 未保存のコマンドがないか
+	$scope.unsaved = () ->
+		!($scope.commands.isEmpty())
+
+	# 未保存コマンドがある場合に確認させる
+	$scope.check_unsaved = (ok) ->
+		$('#confirmDialog').modal("show")
+		# $("#{confirm_dialog}").dialog({
+		# 	modal: true
+		# 	title: "check"
+		# 	buttons:
+		# 		"OK": () ->
+		# 			$( this ).dialog( "close" );
+		# 			ok
+		# 		"キャンセル": ()->
+		# 			$( this ).dialog( "close" );
+		# 	})
 )

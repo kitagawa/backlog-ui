@@ -12,9 +12,13 @@
 	border: 1px solid $gray-lighter;
 }
 
+.btn-panel{
+	margin-bottom: 15px;
+}
+
 .btn-save{
 	width: 200px;
-	margin-bottom: 15px;
+	margin-right: 20px;
 }
 
 .list-block{
@@ -130,6 +134,7 @@ table.ticket-list{
 	.ticket-body{
 		padding: 5px;
 		width: $ticket-width - $ticket-icon-width;
+		width: $ticket-width - $ticket-icon-width - 5;
 
 		// チケットのキー
 		.ticket-key{

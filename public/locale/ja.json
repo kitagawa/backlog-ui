@@ -8,7 +8,8 @@
 	"PROJECTS": "プロジェクト",
 
 	"BUTTON": {
-  	"SAVE": "保存"
+  	"SAVE": "保存",
+    "REFRESH": "再読込"
 	},
   "MESSAGE": {
     "UPDATE_COMPLETE": "更新を完了しました。",

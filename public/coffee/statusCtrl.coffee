@@ -62,17 +62,22 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller) -
 		command = issue.create_update_status_command(status_column)
 		Command.merge_commmand($scope.commands,command)
 
-	# 初期設定を行う
-	$scope.initialize()
-
 	# バージョンを切り替える
 	$scope.switch_version = (version) ->
 		$scope.loading = true #ローディング表示
 
 		# 選択中のバージョンを変更
 		$scope.toggle_selecting_version(version)
+		# チケットの読み込み
+		$scope.load_tickets()
+
+
+	# チケットリストの読み込みを行なう
+	$scope.load_tickets = () ->
+		# ローディング表示
+		$scope.loading = true;
 		# バージョンにあったチケットを取得
-		$scope.get_issues_by_version(version
+		$scope.get_issues_by_version($scope.selecting_version
 			, (data)->
 				# チケットにあったステータスに配置
 				for column in $scope.columns
@@ -83,6 +88,10 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller) -
 				$scope.show_error(status)
 		)
 
+	# チケット一覧の再読み込み
+	$scope.refresh = () ->
+		$scope.load_tickets()
+	
 	# 選択中のバージョンを切り替える
 	$scope.toggle_selecting_version = (version) ->
 		$scope.selecting_version.selected = false
