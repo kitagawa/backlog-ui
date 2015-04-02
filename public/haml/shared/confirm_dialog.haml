@@ -1,0 +1,11 @@
+.ngdialog-message
+  .title
+    %span.fa.fa-warning
+    {{ 'CONFIRM.UNSAVED' | translate }}
+  {{ 'CONFIRM.CONTINUE?' | translate }}
+  %br
+  %center.btn-area 
+    %button{:class => "btn btn-default btn-fix", "ng-click"=> "cancel()"}
+      {{ 'BUTTON.CANCEL' | translate }}
+    %button{:class => "btn btn-primary btn-fix", "ng-click"=>"ok()"}
+      {{ 'BUTTON.OK' | translate }}

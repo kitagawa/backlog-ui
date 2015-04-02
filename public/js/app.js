@@ -2,7 +2,7 @@ var Column, Command, Issue, StatusColumn, Version, app, set_sortable, utils, _re
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-app = angular.module('App', ['ngAnimate', 'ui.router', 'ui.sortable', 'utils', 'pascalprecht.translate']);
+app = angular.module('App', ['ngAnimate', 'ui.router', 'ui.sortable', 'utils', 'pascalprecht.translate', 'ngDialog']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
@@ -239,7 +239,7 @@ Issue = (function() {
 
 })();
 
-app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate, $controller) {
+app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
   $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
@@ -293,9 +293,37 @@ app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate,
     $scope.$parent.show_error(status);
     return $scope.loading = false;
   };
-  return $scope.show_success = function(status) {
+  $scope.show_success = function(status) {
     $scope.$parent.show_success(status);
     return $scope.loading = false;
+  };
+  $scope.unsaved = function() {
+    return !($scope.commands.isEmpty());
+  };
+  $scope.refresh = function() {
+    return $scope.confirm_unsave(function() {
+      return $scope.load_tickets();
+    });
+  };
+  return $scope.confirm_unsave = function(on_ok) {
+    if ($scope.unsaved()) {
+      return ngDialog.open({
+        template: 'html/shared/confirm_dialog.html',
+        controller: [
+          '$scope', function($_scope) {
+            $_scope.ok = function() {
+              $_scope.closeThisDialog();
+              return on_ok();
+            };
+            return $_scope.cancel = function() {
+              return $_scope.closeThisDialog();
+            };
+          }
+        ]
+      });
+    } else {
+      return on_ok();
+    }
   };
 });
 
@@ -323,7 +351,7 @@ app.controller('projectsCtrl', function($scope, $http, $controller) {
   return $scope.initialize();
 });
 
-app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller) {
+app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -373,11 +401,14 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
     command = issue.create_update_status_command(status_column);
     return Command.merge_commmand($scope.commands, command);
   };
-  $scope.initialize();
   $scope.switch_version = function(version) {
     $scope.loading = true;
     $scope.toggle_selecting_version(version);
-    return $scope.get_issues_by_version(version, function(data) {
+    return $scope.load_tickets();
+  };
+  $scope.load_tickets = function() {
+    $scope.loading = true;
+    return $scope.get_issues_by_version($scope.selecting_version, function(data) {
       var column, _i, _len, _ref;
       _ref = $scope.columns;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -572,7 +603,7 @@ Version = (function(_super) {
 
 })(Column);
 
-app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller) {
+app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -586,17 +617,7 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
           name: translation
         }));
       });
-      return Issue.find_all($http, $stateParams.project_id, function(data) {
-        var version, _i, _len, _ref1;
-        _ref1 = $scope.columns;
-        for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-          version = _ref1[_i];
-          version.set_issues(data);
-        }
-        return $scope.loading = false;
-      }, function(data, status, headers, config) {
-        return $scope.show_error(status);
-      });
+      return $scope.load_tickets();
     }, function(data, status, headers, config) {
       return $scope.show_error(status);
     });
@@ -608,7 +629,22 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
       receive: function(event, ui) {}
     };
   };
-  $scope.set_update_issue_milestone = function(ui) {
+  $scope.load_tickets = function() {
+    $scope.loading = true;
+    return Issue.find_all($http, $stateParams.project_id, function(data) {
+      var version, _i, _len, _ref1;
+      _ref1 = $scope.columns;
+      for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+        version = _ref1[_i];
+        version.clear();
+        version.set_issues(data);
+      }
+      return $scope.loading = false;
+    }, function(data, status, headers, config) {
+      return $scope.show_error(status);
+    });
+  };
+  return $scope.set_update_issue_milestone = function(ui) {
     var command, issue, versions;
     issue = ui.item.sortable.moved;
     if (issue === void 0) {
@@ -618,5 +654,4 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
     command = issue.create_update_milestone_command(versions);
     return Command.merge_commmand($scope.commands, command);
   };
-  return $scope.initialize();
 });

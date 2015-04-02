@@ -1,4 +1,4 @@
-app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller) ->
+app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -16,17 +16,8 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller)
 				$translate('VERSION.UNSET').then((translation)->
 					$scope.columns.unshift(new Version(name: translation))
 			  )
-
-				# チケットの一覧を取得
-				Issue.find_all($http, $stateParams.project_id,
-					(data) ->
-						# チケットにあったバージョンに配置
-						for version in $scope.columns
-						 	version.set_issues(data)
-						$scope.loading = false #ローディング非表示
-					,(data, status, headers, config)->
-						$scope.show_error(status)
-				)
+			  # チケット読み込み
+				$scope.load_tickets()
 			,(data, status, headers, config)->
 				$scope.show_error(status)
 		)
@@ -38,6 +29,22 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller)
 				$scope.set_update_issue_milestone(ui)
 			receive: (event,ui) ->
 
+	# チケット一覧の読み込み
+	$scope.load_tickets= () ->
+		# ローディング表示
+		$scope.loading = true;
+
+		Issue.find_all($http, $stateParams.project_id,
+			(data) ->
+				# チケットにあったバージョンに配置
+				for version in $scope.columns
+					version.clear()
+					version.set_issues(data)
+				$scope.loading = false #ローディング非表示
+			,(data, status, headers, config)->
+				$scope.show_error(status)
+		)
+
 	# チケットの更新コマンドを蓄積する
 	$scope.set_update_issue_milestone = (ui)->
 		issue = ui.item.sortable.moved
@@ -45,7 +52,4 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller)
 		versions = $scope.find_column_include_issue(issue)
 		command = issue.create_update_milestone_command(versions)
 		Command.merge_commmand($scope.commands,command)
-
-	# 初期設定を行う
-	$scope.initialize()
 )

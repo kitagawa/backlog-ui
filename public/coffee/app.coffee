@@ -1,4 +1,4 @@
-app = angular.module('App', ['ngAnimate','ui.router','ui.sortable','utils','pascalprecht.translate']);
+app = angular.module('App', ['ngAnimate','ui.router','ui.sortable','utils','pascalprecht.translate','ngDialog']);
 
 # ルーティング設定
 app.config ($stateProvider, $urlRouterProvider)->
