@@ -1,4 +1,4 @@
-app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller) ->
+app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -44,12 +44,6 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller)
 			,(data, status, headers, config)->
 				$scope.show_error(status)
 		)
-
-	# チケット一覧の再読み込み
-	$scope.refresh = () ->
-		if $scope.unsaved()
-		else
-			$scope.load_tickets()
 
 	# チケットの更新コマンドを蓄積する
 	$scope.set_update_issue_milestone = (ui)->

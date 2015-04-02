@@ -1,4 +1,4 @@
-app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller) ->
+app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -88,10 +88,6 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller) -
 				$scope.show_error(status)
 		)
 
-	# チケット一覧の再読み込み
-	$scope.refresh = () ->
-		$scope.load_tickets()
-	
 	# 選択中のバージョンを切り替える
 	$scope.toggle_selecting_version = (version) ->
 		$scope.selecting_version.selected = false

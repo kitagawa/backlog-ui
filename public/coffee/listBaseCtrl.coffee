@@ -1,5 +1,5 @@
 # チケットリスト基底コントローラークラス
-app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller) ->
+app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
 
 	# ローディング表示
 	$scope.loading = false
@@ -65,17 +65,30 @@ app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller)
 	$scope.unsaved = () ->
 		!($scope.commands.isEmpty())
 
-	# 未保存コマンドがある場合に確認させる
-	$scope.check_unsaved = (ok) ->
-		$('#confirmDialog').modal("show")
-		# $("#{confirm_dialog}").dialog({
-		# 	modal: true
-		# 	title: "check"
-		# 	buttons:
-		# 		"OK": () ->
-		# 			$( this ).dialog( "close" );
-		# 			ok
-		# 		"キャンセル": ()->
-		# 			$( this ).dialog( "close" );
-		# 	})
+	# チケット一覧の再読み込み
+	$scope.refresh = ()->
+		# 未保存コマンドがあるか確認してから、チケット読み込み
+		$scope.confirm_unsave(()->
+			$scope.load_tickets();
+			)
+
+	# 未保存コマンドがないか確認し、あらば確認ダイアログを表示。
+	# 確認ダイアログでOKをおされれば実行
+	$scope.confirm_unsave = (on_ok)->
+		# 未保存コマンド確認
+		if $scope.unsaved()
+			# 未保存コマンドがあれば確認ダイアログを表示
+			ngDialog.open({
+				template: 'html/shared/confirm_dialog.html'
+				controller: ['$scope',($_scope)->
+					$_scope.ok= () ->
+						$_scope.closeThisDialog()
+						on_ok()
+					$_scope.cancel= ()->
+						$_scope.closeThisDialog()
+				]
+			})
+		else
+			# 未保存がないので実行
+			on_ok()
 )

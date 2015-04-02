@@ -21,6 +21,21 @@
 	margin-right: 20px;
 }
 
+.btn-fix{
+	width: 100px;
+}
+
+.ngdialog-message{
+	.title{
+		font-weight: bold;
+		font-size: 15px;
+		margin-bottom: 10px;
+	}
+	.btn-area{
+		margin-top: 20px;
+	}
+}
+
 .list-block{
 	position: relative;
 	width: 100%;
