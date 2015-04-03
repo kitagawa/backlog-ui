@@ -4,9 +4,9 @@
 			{{'VIEW-MODE' | translate}}
 	%div{class: "col-md-11 view-mode"}
 		%div{class: "btn-group"}
-			%a{class: "btn btn-default", :href => "#/{{project_id}}/status", "ng-class" => "{active: active_mode('status')}"}
+			%a{class: "btn btn-default", "ng-click" => "change_mode('status')", "ng-class" => "{active: active_mode('status')}"}
 				%span{class: "fa fa fa-tasks"}
 				{{'VIEW-MODES.STATUS' | translate}}
-			%a{class: "btn btn-default", :href => "#/{{project_id}}", "ng-class" => "{active: active_mode('version')}"}
+			%a{class: "btn btn-default", "ng-click" => "change_mode('versions')", "ng-class" => "{active: active_mode('versions')}"}
 				%span{class: "fa fa fa-flag"}
 				{{'VIEW-MODES.VERSION' | translate}}

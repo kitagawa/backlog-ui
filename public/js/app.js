@@ -239,7 +239,7 @@ Issue = (function() {
 
 })();
 
-app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
+app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $translate, $controller, ngDialog) {
   $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
@@ -269,6 +269,13 @@ app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate,
   };
   $scope.active_mode = function(mode) {
     return mode === $scope.mode;
+  };
+  $scope.change_mode = function(mode) {
+    return $scope.confirm_unsave(function() {
+      return $state.go(mode, {
+        project_id: $scope.project_id
+      });
+    });
   };
   $scope.find_column_include_issue = function(issue) {
     var column, result, _i, _issue, _j, _len, _len1, _ref, _ref1;
@@ -402,9 +409,11 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
     return Command.merge_commmand($scope.commands, command);
   };
   $scope.switch_version = function(version) {
-    $scope.loading = true;
-    $scope.toggle_selecting_version(version);
-    return $scope.load_tickets();
+    return $scope.confirm_unsave(function() {
+      $scope.loading = true;
+      $scope.toggle_selecting_version(version);
+      return $scope.load_tickets();
+    });
   };
   $scope.load_tickets = function() {
     $scope.loading = true;
@@ -607,7 +616,7 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
   $controller('listBaseCtrl', {
     $scope: $scope
   });
-  $scope.mode = 'version';
+  $scope.mode = 'versions';
   $scope.initialize = function() {
     $scope.loading = true;
     Version.find_all($http, $stateParams.project_id, function(data) {

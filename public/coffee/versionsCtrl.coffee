@@ -3,7 +3,7 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 	$controller('listBaseCtrl',{$scope: $scope})
 
 	# マイルストーン表示タイプ
-	$scope.mode = 'version'
+	$scope.mode = 'versions'
 
 	# 初期設定
 	$scope.initialize = () ->		

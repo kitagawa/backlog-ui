@@ -64,13 +64,14 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 
 	# バージョンを切り替える
 	$scope.switch_version = (version) ->
-		$scope.loading = true #ローディング表示
-
-		# 選択中のバージョンを変更
-		$scope.toggle_selecting_version(version)
-		# チケットの読み込み
-		$scope.load_tickets()
-
+		# 未保存コマンドがあるか確認してから切り替え
+		$scope.confirm_unsave(()->
+			$scope.loading = true #ローディング表示
+			# 選択中のバージョンを変更
+			$scope.toggle_selecting_version(version)
+			# チケットの読み込み
+			$scope.load_tickets()
+		)
 
 	# チケットリストの読み込みを行なう
 	$scope.load_tickets = () ->
