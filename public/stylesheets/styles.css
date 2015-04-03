@@ -8821,28 +8821,16 @@ table.ticket-list td {
   width: 215px;
   width: 210px;
 }
-<<<<<<< HEAD
-/* line 140, ../sass/_content.scss */
-.ticket .ticket-body .ticket-key {
-  border-bottom: 1px solid #cecece;
-}
-/* line 145, ../sass/_content.scss */
-=======
 /* line 155, ../sass/_content.scss */
 .ticket .ticket-body .ticket-key {
   border-bottom: 1px solid #cecece;
 }
 /* line 160, ../sass/_content.scss */
->>>>>>> master
 .ticket .ticket-body .ticket-title {
   font-weight: bold;
   padding: 5px 0px;
 }
-<<<<<<< HEAD
-/* line 151, ../sass/_content.scss */
-=======
 /* line 166, ../sass/_content.scss */
->>>>>>> master
 .ticket .ticket-body .ticket-status {
   color: #555555;
   font-size: 11px;
@@ -8854,25 +8842,6 @@ table.ticket-list td {
   -webkit-border-radius: 4px;
   border-radius: 4px;
 }
-<<<<<<< HEAD
-/* line 160, ../sass/_content.scss */
-.ticket .ticket-body .ticket-status-1 {
-  background-color: #fcc;
-}
-/* line 163, ../sass/_content.scss */
-.ticket .ticket-body .ticket-status-2 {
-  background-color: #d3e0ef;
-}
-/* line 166, ../sass/_content.scss */
-.ticket .ticket-body .ticket-status-3 {
-  background-color: #acd9d3;
-}
-/* line 169, ../sass/_content.scss */
-.ticket .ticket-body .ticket-status-4 {
-  background-color: #c2d3a3;
-}
-/* line 174, ../sass/_content.scss */
-=======
 /* line 175, ../sass/_content.scss */
 .ticket .ticket-body .ticket-status-1 {
   background-color: #fcc;
@@ -8890,30 +8859,10 @@ table.ticket-list td {
   background-color: #c2d3a3;
 }
 /* line 189, ../sass/_content.scss */
->>>>>>> master
 .ticket .ticket-body .ticket-date {
   display: inline;
   float: right;
 }
-<<<<<<< HEAD
-/* line 180, ../sass/_content.scss */
-.ticket .ticket-body .ticket-priority {
-  display: inline;
-}
-/* line 183, ../sass/_content.scss */
-.ticket .ticket-body .ticket-priority .fa-arrow-up {
-  color: #d9534f;
-}
-/* line 187, ../sass/_content.scss */
-.ticket .ticket-body .ticket-priority .fa-arrow-right {
-  color: #5bc0de;
-}
-/* line 191, ../sass/_content.scss */
-.ticket .ticket-body .ticket-priority .fa-arrow-down {
-  color: #5cb85c;
-}
-/* line 196, ../sass/_content.scss */
-=======
 /* line 195, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority {
   display: inline;
@@ -8931,7 +8880,6 @@ table.ticket-list td {
   color: #5cb85c;
 }
 /* line 211, ../sass/_content.scss */
->>>>>>> master
 .ticket .danger {
   color: red;
 }
