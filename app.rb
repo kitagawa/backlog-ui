@@ -4,8 +4,13 @@ require 'sass'
 require 'json'
 require './public/backlog_lib'
 
+# セッションを有効化
 enable :sessions
 set :session_secret, 'iu_go1kc@b'
+
+# エラーハンドリングを有効化
+set :show_exceptions, :after_handler
+$stdout.sync = true
 
 # アプリケーション名
 set :title, 'BacklogUI'
@@ -21,12 +26,51 @@ get '/logout' do
 	redirect '/login'
 end
 
-# ログイン処理
-post '/do_login' do
-	session[:api_key] = params[:api_key]
+# OAUTHを行なう
+post '/oauth' do
 	session[:space_id] = params[:space_id]
-
 	begin
+		# OAUTH認証画面へリダイレクト
+		url = "https://#{session[:space_id]}.backlog.jp/OAuth2AccessRequest.action"
+		params = {
+			'response_type' => "code", #固定値
+			'client_id' => "N3YUtgOx1hLtaGOT4MTOukyiZmnXzW5k",
+		}
+		redirect url + "?" +
+		 params.collect{|k,v| "#{k}=#{v}"}.join("&")
+	rescue Exception => e #入力されたログイン情報が正しくない
+		@error = true
+		haml :login
+	end
+end
+
+# OAUTHからのリダイレクト受け
+get '/return_oauth' do
+	# begin
+		# アクセストークンを取得する
+		response = BacklogLib::OauthClient.get_access_token(session[:space_id],params['code'])
+
+		session[:code] = params[:code]
+		session[:access_token] = response['access_token']
+		session[:refresh_token] = response['refresh_token']
+		session[:token_type] = response['token_type']
+
+		# ログインユーザー情報を取得
+		response = get_user_info
+		session[:user_id] = response["id"]
+		session[:user_name] = response["name"]		
+		redirect '/'
+	# rescue Exception => e #入力されたログイン情報が正しくない
+	# 	@error = true
+	# 	haml :login
+	# end
+end
+
+# ログイン処理(APIキーを使用した場合)
+post '/do_login' do
+    session[:api_key] = params[:api_key]
+
+  begin
 		# ログインユーザー情報を取得
 		response = get_user_info
 		session[:user_id] = response["id"]
@@ -59,7 +103,7 @@ end
 
 # プロジェクト一覧取得API
 get '/get_projects' do
-	client.get("projects")
+	client.get("projects")		
 end
 
 # バージョン一覧取得API
@@ -122,18 +166,29 @@ get '/url/:issueKey' do
 	redirect "https://#{session[:space_id]}.backlog.jp/view/#{params[:issueKey]}"
 end
 
+# エラーハンドリング
+# 認証エラー
+error BacklogLib::UnAuthenticationException do
+	status 401
+end
+
 private
 	# Backlog接続クライアント取得
 	def client
-		BacklogLib::Client.new(
-			session[:api_key], session[:space_id])
+		if session[:api_key]
+			# APIキー認証した場合
+			BacklogLib::Client.new(
+				session[:api_key], session[:space_id])
+		else
+			# OAuth認証した場合
+			BacklogLib::OauthClient.new(
+				session[:space_id], session[:code], session[:token_type],
+				session[:access_token], session[:refresh_token])
+		end
+
 	end
 
-	# ログイン状態かをチェックする
-	def is_authed?
-		session[:api_key] and session[:space_id] and session[:user_name]
-	end
-
+	# ユーザー情報を取得する
 	def get_user_info
 		JSON.parse client.get("users/myself")
 	end
@@ -142,6 +197,10 @@ private
 	def clear_authed
 		session[:api_key] = nil
 		session[:space_id] = nil	
+		session[:code] = nil
+		session[:token_type] = nil
+		session[:access_token] = nil
+		session[:refresh_token] = nil
 		session[:user_id] = nil
 		session[:user_name] = nil
 	end
