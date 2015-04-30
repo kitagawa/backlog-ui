@@ -65,13 +65,17 @@ app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
     }, 2000);
   };
   return $scope.show_error = function(status) {
-    $scope.error = true;
-    $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
-      return $scope.error_message = translation;
-    });
-    return $timeout(function() {
-      return $scope.error = false;
-    }, 2000);
+    if (status === 401) {
+      return location.href = "/login";
+    } else {
+      $scope.error = true;
+      $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
+        return $scope.error_message = translation;
+      });
+      return $timeout(function() {
+        return $scope.error = false;
+      }, 2000);
+    }
   };
 });
 

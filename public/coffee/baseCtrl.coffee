@@ -20,12 +20,16 @@ app.controller('baseCtrl',($scope,$http,$translate,$timeout) ->
 
 	# エラーメッセージを表示
 	$scope.show_error = (status) ->
-		$scope.error = true
-		$translate('MESSAGE.CONNECTION_ERROR').then((translation)->
-			$scope.error_message = translation
-	  )
-		$timeout(()->
-				$scope.error = false
-			,2000
-		);
+		if status == 401
+			# 認証不足
+			location.href = "/login"
+		else
+			$scope.error = true
+			$translate('MESSAGE.CONNECTION_ERROR').then((translation)->
+				$scope.error_message = translation
+		  )
+			$timeout(()->
+					$scope.error = false
+				,2000
+			);
 )

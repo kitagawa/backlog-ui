@@ -47,13 +47,9 @@ end
 # OAUTHからのリダイレクト受け
 get '/return_oauth' do
 	# begin
-		# アクセストークンを取得する
-		response = BacklogLib::OauthClient.get_access_token(session[:space_id],params['code'])
-
 		session[:code] = params[:code]
-		session[:access_token] = response['access_token']
-		session[:refresh_token] = response['refresh_token']
-		session[:token_type] = response['token_type']
+		# アクセストークンをセッションに設定する
+		BacklogLib::OauthClient.set_access_token(session, session[:space_id],params['code'])
 
 		# ログインユーザー情報を取得
 		response = get_user_info
@@ -177,13 +173,10 @@ private
 	def client
 		if session[:api_key]
 			# APIキー認証した場合
-			BacklogLib::Client.new(
-				session[:api_key], session[:space_id])
+			BacklogLib::Client.new(session)
 		else
 			# OAuth認証した場合
-			BacklogLib::OauthClient.new(
-				session[:space_id], session[:code], session[:token_type],
-				session[:access_token], session[:refresh_token])
+			BacklogLib::OauthClient.new(session)
 		end
 
 	end

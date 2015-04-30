@@ -4,7 +4,7 @@ module BacklogLib
 		require 'uri'
 		require 'json'
 
-		attr_accessor :api_key, :space_id
+		attr_accessor :session, :api_key, :space_id
 
 		$stdout.sync = true
 
@@ -12,11 +12,9 @@ module BacklogLib
 		URL = "backlog.jp/api/v2".freeze
 
 		# Backlogへの接続設定を行います
-		#* api_key: APIキー
-		#* space_id: スペースID
-		def initialize(api_key,space_id)
-			self.api_key = api_key
-			self.space_id = space_id
+		def initialize(session)
+			self.api_key = session[:api_key]
+			self.space_id = session[:space_id]
 		end		
 
 		# GETメソッドを実行します
@@ -105,7 +103,7 @@ module BacklogLib
 
 	# OAuth認証時の接続クライアント
 	class OauthClient < Client
-		attr_accessor :code, :token_type, :access_token, :refresh_token
+		attr_accessor :code, :token_type, :access_token, :refresh_token, :expire
 		require 'yaml'
 
 		# Backlogへの接続設定を行います
@@ -114,12 +112,19 @@ module BacklogLib
 		#* code: 認可コード
 		#* access_token: アクセストークン
 		#* refresh_token: リフレッシュトークン
-		def initialize(space_id, code,token_type,access_token,refresh_token)
-			self.space_id = space_id
-			self.code = code
-			self.token_type = token_type
-			self.access_token = access_token
-			self.refresh_token = refresh_token
+		def initialize(session)
+			self.session = session
+			set_params(session)
+		end
+
+		# セッションの値をプロパティに設定する
+		def set_params(session)
+			self.space_id = session[:space_id]
+			self.code = session[:code]
+			self.token_type = session[:token_type]
+			self.access_token = session[:access_token]
+			self.refresh_token = session[:refresh_token]
+			self.expire = session[:expire]
 		end
 
 		# OAUTH認証で登録されているアプリケーション情報を取得する
@@ -141,9 +146,15 @@ module BacklogLib
 			end
 		end
 
+		# アクセストークンを取得し、セッションに格納する
+		def self.set_access_token(session, space_id, code)
+			response = self.get_access_token(space_id, code)
+			self.set_token(session, response)
+		end
+
 		# アクセストークンを取得する
 		def self.get_access_token(space_id,code)
-			client = self.new(space_id,code,nil,nil,nil)
+			client = self.new(:space_id => space_id, :code => code)
 
 			params = self.client_info.merge({
 				'grant_type' => 'authorization_code', #固定値
@@ -155,16 +166,40 @@ module BacklogLib
 			return JSON.parse(response)
 		end
 
+		# セッションにトークン情報を設定する
+		def self.set_token(session, response)
+			session[:access_token] = response['access_token']
+			session[:refresh_token] = response['refresh_token']
+			session[:token_type] = response['token_type']
+			session[:expire] = get_expired_time(response['expires_in'])
+		end
+
+		# トークンの期限が切れる時刻(秒)を設定する
+		def self.get_expired_time(expires_in)
+			return Time.now.to_i + expires_in.to_i
+		end
+
 		# アクセストークンをリフレッシュする
 		def refresh_access_token
-			params = self.client_info.merge({
+			# トークンのリフレッシュ
+			response = send_refresh
+			# 結果をセッションに格納
+			self.class.set_token(self.session,response)
+			# パラメーターを設定し直し
+			set_params(self.session)
+		end
+
+		# トークンのリフレッシュを行なう
+		def send_refresh
+			puts "refresh call"
+			params = self.class.client_info.merge({
 				'grant_type' => 'refresh_token', #固定値
 				'refresh_token' => self.refresh_token
 			})
 			url = "https://#{space_id}.backlog.jp/api/v2/oauth2/token?" +
 				params.collect{|k,v| "#{k}=#{v}"}.join("&")
 			response = client.send(url, "post")
-			return JSON.parse(response)			
+			return JSON.parse(response)
 		end
 
 		# APIを実行します
@@ -175,6 +210,11 @@ module BacklogLib
 			unless session_valid
 				# セッションが切れている場合は401を返す
 				raise UnAuthenticationException
+			end
+
+			unless token_valid
+				# トークンの期限がきれていたらリフレッシュする
+				refresh_access_token
 			end
 
 			# APIのurl作成
@@ -200,7 +240,7 @@ module BacklogLib
 			# アクセストークンの期限切れ
 			if response.header["www-authenticate"] == 
 				'Bearer error="invalid_token", error_description="The access token expired"'
-				# refresh_token
+				refresh_access_token
 			else
 				raise UnAuthenticationException.new(response.message)
 			end
@@ -209,6 +249,11 @@ module BacklogLib
 		# セッションが保持されているか
 		def session_valid
 			self.space_id and self.access_token and self.refresh_token
+		end
+
+		# トークンの有効期限内か
+		def token_valid
+			Time.now.to_i < self.expire
 		end
 
 	end
