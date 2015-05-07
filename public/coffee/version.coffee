@@ -8,14 +8,6 @@ class Version extends Column
 		this.startDate = new Date(attributes["startDate"]) if attributes
 		this.releaseDueDate = new Date(attributes["releaseDueDate"]) if attributes
 
-	# マイルストーン一覧を取得する
-	@find_all:($http, project_id, on_success, on_error) ->
-		$http(method: 'GET', url: '/get_versions/'+project_id)
-		.success (data, status, headers, config)->
-			on_success(Version.convert_versions(data))
-		.error (data, status, headers, config)->
-			on_error(data, status, headers, config)
-
 	# マイルストーンに一致するチケットを設定する
 	# @param issues チケットの一覧
 	set_issues: (issues) ->

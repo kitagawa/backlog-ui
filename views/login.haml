@@ -8,22 +8,15 @@
 				%h1.text-primary BacklogUI
 				%h3 ver.α
 
-			%form{name: "form", method: "post",action: "/do_login", class: "login-form  center-block"}
+			%form{name: "form", method: "post",action: "/oauth", class: "login-form  center-block"}
 				%div{class: "policy-form"}
 					%ng-include{:src => "'terms.txt'"}
 
 				-if @error
 					%p{class: "alert alert-danger"}
 						{{ 'MESSAGE.LOGIN_FAILURE' | translate }}
-						%br
-						{{ 'MESSAGE.CONFIRM_API_KEY' | translate }}
 				%div{class: "form-group"}
 					%input{type: "text", name: "space_id", class: "form-control", placeholder: "Backlog{{ 'SPACE_ID' | translate }}  ({{ 'EXAMPLE' | translate }} https://[{{ 'SPACE_ID' | translate }}].backlog.jp)"}
-				%div{class: "form-group"}
-					%input{type: "text", name: "api_key", class: "form-control", placeholder: "Backlog {{ 'API_KEY' | translate }}"}
-					%a{href: "http://www.backlog.jp/help/usersguide/personal-settings/userguide2378.html",target: 'blank', class: 'hint'}
-						%span{class: "fa fa-info-circle"}
-						{{ 'MESSAGE.GENERATE_API_KEY' | translate }}
 				%div{class: "form-group"}
 				%button{typ:"submit", class: "btn btn-primary center-block"}
 					%span{class: "fa fa-sign-in"}

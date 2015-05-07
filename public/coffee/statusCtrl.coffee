@@ -1,4 +1,4 @@
-app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
+app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog, statusService,versionService,issueService) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -15,27 +15,27 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 		$scope.loading = true;
 
 		# 状態一覧を取得
-		StatusColumn.find_all($http,
+		statusService.find_all().then(
 			(data) ->
 				$scope.columns = data
-
 				#マイルストーンの一覧を取得
-				Version.find_all($http,$stateParams.project_id,
-					(versions_list) ->
-						$scope.versions = versions_list
-						# 「すべて」を一覧に追加
-						$translate('VERSION.ALL').then((translation)->
-							$scope.versions.unshift(new Version(name: translation))
-					  )						
-						# 期間中のマイルストーンを初期設定にする
-						selecting_version = Version.select_current(versions_list)
+				versionService.find_all($stateParams.project_id)
+			
+			,(data, status, headers, config)->
+				$scope.show_error(status)
+		).then(
+			(versions_list) ->
+				$scope.versions = versions_list
+				# 「すべて」を一覧に追加
+				$translate('VERSION.ALL').then((translation)->
+					$scope.versions.unshift(new Version(name: translation))
+			  )
+				# 期間中のマイルストーンを初期設定にする
+				selecting_version = Version.select_current(versions_list)
 
-						# 選択しているマイルストーンを切り替える
-						$scope.switch_version(selecting_version)
+				# 選択しているマイルストーンを切り替える
+				$scope.switch_version(selecting_version)
 						
-					,(data, status, headers, config)->
-						$scope.show_error(status)
-				)
 			,(data, status, headers, config)->
 				$scope.show_error(status)
 		)
@@ -64,29 +64,30 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 
 	# バージョンを切り替える
 	$scope.switch_version = (version) ->
-		$scope.loading = true #ローディング表示
-
-		# 選択中のバージョンを変更
-		$scope.toggle_selecting_version(version)
-		# チケットの読み込み
-		$scope.load_tickets()
-
+		# 未保存コマンドがあるか確認してから切り替え
+		$scope.confirm_unsave(()->
+			$scope.loading = true #ローディング表示
+			# 選択中のバージョンを変更
+			$scope.toggle_selecting_version(version)
+			# チケットの読み込み
+			$scope.load_tickets()
+		)
 
 	# チケットリストの読み込みを行なう
 	$scope.load_tickets = () ->
 		# ローディング表示
 		$scope.loading = true;
 		# バージョンにあったチケットを取得
-		$scope.get_issues_by_version($scope.selecting_version
-			, (data)->
+		$scope.get_issues_by_version($scope.selecting_version).then(
+			(data)->
 				# チケットにあったステータスに配置
 				for column in $scope.columns
 					column.clear()
 					column.set_issues(data)
 				$scope.loading = false #ローディング非表示
-			,(data, status, headers, config)->
+			(data, status, headers, config)->
 				$scope.show_error(status)
-		)
+			)
 
 	# 選択中のバージョンを切り替える
 	$scope.toggle_selecting_version = (version) ->
@@ -96,17 +97,11 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 
 	# バージョンにあったチケットの一覧を取得する
 	# バージョン指定しない場合(すべて)の場合はversionをnullで指定
-	$scope.get_issues_by_version = (version, onSuccess, onError) ->
+	$scope.get_issues_by_version = (version) ->
 		option = {}
 		if version
 			option['milestoneId'] = version.id
-		Issue.find_all($http,$stateParams.project_id,
-			(data)->
-				onSuccess(data)
-			,(data, status, headers, config)->
-				onError(data, status, headers, config)
-			,option
-		)
+		issueService.find_all($stateParams.project_id,option)
 )
 
 

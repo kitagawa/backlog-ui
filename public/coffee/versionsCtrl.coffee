@@ -1,15 +1,15 @@
-app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
+app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog,versionService,issueService) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
 	# マイルストーン表示タイプ
-	$scope.mode = 'version'
+	$scope.mode = 'versions'
 
 	# 初期設定
 	$scope.initialize = () ->		
 		# ローディング表示
 		$scope.loading = true;
-		Version.find_all($http,$stateParams.project_id,
+		versionService.find_all($stateParams.project_id).then(
 			(data) ->
 				$scope.columns = data
 				# 未設定用のバージョンを一覧に追加
@@ -19,7 +19,7 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 			  # チケット読み込み
 				$scope.load_tickets()
 			,(data, status, headers, config)->
-				$scope.show_error(status)
+				$scope.show_error(status)			
 		)
 
 		# UI-Sortableの変更された時の設定
@@ -34,7 +34,7 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 		# ローディング表示
 		$scope.loading = true;
 
-		Issue.find_all($http, $stateParams.project_id,
+		issueService.find_all($stateParams.project_id).then(
 			(data) ->
 				# チケットにあったバージョンに配置
 				for version in $scope.columns

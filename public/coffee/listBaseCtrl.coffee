@@ -1,5 +1,5 @@
 # チケットリスト基底コントローラークラス
-app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog) ->
+app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$controller,ngDialog) ->
 
 	# ローディング表示
 	$scope.loading = false
@@ -37,6 +37,13 @@ app.controller('listBaseCtrl',($scope,$http,$stateParams,$translate,$controller,
 	# 現在の表示タイプとあっているか
 	$scope.active_mode = (mode) ->
 		mode == $scope.mode			
+
+	# 表示タイプを切り替える
+	$scope.change_mode = (mode) ->
+		# 未保存コマンドがあるか確認してから、表示切り替え
+		$scope.confirm_unsave(()->
+				$state.go(mode,{project_id: $scope.project_id})
+			)
 
 	# 指定のチケットを保持しているカラムを取得する
 	$scope.find_column_include_issue = (issue) ->

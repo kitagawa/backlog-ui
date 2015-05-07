@@ -65,13 +65,17 @@ app.controller('baseCtrl', function($scope, $http, $translate, $timeout) {
     }, 2000);
   };
   return $scope.show_error = function(status) {
-    $scope.error = true;
-    $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
-      return $scope.error_message = translation;
-    });
-    return $timeout(function() {
-      return $scope.error = false;
-    }, 2000);
+    if (status === 401) {
+      return location.href = "/login";
+    } else {
+      $scope.error = true;
+      $translate('MESSAGE.CONNECTION_ERROR').then(function(translation) {
+        return $scope.error_message = translation;
+      });
+      return $timeout(function() {
+        return $scope.error = false;
+      }, 2000);
+    }
   };
 });
 
@@ -219,27 +223,29 @@ Issue = (function() {
     }, this.id);
   };
 
-  Issue.find_all = function($http, project_id, on_success, on_error, option) {
-    var url;
-    url = '/find_issue/' + project_id;
-    if (option && option['milestoneId']) {
-      url += '?milestoneId=' + option['milestoneId'];
-    }
-    return $http({
-      method: 'GET',
-      url: url
-    }).success(function(data, status, headers, config) {
-      return on_success(Issue.convert_issues(data));
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
-  };
-
   return Issue;
 
 })();
 
-app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
+app.factory('issueService', function($http) {
+  return {
+    find_all: function(project_id, option) {
+      var url;
+      url = '/find_issue/' + project_id;
+      if (option && option['milestoneId']) {
+        url += '?milestoneId=' + option['milestoneId'];
+      }
+      return $http({
+        method: 'GET',
+        url: url
+      }).then(function(response) {
+        return Issue.convert_issues(response.data);
+      });
+    }
+  };
+});
+
+app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $translate, $controller, ngDialog) {
   $scope.loading = false;
   $scope.commands = [];
   $scope.mode = '';
@@ -269,6 +275,13 @@ app.controller('listBaseCtrl', function($scope, $http, $stateParams, $translate,
   };
   $scope.active_mode = function(mode) {
     return mode === $scope.mode;
+  };
+  $scope.change_mode = function(mode) {
+    return $scope.confirm_unsave(function() {
+      return $state.go(mode, {
+        project_id: $scope.project_id
+      });
+    });
   };
   $scope.find_column_include_issue = function(issue) {
     var column, result, _i, _issue, _j, _len, _len1, _ref, _ref1;
@@ -332,26 +345,23 @@ app.controller('projectsCtrl', function($scope, $http, $controller) {
     $scope: $scope
   });
   $scope.initialize = function() {
-    return $scope.find_projects(function(data) {
-      return $scope.projects = data;
+    return $scope.find_projects().then(function(data) {
+      return $scope.$parent.projects = data;
     }, function(data, status, headers, config) {
       return $scope.show_error(status);
     });
   };
-  $scope.find_projects = function(on_success, on_error) {
+  return $scope.find_projects = function() {
     return $http({
       method: 'GET',
       url: '/get_projects'
-    }).success(function(data, status, headers, config) {
-      return on_success(data);
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
+    }).then(function(response) {
+      return response.data;
     });
   };
-  return $scope.initialize();
 });
 
-app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
+app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, statusService, versionService, issueService) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -360,21 +370,21 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
     $scope.versions = [];
     $scope.selecting_version = {};
     $scope.loading = true;
-    StatusColumn.find_all($http, function(data) {
+    statusService.find_all().then(function(data) {
       $scope.columns = data;
-      return Version.find_all($http, $stateParams.project_id, function(versions_list) {
-        var selecting_version;
-        $scope.versions = versions_list;
-        $translate('VERSION.ALL').then(function(translation) {
-          return $scope.versions.unshift(new Version({
-            name: translation
-          }));
-        });
-        selecting_version = Version.select_current(versions_list);
-        return $scope.switch_version(selecting_version);
-      }, function(data, status, headers, config) {
-        return $scope.show_error(status);
+      return versionService.find_all($stateParams.project_id);
+    }, function(data, status, headers, config) {
+      return $scope.show_error(status);
+    }).then(function(versions_list) {
+      var selecting_version;
+      $scope.versions = versions_list;
+      $translate('VERSION.ALL').then(function(translation) {
+        return $scope.versions.unshift(new Version({
+          name: translation
+        }));
       });
+      selecting_version = Version.select_current(versions_list);
+      return $scope.switch_version(selecting_version);
     }, function(data, status, headers, config) {
       return $scope.show_error(status);
     });
@@ -402,13 +412,15 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
     return Command.merge_commmand($scope.commands, command);
   };
   $scope.switch_version = function(version) {
-    $scope.loading = true;
-    $scope.toggle_selecting_version(version);
-    return $scope.load_tickets();
+    return $scope.confirm_unsave(function() {
+      $scope.loading = true;
+      $scope.toggle_selecting_version(version);
+      return $scope.load_tickets();
+    });
   };
   $scope.load_tickets = function() {
     $scope.loading = true;
-    return $scope.get_issues_by_version($scope.selecting_version, function(data) {
+    return $scope.get_issues_by_version($scope.selecting_version).then(function(data) {
       var column, _i, _len, _ref;
       _ref = $scope.columns;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -426,17 +438,26 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
     $scope.selecting_version = version;
     return $scope.selecting_version.selected = true;
   };
-  return $scope.get_issues_by_version = function(version, onSuccess, onError) {
+  return $scope.get_issues_by_version = function(version) {
     var option;
     option = {};
     if (version) {
       option['milestoneId'] = version.id;
     }
-    return Issue.find_all($http, $stateParams.project_id, function(data) {
-      return onSuccess(data);
-    }, function(data, status, headers, config) {
-      return onError(data, status, headers, config);
-    }, option);
+    return issueService.find_all($stateParams.project_id, option);
+  };
+});
+
+app.factory('statusService', function($http) {
+  return {
+    find_all: function() {
+      return $http({
+        method: 'GET',
+        url: '/get_statuses'
+      }).then(function(response) {
+        return StatusColumn.convert_statuses(response.data);
+      });
+    }
   };
 });
 
@@ -447,17 +468,6 @@ StatusColumn = (function(_super) {
     _ref = StatusColumn.__super__.constructor.apply(this, arguments);
     return _ref;
   }
-
-  StatusColumn.find_all = function($http, on_success, on_error) {
-    return $http({
-      method: 'GET',
-      url: '/get_statuses'
-    }).success(function(data, status, headers, config) {
-      return on_success(StatusColumn.convert_statuses(data));
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
-  };
 
   StatusColumn.convert_statuses = function(data_list) {
     var data, statuses, _i, _len;
@@ -504,17 +514,6 @@ Version = (function(_super) {
       this.releaseDueDate = new Date(attributes["releaseDueDate"]);
     }
   }
-
-  Version.find_all = function($http, project_id, on_success, on_error) {
-    return $http({
-      method: 'GET',
-      url: '/get_versions/' + project_id
-    }).success(function(data, status, headers, config) {
-      return on_success(Version.convert_versions(data));
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
-  };
 
   Version.prototype.set_issues = function(issues) {
     var issue, _i, _len, _results;
@@ -603,14 +602,27 @@ Version = (function(_super) {
 
 })(Column);
 
-app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog) {
+app.factory('versionService', function($http) {
+  return {
+    find_all: function(project_id) {
+      return $http({
+        method: 'GET',
+        url: '/get_versions/' + project_id
+      }).then(function(response) {
+        return Version.convert_versions(response.data);
+      });
+    }
+  };
+});
+
+app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, versionService, issueService) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
-  $scope.mode = 'version';
+  $scope.mode = 'versions';
   $scope.initialize = function() {
     $scope.loading = true;
-    Version.find_all($http, $stateParams.project_id, function(data) {
+    versionService.find_all($stateParams.project_id).then(function(data) {
       $scope.columns = data;
       $translate('VERSION.UNSET').then(function(translation) {
         return $scope.columns.unshift(new Version({
@@ -631,7 +643,7 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
   };
   $scope.load_tickets = function() {
     $scope.loading = true;
-    return Issue.find_all($http, $stateParams.project_id, function(data) {
+    return issueService.find_all($stateParams.project_id).then(function(data) {
       var version, _i, _len, _ref1;
       _ref1 = $scope.columns;
       for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
