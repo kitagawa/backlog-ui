@@ -34,7 +34,7 @@ post '/oauth' do
 		url = "https://#{session[:space_id]}.backlog.jp/OAuth2AccessRequest.action"
 		params = {
 			'response_type' => "code", #固定値
-			'client_id' => "N3YUtgOx1hLtaGOT4MTOukyiZmnXzW5k",
+			'client_id' => ENV['OAUTH_CLIENT_ID'],
 		}
 		redirect url + "?" +
 		 params.collect{|k,v| "#{k}=#{v}"}.join("&")
@@ -46,7 +46,7 @@ end
 
 # OAUTHからのリダイレクト受け
 get '/return_oauth' do
-	# begin
+	begin
 		session[:code] = params[:code]
 		# アクセストークンをセッションに設定する
 		BacklogLib::OauthClient.set_access_token(session, session[:space_id],params['code'])
@@ -56,10 +56,10 @@ get '/return_oauth' do
 		session[:user_id] = response["id"]
 		session[:user_name] = response["name"]		
 		redirect '/'
-	# rescue Exception => e #入力されたログイン情報が正しくない
-	# 	@error = true
-	# 	haml :login
-	# end
+	rescue Exception => e #入力されたログイン情報が正しくない
+		@error = true
+		haml :login
+	end
 end
 
 # ログイン処理(APIキーを使用した場合)
