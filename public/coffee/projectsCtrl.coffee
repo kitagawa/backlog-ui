@@ -6,9 +6,10 @@ app.controller('projectsCtrl',($scope,$http,$controller) ->
 	$scope.initialize = () ->
 		# プロジェクトの一覧を設定する
 		$scope.find_projects().then(
-			(data)-> $scope.$parent.projects = data
-			(data, status, headers, config)-> 
-				$scope.show_error(status)
+			(data)-> 
+				$scope.$parent.projects = data
+			,(response)-> 
+				$scope.show_error(response.status)
 		)
 
 	# プロジェクトの一覧を取得する
