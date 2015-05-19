@@ -8617,6 +8617,11 @@ button.close {
   opacity: 0;
 }
 
+/* line 42, ../sass/_base.scss */
+.dropdown-bottun {
+  cursor: pointer;
+}
+
 /* line 1, ../sass/_login.scss */
 .main-title {
   text-align: center;
@@ -8882,4 +8887,37 @@ table.ticket-list td {
 /* line 211, ../sass/_content.scss */
 .ticket .danger {
   color: red;
+}
+
+/* line 234, ../sass/_content.scss */
+.triangle {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+/* line 245, ../sass/_content.scss */
+.user-menu {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  opacity: 0.9;
+  margin-top: 5px;
+}
+/* line 222, ../sass/_content.scss */
+.user-menu li {
+  cursor: pointer;
+}
+/* line 224, ../sass/_content.scss */
+.user-menu li a {
+  padding: 2px;
+}
+/* line 228, ../sass/_content.scss */
+.user-menu li:not(:last-child) {
+  border-bottom: 1px solid #555555;
 }

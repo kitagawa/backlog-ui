@@ -79,3 +79,14 @@ class Issue
 		new Command("update_issue", {
 			"statusId": status.id
 			},this.id)
+
+	# 担当者更新コマンドを作成する
+	# @return 更新コマンド
+	create_update_asignee_command: (user) ->
+		if user == null or user == undefined
+			user_id = null
+		else
+			user_id = user.id
+		new Command("update_issue",{
+			"assigneeId": user_id
+			},this.id)

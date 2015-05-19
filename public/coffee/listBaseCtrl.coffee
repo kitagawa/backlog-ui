@@ -13,6 +13,29 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 	# プロジェクトID
 	$scope.project_id = $stateParams.project_id
 
+	# ユーザ一覧
+	$scope.get_users = ()->
+		$http(method: 'GET', url: '/get_users/'+$scope.project_id)
+			.then(
+				(response)->
+					$scope.users = response.data.insert(null,0)
+					# 未設定分を追加
+			)	
+
+	# チケットの担当を変更する
+	$scope.change_user = (issue,user)->
+		# 変更が無い場合は終了
+		if(user == null or issue.assignee == null)
+			return if(user == null and issue.assignee == null)
+		else if (issue.assignee.id == user.id)
+			return
+		# 担当者変更
+		issue.assignee = user
+		# 更新コマンドを作成
+		command = issue.create_update_asignee_command(issue.assignee)
+		commandService.store(command)
+
+
 	# チケットの更新を行う
 	$scope.update = () ->
 		$scope.loading = true

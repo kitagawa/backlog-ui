@@ -4,7 +4,7 @@
 <img src='/images/loader.GIF'>
 </center>
 </div>
-<table class='ticket-list'>
+<table class='ticket-list' ng-init='get_users()'>
 <tbody>
 <tr>
 <th ng-repeat='column in columns'>
@@ -15,36 +15,7 @@
 <td ng-repeat='column in columns'>
 <div class='scrollable column full-height' ng-model='column.issues' ui-sortable='sortable_options'>
 <div ng-repeat='issue in column.issues'>
-<div class='ticket' ng-click='select_issue(issue)'>
-<div class='float-left ticket-icon'>
-<img class='icon' ng-src='/icon?id={{issue.assignee.id || null}}'>
-<div class='ticket-user'>
-{{issue.assignee.name}}
-</div>
-</div>
-<div class='float-left ticket-body'>
-<div class='ticket-key'>
-<a href='/url/{{issue.issueKey}}' target='window'>
-{{issue.issueKey}}
-</a>
-</div>
-<div class='ticket-title'>
-{{issue.summary}}
-</div>
-<div class='ticket-status ticket-status-{{issue.status.id}}'>
-{{issue.status.name}}
-</div>
-<div class='ticket-priority'>
-<span class='fa' ng-class="{'fa-arrow-up': issue.high_priority(), 'fa-arrow-right': issue.mid_priority(), 'fa-arrow-down': issue.low_priority()}"></span>
-</div>
-<div class='ticket-date' ng-show='issue.dueDate'>
-<span class='fa fa-clock-o' ng-class="{'text-danger': issue.due_over()}">
-{{issue.dueDate|date: 'yyyy/MM/dd'}}
-</span>
-</div>
-</div>
-<div class='clear'></div>
-</div>
+<ng-include src="'html/shared/issue_ticket.html'"></ng-include>
 </div>
 </div>
 </td>

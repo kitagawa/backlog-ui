@@ -242,6 +242,18 @@ Issue = (function() {
     }, this.id);
   };
 
+  Issue.prototype.create_update_asignee_command = function(user) {
+    var user_id;
+    if (user === null || user === void 0) {
+      user_id = null;
+    } else {
+      user_id = user.id;
+    }
+    return new Command("update_issue", {
+      "assigneeId": user_id
+    }, this.id);
+  };
+
   return Issue;
 
 })();
@@ -269,6 +281,27 @@ app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $tr
   $scope.mode = '';
   $scope.selecting_issue = {};
   $scope.project_id = $stateParams.project_id;
+  $scope.get_users = function() {
+    return $http({
+      method: 'GET',
+      url: '/get_users/' + $scope.project_id
+    }).then(function(response) {
+      return $scope.users = response.data.insert(null, 0);
+    });
+  };
+  $scope.change_user = function(issue, user) {
+    var command;
+    if (user === null || issue.assignee === null) {
+      if (user === null && issue.assignee === null) {
+        return;
+      }
+    } else if (issue.assignee.id === user.id) {
+      return;
+    }
+    issue.assignee = user;
+    command = issue.create_update_asignee_command(issue.assignee);
+    return commandService.store(command);
+  };
   $scope.update = function() {
     $scope.loading = true;
     return commandService.execute(function() {
@@ -353,19 +386,14 @@ app.controller('projectsCtrl', function($scope, $http, $controller) {
   $controller('baseCtrl', {
     $scope: $scope
   });
-  $scope.initialize = function() {
-    return $scope.find_projects().then(function(data) {
-      return $scope.$parent.projects = data;
-    }, function(response) {
-      return $scope.show_error(response.status);
-    });
-  };
   return $scope.find_projects = function() {
     return $http({
       method: 'GET',
       url: '/get_projects'
     }).then(function(response) {
-      return response.data;
+      return $scope.$parent.projects = response.data;
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
   };
 });
@@ -674,5 +702,15 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
     versions = $scope.find_column_include_issue(issue);
     command = issue.create_update_milestone_command(versions);
     return commandService.store(command);
+  };
+});
+
+app.filter('withNull', function() {
+  return function(input) {
+    if (input === null || input === void 0) {
+      return "未設定";
+    } else {
+      return input;
+    }
   };
 });
