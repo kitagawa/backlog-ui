@@ -175,6 +175,19 @@ Issue = (function() {
     return new Date(this.dueDate) <= Date.create().addDays(3);
   };
 
+  Issue.prototype.priorities = [
+    {
+      id: 2,
+      name: "high"
+    }, {
+      id: 3,
+      name: "mid"
+    }, {
+      id: 4,
+      name: "low"
+    }
+  ];
+
   Issue.prototype.high_priority = function() {
     return this.priority.id === 2;
   };
@@ -705,10 +718,10 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
   };
 });
 
-app.filter('withNull', function() {
-  return function(input) {
+app.filter('withNull', function($translate) {
+  return function(input, interpolateParams, interpolation) {
     if (input === null || input === void 0) {
-      return "未設定";
+      return $translate.instant('NULL', interpolateParams, interpolation);
     } else {
       return input;
     }

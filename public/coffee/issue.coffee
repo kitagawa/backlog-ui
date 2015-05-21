@@ -18,6 +18,9 @@ class Issue
 		return false if this.dueDate == null
 		new Date(this.dueDate) <= Date.create().addDays(3)
 
+	# 優先度
+	priorities: [{id: 2, name: "high"}, {id: 3, name: "mid"}, {id: 4, name: "low"}]
+
 	# 高優先度
 	# @return boolean
 	high_priority: () ->

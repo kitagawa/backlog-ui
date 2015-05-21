@@ -8893,11 +8893,11 @@ table.ticket-list td {
 .triangle {
   position: absolute;
   top: -10px;
-  left: 12px;
+  left: 20px;
   margin-left: -10px;
   width: 0;
   height: 0;
-  border-bottom: 10px solid #fff;
+  border-bottom: 10px solid #55ab00;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
@@ -8907,7 +8907,7 @@ table.ticket-list td {
   padding-top: 0px;
   padding-bottom: 0px;
   opacity: 0.9;
-  margin-top: 5px;
+  border: 1px solid #55ab00;
 }
 /* line 222, ../sass/_content.scss */
 .user-menu li {
@@ -8919,5 +8919,5 @@ table.ticket-list td {
 }
 /* line 228, ../sass/_content.scss */
 .user-menu li:not(:last-child) {
-  border-bottom: 1px solid #555555;
+  border-bottom: 1px solid #55ab00;
 }
