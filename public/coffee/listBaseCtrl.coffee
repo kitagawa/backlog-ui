@@ -20,7 +20,14 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 				(response)->
 					$scope.users = response.data.insert(null,0)
 					# 未設定分を追加
-			)	
+			)
+
+	# 優先度
+	$scope.priorities = [
+		{id: 2, name: "high"}, 
+		{id: 3, name: "mid"}, 
+		{id: 4, name: "low"}
+	]
 
 	# チケットの担当を変更する
 	$scope.change_user = (issue,user)->
@@ -33,6 +40,17 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 		issue.assignee = user
 		# 更新コマンドを作成
 		command = issue.create_update_asignee_command(issue.assignee)
+		commandService.store(command)
+
+	# チケットの優先度を変更する
+	$scope.change_priority = (issue,priority) ->
+		# 変更が無い場合は終了
+		if (issue.priority.id == priority.id)
+			return
+		# 担当者変更
+		issue.priority = priority
+		# 更新コマンドを作成
+		command = issue.create_update_priority_command(issue.priority)
 		commandService.store(command)
 
 

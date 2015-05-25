@@ -175,19 +175,6 @@ Issue = (function() {
     return new Date(this.dueDate) <= Date.create().addDays(3);
   };
 
-  Issue.prototype.priorities = [
-    {
-      id: 2,
-      name: "high"
-    }, {
-      id: 3,
-      name: "mid"
-    }, {
-      id: 4,
-      name: "low"
-    }
-  ];
-
   Issue.prototype.high_priority = function() {
     return this.priority.id === 2;
   };
@@ -267,6 +254,12 @@ Issue = (function() {
     }, this.id);
   };
 
+  Issue.prototype.create_update_priority_command = function(priority) {
+    return new Command("update_issue", {
+      "priorityId": priority.id
+    }, this.id);
+  };
+
   return Issue;
 
 })();
@@ -302,6 +295,18 @@ app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $tr
       return $scope.users = response.data.insert(null, 0);
     });
   };
+  $scope.priorities = [
+    {
+      id: 2,
+      name: "high"
+    }, {
+      id: 3,
+      name: "mid"
+    }, {
+      id: 4,
+      name: "low"
+    }
+  ];
   $scope.change_user = function(issue, user) {
     var command;
     if (user === null || issue.assignee === null) {
@@ -313,6 +318,15 @@ app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $tr
     }
     issue.assignee = user;
     command = issue.create_update_asignee_command(issue.assignee);
+    return commandService.store(command);
+  };
+  $scope.change_priority = function(issue, priority) {
+    var command;
+    if (issue.priority.id === priority.id) {
+      return;
+    }
+    issue.priority = priority;
+    command = issue.create_update_priority_command(issue.priority);
     return commandService.store(command);
   };
   $scope.update = function() {

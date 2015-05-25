@@ -18,9 +18,6 @@ class Issue
 		return false if this.dueDate == null
 		new Date(this.dueDate) <= Date.create().addDays(3)
 
-	# 優先度
-	priorities: [{id: 2, name: "high"}, {id: 3, name: "mid"}, {id: 4, name: "low"}]
-
 	# 高優先度
 	# @return boolean
 	high_priority: () ->
@@ -93,3 +90,12 @@ class Issue
 		new Command("update_issue",{
 			"assigneeId": user_id
 			},this.id)
+
+	# 優先度更新コマンドを作成する
+	# @return 更新コマンド
+	create_update_priority_command: (priority) ->
+		new Command("update_issue",{
+			"priorityId": priority.id
+			},this.id)
+
+

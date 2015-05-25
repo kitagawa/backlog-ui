@@ -19,8 +19,14 @@
 			{{issue.summary}}
 		%div{class: "ticket-status ticket-status-{{issue.status.id}}"}
 			{{issue.status.name}}
-		%div{class: "ticket-priority"}
-			%span{class: "fa", "ng-class"=> "{'fa-arrow-up': issue.high_priority(), 'fa-arrow-right': issue.mid_priority(), 'fa-arrow-down': issue.low_priority()}"}
+		%div.dropdown.ticket-priority
+			%a.dropdown-bottun.fa{"data-toggle" => "dropdown"}
+				%span{class: "fa", "ng-class"=> "{'fa-arrow-up': issue.high_priority(), 'fa-arrow-right': issue.mid_priority(), 'fa-arrow-down': issue.low_priority()}"}
+			%ul.dropdown-menu.priority-menu
+				.triangle
+				%li{"ng-repeat" => "priority in priorities"}
+					%a{"ng-click" => "change_priority(issue, priority)", class: "fa", "ng-class"=> "{'fa-arrow-up': priority.name=='high', 'fa-arrow-right': priority.name=='mid', 'fa-arrow-down': priority.name == 'low'}"}
+						
 		%div{class: "ticket-date", "ng-show"=> "issue.dueDate"}
 			%span{class: "fa fa-clock-o","ng-class"=>"{'text-danger': issue.due_over()}"}
 				{{issue.dueDate|date: 'yyyy/MM/dd'}}
