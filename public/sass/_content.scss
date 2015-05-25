@@ -185,6 +185,16 @@ table.ticket-list{
 			background-color: $stauts-complete;
 		}
 
+		//　チケットの種類
+		.ticket-type{
+			color: #fff;
+			font-size: $font-size-small;
+			display: inline;
+			padding: 2px 3px;
+			margin-right: 5px;
+			@include border-radius($border-radius-base);
+		}
+
 		// チケットの期限表示
 		.ticket-date{
 			display: inline;
@@ -218,7 +228,7 @@ table.ticket-list{
 	padding-top: 0px;
 	padding-bottom: 0px;
 	opacity: 0.9;
-	border: 1px solid $brand-primary;
+	border: 1px solid $gray-light;
 	li{
 		cursor: pointer;
 		a{
@@ -226,7 +236,7 @@ table.ticket-list{
 		}
 	}
 	li:not(:last-child){
-		border-bottom: 1px solid $brand-primary;
+		border-bottom: 1px solid $gray-light;
 	}
 }
 
@@ -238,7 +248,7 @@ table.ticket-list{
   margin-left: -10px;
   width: 0;
   height: 0;
-  border-bottom: 6px solid $brand-primary;
+  border-bottom: 6px solid $gray-light;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;}
 

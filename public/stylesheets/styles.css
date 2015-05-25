@@ -8864,32 +8864,43 @@ table.ticket-list td {
   background-color: #c2d3a3;
 }
 /* line 189, ../sass/_content.scss */
+.ticket .ticket-body .ticket-type {
+  color: #fff;
+  font-size: 11px;
+  display: inline;
+  padding: 2px 3px;
+  margin-right: 5px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+/* line 199, ../sass/_content.scss */
 .ticket .ticket-body .ticket-date {
   display: inline;
   float: right;
 }
-/* line 195, ../sass/_content.scss */
+/* line 205, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority {
   display: inline;
 }
-/* line 198, ../sass/_content.scss */
+/* line 208, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-up {
   color: #d9534f;
 }
-/* line 202, ../sass/_content.scss */
+/* line 212, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-right {
   color: #5bc0de;
 }
-/* line 206, ../sass/_content.scss */
+/* line 216, ../sass/_content.scss */
 .ticket .ticket-body .ticket-priority .fa-arrow-down {
   color: #5cb85c;
 }
-/* line 211, ../sass/_content.scss */
+/* line 221, ../sass/_content.scss */
 .ticket .danger {
   color: red;
 }
 
-/* line 234, ../sass/_content.scss */
+/* line 244, ../sass/_content.scss */
 .triangle {
   position: absolute;
   top: -6px;
@@ -8897,48 +8908,48 @@ table.ticket-list td {
   margin-left: -10px;
   width: 0;
   height: 0;
-  border-bottom: 6px solid #55ab00;
+  border-bottom: 6px solid #8c8c8c;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
 
-/* line 245, ../sass/_content.scss */
+/* line 255, ../sass/_content.scss */
 .user-menu {
   padding-top: 0px;
   padding-bottom: 0px;
   opacity: 0.9;
-  border: 1px solid #55ab00;
+  border: 1px solid #8c8c8c;
 }
-/* line 222, ../sass/_content.scss */
+/* line 232, ../sass/_content.scss */
 .user-menu li {
   cursor: pointer;
 }
-/* line 224, ../sass/_content.scss */
+/* line 234, ../sass/_content.scss */
 .user-menu li a {
   padding: 2px;
 }
-/* line 228, ../sass/_content.scss */
+/* line 238, ../sass/_content.scss */
 .user-menu li:not(:last-child) {
-  border-bottom: 1px solid #55ab00;
+  border-bottom: 1px solid #8c8c8c;
 }
 
-/* line 248, ../sass/_content.scss */
+/* line 258, ../sass/_content.scss */
 .priority-menu {
   padding-top: 0px;
   padding-bottom: 0px;
   opacity: 0.9;
-  border: 1px solid #55ab00;
+  border: 1px solid #8c8c8c;
   min-width: 25px;
 }
-/* line 222, ../sass/_content.scss */
+/* line 232, ../sass/_content.scss */
 .priority-menu li {
   cursor: pointer;
 }
-/* line 224, ../sass/_content.scss */
+/* line 234, ../sass/_content.scss */
 .priority-menu li a {
   padding: 2px;
 }
-/* line 228, ../sass/_content.scss */
+/* line 238, ../sass/_content.scss */
 .priority-menu li:not(:last-child) {
-  border-bottom: 1px solid #55ab00;
+  border-bottom: 1px solid #8c8c8c;
 }

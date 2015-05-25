@@ -20,6 +20,9 @@
 </div>
 <div class='float-left ticket-body'>
 <div class='ticket-key'>
+<span class='ticket-type' style='background-color: {{issue.issueType.color}}'>
+{{issue.issueType.name}}
+</span>
 <a href='/url/{{issue.issueKey}}' target='window'>
 {{issue.issueKey}}
 </a>
