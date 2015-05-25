@@ -1,0 +1,33 @@
+%div{:class=>"ticket", "ng-click"=>"select_issue(issue)"}
+	%div{class: "float-left ticket-icon"}
+		%div.dropdown
+			%a.dropdown-bottun{"data-toggle" => "dropdown"}
+				%img{"ng-src" => "/icon?id={{issue.assignee.id || null}}", class: "icon"}
+				%div{class: "ticket-user"}
+					{{issue.assignee.name}}
+			%ul.dropdown-menu.user-menu
+				.triangle
+				%li{"ng-repeat" => "user in users"}
+					%a{"ng-click" => "change_user(issue,user)"}
+						%img{"ng-src" => "/icon?id={{user.id || null}}", class: "icon"}
+						{{user.name | withNull}}
+	%div{class: "float-left ticket-body"}
+		%div{class: "ticket-key"}
+			%a{href: "/url/{{issue.issueKey}}", target: "window"}
+				{{issue.issueKey}}
+		%div{class: "ticket-title"}
+			{{issue.summary}}
+		%div{class: "ticket-status ticket-status-{{issue.status.id}}"}
+			{{issue.status.name}}
+		%div.dropdown.ticket-priority
+			%a.dropdown-bottun.fa{"data-toggle" => "dropdown"}
+				%span{class: "fa", "ng-class"=> "{'fa-arrow-up': issue.high_priority(), 'fa-arrow-right': issue.mid_priority(), 'fa-arrow-down': issue.low_priority()}"}
+			%ul.dropdown-menu.priority-menu
+				.triangle
+				%li{"ng-repeat" => "priority in priorities"}
+					%a{"ng-click" => "change_priority(issue, priority)", class: "fa", "ng-class"=> "{'fa-arrow-up': priority.name=='high', 'fa-arrow-right': priority.name=='mid', 'fa-arrow-down': priority.name == 'low'}"}
+						
+		%div{class: "ticket-date", "ng-show"=> "issue.dueDate"}
+			%span{class: "fa fa-clock-o","ng-class"=>"{'text-danger': issue.due_over()}"}
+				{{issue.dueDate|date: 'yyyy/MM/dd'}}
+	%div{class: "clear"}

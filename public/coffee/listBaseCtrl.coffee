@@ -1,11 +1,9 @@
 # チケットリスト基底コントローラークラス
-app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$controller,ngDialog) ->
+app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$controller,ngDialog, commandService) ->
 
 	# ローディング表示
 	$scope.loading = false
 
-	#コマンドリスト
-	$scope.commands = []
 	# 表示タイプ
 	$scope.mode = ''
 
@@ -15,24 +13,61 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 	# プロジェクトID
 	$scope.project_id = $stateParams.project_id
 
+	# ユーザ一覧
+	$scope.get_users = ()->
+		$http(method: 'GET', url: '/get_users/'+$scope.project_id)
+			.then(
+				(response)->
+					$scope.users = response.data.insert(null,0)
+					# 未設定分を追加
+			)
+
+	# 優先度
+	$scope.priorities = [
+		{id: 2, name: "high"}, 
+		{id: 3, name: "mid"}, 
+		{id: 4, name: "low"}
+	]
+
+	# チケットの担当を変更する
+	$scope.change_user = (issue,user)->
+		# 変更が無い場合は終了
+		if(user == null or issue.assignee == null)
+			return if(user == null and issue.assignee == null)
+		else if (issue.assignee.id == user.id)
+			return
+		# 担当者変更
+		issue.assignee = user
+		# 更新コマンドを作成
+		command = issue.create_update_asignee_command(issue.assignee)
+		commandService.store(command)
+
+	# チケットの優先度を変更する
+	$scope.change_priority = (issue,priority) ->
+		# 変更が無い場合は終了
+		if (issue.priority.id == priority.id)
+			return
+		# 担当者変更
+		issue.priority = priority
+		# 更新コマンドを作成
+		command = issue.create_update_priority_command(issue.priority)
+		commandService.store(command)
+
+
 	# チケットの更新を行う
 	$scope.update = () ->
-		commands_count = $scope.commands.length
-		success_count = 0
-
-		for command,i in $scope.commands by -1
-			$scope.loading = true
-			command.execute($http,
-				(data)->
-					$scope.commands.removeAt(i) #実行したものは削除
-					# すべてのコマンドが実行されたら完了メッセージを表示
-					if $scope.commands.isEmpty()
-						$translate('MESSAGE.UPDATE_COMPLETE').then((translation)->
-							$scope.show_success(translation)
-					  )
-				,(data, status, headers, config)->
-					$scope.show_error(data)
-			)
+		$scope.loading = true
+		commandService.execute(
+			()->
+				# 完了メッセージを表示
+				$translate('MESSAGE.UPDATE_COMPLETE').then((translation)->
+					$scope.show_success(translation)
+					$scope.loading = false
+			  )
+			,(data, status, headers, config)->
+				$scope.show_error(data)
+				$scope.loading = false
+		)
 
 	# 現在の表示タイプとあっているか
 	$scope.active_mode = (mode) ->
@@ -70,7 +105,7 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 
 	# 未保存のコマンドがないか
 	$scope.unsaved = () ->
-		!($scope.commands.isEmpty())
+		!(commandService.list().isEmpty())
 
 	# チケット一覧の再読み込み
 	$scope.refresh = ()->
@@ -90,6 +125,8 @@ app.controller('listBaseCtrl',($scope,$http,$state,$stateParams,$translate,$cont
 				controller: ['$scope',($_scope)->
 					$_scope.ok= () ->
 						$_scope.closeThisDialog()
+						# コマンドを空にする
+						commandService.clear()
 						on_ok()
 					$_scope.cancel= ()->
 						$_scope.closeThisDialog()

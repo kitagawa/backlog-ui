@@ -1,4 +1,4 @@
-app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog,versionService,issueService) ->
+app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog,versionService,issueService,commandService) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -18,8 +18,8 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 			  )
 			  # チケット読み込み
 				$scope.load_tickets()
-			,(data, status, headers, config)->
-				$scope.show_error(status)			
+			,(response)->
+				$scope.show_error(response.status)			
 		)
 
 		# UI-Sortableの変更された時の設定
@@ -41,8 +41,8 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 					version.clear()
 					version.set_issues(data)
 				$scope.loading = false #ローディング非表示
-			,(data, status, headers, config)->
-				$scope.show_error(status)
+			,(response)->
+				$scope.show_error(response.status)
 		)
 
 	# チケットの更新コマンドを蓄積する
@@ -51,5 +51,5 @@ app.controller('versionsCtrl',($scope,$http,$stateParams,$translate,$controller,
 		return if issue is undefined #移動したものがない場合
 		versions = $scope.find_column_include_issue(issue)
 		command = issue.create_update_milestone_command(versions)
-		Command.merge_commmand($scope.commands,command)
+		commandService.store(command)
 )

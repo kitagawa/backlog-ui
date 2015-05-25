@@ -102,6 +102,11 @@ get '/get_projects' do
 	client.get("projects")		
 end
 
+# プロジェクトのユーザ一覧取得API
+get '/get_users/:projectId' do
+	client.get("projects/#{params[:projectId].to_i}/users")
+end
+
 # バージョン一覧取得API
 get '/get_versions/:projectId' do
 	client.get("projects/#{params[:projectId].to_i}/versions")

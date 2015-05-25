@@ -212,3 +212,40 @@ table.ticket-list{
 		color: red;
 	}
 }
+
+// ######### ドロップダウンメニュー
+@mixin base-dropdown-menu{
+	padding-top: 0px;
+	padding-bottom: 0px;
+	opacity: 0.9;
+	border: 1px solid $brand-primary;
+	li{
+		cursor: pointer;
+		a{
+			padding: 2px;
+		}
+	}
+	li:not(:last-child){
+		border-bottom: 1px solid $brand-primary;
+	}
+}
+
+// 吹き出し
+.triangle {
+	position: absolute;
+  top: -6px;
+  left: 10px;
+  margin-left: -10px;
+  width: 0;
+  height: 0;
+  border-bottom: 6px solid $brand-primary;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;}
+
+.user-menu{
+	@include base-dropdown-menu;
+}
+.priority-menu{
+	@include base-dropdown-menu;
+	min-width: 25px;	
+}

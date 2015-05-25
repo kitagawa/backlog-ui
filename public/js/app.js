@@ -102,34 +102,53 @@ Command = (function() {
     this.key = key;
   }
 
-  Command.prototype.execute = function($http, on_success, on_error) {
-    var url;
-    url = '/' + this.name + '/';
-    if (this.key) {
-      url += this.key;
-    }
-    return $http.post(url, this.data).success(function(data, status, headers, config) {
-      return on_success(data);
-    }).error(function(data, status, headers, config) {
-      return on_error(data, status, headers, config);
-    });
-  };
-
-  Command.merge_commmand = function(command_list, command) {
-    var _command, _i, _len;
-    for (_i = 0, _len = command_list.length; _i < _len; _i++) {
-      _command = command_list[_i];
-      if (_command.name === command.name && _command.key === command.key) {
-        Object.merge(_command.data, command.data);
-        return;
-      }
-    }
-    return command_list.push(command);
-  };
-
   return Command;
 
 })();
+
+app.factory('commandService', function($http) {
+  var commands;
+  commands = [];
+  return {
+    store: function(command) {
+      var _command, _i, _len;
+      for (_i = 0, _len = commands.length; _i < _len; _i++) {
+        _command = commands[_i];
+        if (_command.name === command.name && _command.key === command.key) {
+          Object.merge(_command.data, command.data);
+          return;
+        }
+      }
+      return commands.push(command);
+    },
+    execute: function(on_success, on_error) {
+      var command, i, url, _i, _results;
+      _results = [];
+      for (i = _i = commands.length - 1; _i >= 0; i = _i += -1) {
+        command = commands[i];
+        url = '/' + command.name + '/';
+        if (command.key) {
+          url += command.key;
+        }
+        _results.push($http.post(url, command.data).success(function(data, status, headers, config) {
+          commands.removeAt(i);
+          if (commands.isEmpty()) {
+            return on_success();
+          }
+        }).error(function(data, status, headers, config) {
+          on_error(data, status, headers, config);
+        }));
+      }
+      return _results;
+    },
+    clear: function() {
+      return commands = [];
+    },
+    list: function() {
+      return commands;
+    }
+  };
+});
 
 set_sortable = function() {
   return $(".connectedSortable").sortable({
@@ -223,6 +242,24 @@ Issue = (function() {
     }, this.id);
   };
 
+  Issue.prototype.create_update_asignee_command = function(user) {
+    var user_id;
+    if (user === null || user === void 0) {
+      user_id = null;
+    } else {
+      user_id = user.id;
+    }
+    return new Command("update_issue", {
+      "assigneeId": user_id
+    }, this.id);
+  };
+
+  Issue.prototype.create_update_priority_command = function(priority) {
+    return new Command("update_issue", {
+      "priorityId": priority.id
+    }, this.id);
+  };
+
   return Issue;
 
 })();
@@ -245,33 +282,64 @@ app.factory('issueService', function($http) {
   };
 });
 
-app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $translate, $controller, ngDialog) {
+app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $translate, $controller, ngDialog, commandService) {
   $scope.loading = false;
-  $scope.commands = [];
   $scope.mode = '';
   $scope.selecting_issue = {};
   $scope.project_id = $stateParams.project_id;
-  $scope.update = function() {
-    var command, commands_count, i, success_count, _i, _ref, _results;
-    commands_count = $scope.commands.length;
-    success_count = 0;
-    _ref = $scope.commands;
-    _results = [];
-    for (i = _i = _ref.length - 1; _i >= 0; i = _i += -1) {
-      command = _ref[i];
-      $scope.loading = true;
-      _results.push(command.execute($http, function(data) {
-        $scope.commands.removeAt(i);
-        if ($scope.commands.isEmpty()) {
-          return $translate('MESSAGE.UPDATE_COMPLETE').then(function(translation) {
-            return $scope.show_success(translation);
-          });
-        }
-      }, function(data, status, headers, config) {
-        return $scope.show_error(data);
-      }));
+  $scope.get_users = function() {
+    return $http({
+      method: 'GET',
+      url: '/get_users/' + $scope.project_id
+    }).then(function(response) {
+      return $scope.users = response.data.insert(null, 0);
+    });
+  };
+  $scope.priorities = [
+    {
+      id: 2,
+      name: "high"
+    }, {
+      id: 3,
+      name: "mid"
+    }, {
+      id: 4,
+      name: "low"
     }
-    return _results;
+  ];
+  $scope.change_user = function(issue, user) {
+    var command;
+    if (user === null || issue.assignee === null) {
+      if (user === null && issue.assignee === null) {
+        return;
+      }
+    } else if (issue.assignee.id === user.id) {
+      return;
+    }
+    issue.assignee = user;
+    command = issue.create_update_asignee_command(issue.assignee);
+    return commandService.store(command);
+  };
+  $scope.change_priority = function(issue, priority) {
+    var command;
+    if (issue.priority.id === priority.id) {
+      return;
+    }
+    issue.priority = priority;
+    command = issue.create_update_priority_command(issue.priority);
+    return commandService.store(command);
+  };
+  $scope.update = function() {
+    $scope.loading = true;
+    return commandService.execute(function() {
+      return $translate('MESSAGE.UPDATE_COMPLETE').then(function(translation) {
+        $scope.show_success(translation);
+        return $scope.loading = false;
+      });
+    }, function(data, status, headers, config) {
+      $scope.show_error(data);
+      return $scope.loading = false;
+    });
   };
   $scope.active_mode = function(mode) {
     return mode === $scope.mode;
@@ -311,7 +379,7 @@ app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $tr
     return $scope.loading = false;
   };
   $scope.unsaved = function() {
-    return !($scope.commands.isEmpty());
+    return !(commandService.list().isEmpty());
   };
   $scope.refresh = function() {
     return $scope.confirm_unsave(function() {
@@ -326,6 +394,7 @@ app.controller('listBaseCtrl', function($scope, $http, $state, $stateParams, $tr
           '$scope', function($_scope) {
             $_scope.ok = function() {
               $_scope.closeThisDialog();
+              commandService.clear();
               return on_ok();
             };
             return $_scope.cancel = function() {
@@ -344,24 +413,19 @@ app.controller('projectsCtrl', function($scope, $http, $controller) {
   $controller('baseCtrl', {
     $scope: $scope
   });
-  $scope.initialize = function() {
-    return $scope.find_projects().then(function(data) {
-      return $scope.$parent.projects = data;
-    }, function(data, status, headers, config) {
-      return $scope.show_error(status);
-    });
-  };
   return $scope.find_projects = function() {
     return $http({
       method: 'GET',
       url: '/get_projects'
     }).then(function(response) {
-      return response.data;
+      return $scope.$parent.projects = response.data;
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
   };
 });
 
-app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, statusService, versionService, issueService) {
+app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, statusService, versionService, issueService, commandService) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -385,8 +449,8 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
       });
       selecting_version = Version.select_current(versions_list);
       return $scope.switch_version(selecting_version);
-    }, function(data, status, headers, config) {
-      return $scope.show_error(status);
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
     return $scope.sortable_options = {
       connectWith: '.column',
@@ -409,7 +473,7 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
   $scope.set_update_status_command = function(issue, status_column) {
     var command;
     command = issue.create_update_status_command(status_column);
-    return Command.merge_commmand($scope.commands, command);
+    return commandService.store(command);
   };
   $scope.switch_version = function(version) {
     return $scope.confirm_unsave(function() {
@@ -429,8 +493,8 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
         column.set_issues(data);
       }
       return $scope.loading = false;
-    }, function(data, status, headers, config) {
-      return $scope.show_error(status);
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
   };
   $scope.toggle_selecting_version = function(version) {
@@ -615,7 +679,7 @@ app.factory('versionService', function($http) {
   };
 });
 
-app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, versionService, issueService) {
+app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate, $controller, ngDialog, versionService, issueService, commandService) {
   $controller('listBaseCtrl', {
     $scope: $scope
   });
@@ -630,8 +694,8 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
         }));
       });
       return $scope.load_tickets();
-    }, function(data, status, headers, config) {
-      return $scope.show_error(status);
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
     return $scope.sortable_options = {
       connectWith: '.column',
@@ -652,8 +716,8 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
         version.set_issues(data);
       }
       return $scope.loading = false;
-    }, function(data, status, headers, config) {
-      return $scope.show_error(status);
+    }, function(response) {
+      return $scope.show_error(response.status);
     });
   };
   return $scope.set_update_issue_milestone = function(ui) {
@@ -664,6 +728,16 @@ app.controller('versionsCtrl', function($scope, $http, $stateParams, $translate,
     }
     versions = $scope.find_column_include_issue(issue);
     command = issue.create_update_milestone_command(versions);
-    return Command.merge_commmand($scope.commands, command);
+    return commandService.store(command);
+  };
+});
+
+app.filter('withNull', function($translate) {
+  return function(input, interpolateParams, interpolation) {
+    if (input === null || input === void 0) {
+      return $translate.instant('NULL', interpolateParams, interpolation);
+    } else {
+      return input;
+    }
   };
 });

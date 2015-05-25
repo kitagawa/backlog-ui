@@ -1,4 +1,4 @@
-app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog, statusService,versionService,issueService) ->
+app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ngDialog, statusService,versionService,issueService,commandService) ->
 	# 基底コントローラーを継承
 	$controller('listBaseCtrl',{$scope: $scope})
 
@@ -36,8 +36,8 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 				# 選択しているマイルストーンを切り替える
 				$scope.switch_version(selecting_version)
 						
-			,(data, status, headers, config)->
-				$scope.show_error(status)
+			,(response)->
+				$scope.show_error(response.status)
 		)
 
 		# UI-Sortableの変更された時の設定
@@ -60,7 +60,7 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 	# チケットの更新コマンドを蓄積する
 	$scope.set_update_status_command = (issue, status_column)->
 		command = issue.create_update_status_command(status_column)
-		Command.merge_commmand($scope.commands,command)
+		commandService.store(command)
 
 	# バージョンを切り替える
 	$scope.switch_version = (version) ->
@@ -85,8 +85,8 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 					column.clear()
 					column.set_issues(data)
 				$scope.loading = false #ローディング非表示
-			(data, status, headers, config)->
-				$scope.show_error(status)
+			(response)->
+				$scope.show_error(response.status)
 			)
 
 	# 選択中のバージョンを切り替える

@@ -6,6 +6,7 @@
 	"SPACE_ID": "スペースID",
 	"EXAMPLE": "例.",
 	"PROJECTS": "プロジェクト",
+  "NULL": "未設定",
 
 	"BUTTON": {
     "OK": "OK",
