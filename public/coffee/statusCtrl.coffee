@@ -31,7 +31,7 @@ app.controller('statusCtrl',($scope,$http,$stateParams,$translate,$controller,ng
 					$scope.versions.unshift(new Version(name: translation))
 			  )
 				# 期間中のマイルストーンを初期設定にする
-				selecting_version = Version.select_current(versions_list)
+				selecting_version = Version.select_current(versions_list,new Date();)
 
 				# 選択しているマイルストーンを切り替える
 				$scope.switch_version(selecting_version)
