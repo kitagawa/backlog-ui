@@ -447,7 +447,7 @@ app.controller('statusCtrl', function($scope, $http, $stateParams, $translate, $
           name: translation
         }));
       });
-      selecting_version = Version.select_current(versions_list);
+      selecting_version = Version.select_current(versions_list, new Date());
       return $scope.switch_version(selecting_version);
     }, function(response) {
       return $scope.show_error(response.status);
